@@ -4,7 +4,9 @@ import { SiteFooter } from './components/layout/SiteFooter'
 import { SiteHeader } from './components/layout/SiteHeader'
 import { SkipLink } from './components/layout/SkipLink'
 import { Projects } from './components/projects/Projects'
+import { About } from './components/sections/About'
 import { Hero } from './components/sections/Hero'
+import { Interests } from './components/sections/Interests'
 import { useReducedMotion } from './hooks/useReducedMotion'
 
 export default function App() {
@@ -39,7 +41,9 @@ export default function App() {
           la page et la navigation lisent ainsi le même verdict. */}
       <main id="contenu">
         <Hero />
+        <About />
         <Projects />
+        <Interests />
       </main>
 
       <SiteFooter />

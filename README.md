@@ -2,9 +2,8 @@
 
 Portfolio professionnel de Sok Vibol Arnaud, chef de projet IA et étudiant en Master MIAGE.
 
-> 🚧 **Portfolio en cours de construction.** L'identité visuelle *Warm Vintage Jazz Editorial* est
-> posée : navigation, hero et sélection de projets. Les sections À propos, Parcours, Compétences,
-> Centres d'intérêt et Contact sont en cours de construction.
+> 🚧 **Portfolio en cours de construction.** Sections en ligne : Accueil, À propos, Projets et
+> Centres d'intérêt. Restent à construire : Parcours, Compétences et Contact.
 
 ## Contenu et sections
 

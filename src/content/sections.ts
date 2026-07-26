@@ -1,3 +1,5 @@
+import { about, facts } from './about'
+import { interests } from './interests'
 import { projects } from './projects'
 import { sectionRegistry } from './navigation'
 import type { SectionDefinition } from '../types/content'
@@ -16,7 +18,14 @@ import type { SectionDefinition } from '../types/content'
 const hasContent: Record<string, boolean> = {
   /* L'accueil est toujours là : c'est la couverture. */
   accueil: true,
+
+  /* La fiche de faits suffit à faire exister la section, même sans prose. */
+  'a-propos': about.paragraphs.length > 0 || facts.length > 0,
+
   projets: projects.length > 0,
+
+  /* Les cinq intitulés sont des faits : la section est complète d'emblée. */
+  interets: interests.length > 0,
 }
 
 /** Sections à monter dans la page, dans l'ordre du registre. */

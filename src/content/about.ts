@@ -24,5 +24,5 @@ export const facts: readonly Fact[] = [
   { label: 'Formation', value: profile.education },
   { label: 'Actuellement', value: profile.company },
   { label: 'Localisation', value: profile.location },
-  { label: 'Domaines', value: profile.domains.join(' · ') },
+  { label: 'Domaines', value: profile.domains.join(' · '), full: true },
 ]

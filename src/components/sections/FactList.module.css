@@ -1,0 +1,45 @@
+.list {
+  display: grid;
+  gap: 0;
+  margin: 0;
+}
+
+.item {
+  padding-block: var(--space-4);
+  border-top: 1px solid var(--hairline);
+}
+
+.item:last-child {
+  border-bottom: 1px solid var(--hairline);
+}
+
+.term {
+  color: var(--text-3);
+}
+
+.value {
+  margin: var(--space-1) 0 0;
+  font-size: var(--size-ui);
+  line-height: 1.5;
+}
+
+/**
+ * Étalée sur deux colonnes quand elle porte la section à elle seule : une
+ * colonne étroite isolée à côté d'un vide donnerait une composition bancale.
+ */
+@media (width >= 720px) {
+  .list[data-layout='spread'] {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    column-gap: var(--space-12);
+  }
+
+  /* Le dernier filet ne doit apparaître qu'une fois, sous la rangée du bas. */
+  .list[data-layout='spread'] .item:last-child {
+    border-bottom: 0;
+  }
+
+  .list[data-layout='spread'] .item[data-full='true'] {
+    grid-column: 1 / -1;
+    border-bottom: 1px solid var(--hairline);
+  }
+}

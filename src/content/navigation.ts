@@ -18,11 +18,28 @@ export const sectionRegistry: readonly SectionDefinition[] = [
     surface: 'ink',
   },
   {
+    id: 'a-propos',
+    number: '01',
+    label: 'À propos',
+    inNav: true,
+    surface: 'paper',
+  },
+  {
     id: 'projets',
     number: '04',
     label: 'Projets',
     kicker: 'Une sélection tirée de mes dépôts.',
     inNav: true,
+    surface: 'ink',
+  },
+  {
+    id: 'interets',
+    number: '05',
+    label: 'Centres d’intérêt',
+    kicker: 'Face B.',
+    /* Volontairement hors de la barre desktop, pour ne pas la surcharger.
+       Le menu mobile, lui, la liste comme les autres. */
+    inNav: false,
     surface: 'ink',
   },
 ]

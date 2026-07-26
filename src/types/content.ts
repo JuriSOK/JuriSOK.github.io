@@ -63,6 +63,8 @@ export interface AboutContent {
 export interface Fact {
   readonly label: string
   readonly value: string
+  /** Occupe toute la largeur quand la fiche est étalée sur deux colonnes. */
+  readonly full?: boolean
 }
 
 /* ---------- Parcours ---------- */

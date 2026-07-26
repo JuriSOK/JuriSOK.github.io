@@ -1,0 +1,67 @@
+.list {
+  display: flex;
+  flex-direction: column;
+}
+
+.item {
+  display: flex;
+  align-items: baseline;
+  gap: var(--space-4);
+  padding-block: var(--space-4);
+  border-top: 1px solid var(--hairline);
+}
+
+.item:last-child {
+  border-bottom: 1px solid var(--hairline);
+}
+
+.index {
+  flex-shrink: 0;
+  width: 2.25rem;
+  color: var(--accent);
+}
+
+.name {
+  font-family: var(--font-display);
+  font-variation-settings: var(--fraunces-title);
+  font-size: clamp(1.25rem, 2.4vw, 1.5rem);
+  font-weight: 500;
+  line-height: 1.2;
+}
+
+/* Filet de conduite : il occupe l'espace restant, avec ou sans note. */
+.lead {
+  flex: 1;
+  min-width: var(--space-8);
+  height: 1px;
+  background-color: var(--hairline);
+  transform: translateY(-0.3em);
+}
+
+.note {
+  flex-shrink: 0;
+  max-width: 22ch;
+  color: var(--text-3);
+  font-size: var(--size-meta);
+  text-align: right;
+}
+
+/* Deux lignes sur mobile : le filet n'aurait plus de place utile. */
+@media (width < 640px) {
+  .item {
+    display: grid;
+    grid-template-columns: 2.25rem 1fr;
+    align-items: baseline;
+    gap: var(--space-1) var(--space-3);
+  }
+
+  .lead {
+    display: none;
+  }
+
+  .note {
+    grid-column: 2;
+    max-width: none;
+    text-align: left;
+  }
+}
