@@ -14,14 +14,28 @@ Portfolio professionnel de Sok Vibol Arnaud, chef de projet IA et étudiant en M
 
 ## Prérequis
 
-- Node.js 20 ou supérieur
-- npm
+- **Node.js 24 LTS** (requis — la contrainte est déclarée dans le champ `engines` de `package.json`)
+- npm 11 ou supérieur (fourni avec Node.js 24)
+
+L'usage d'un gestionnaire de versions comme [`nvm`](https://github.com/nvm-sh/nvm),
+[`fnm`](https://github.com/Schniz/fnm) ou [`mise`](https://mise.jdx.dev/) est recommandé afin de
+garder la même version entre le développement local et les futurs workflows GitHub Actions. La
+version attendue est déclarée dans les fichiers `.nvmrc` et `.node-version`.
+
+Si `nvm` est installé, il suffit d'exécuter à la racine du projet :
+
+```bash
+nvm use
+```
+
+(la première fois : `nvm install 24`)
 
 ## Installation
 
 ```bash
 git clone https://github.com/JuriSOK/JuriSOK.github.io.git
 cd JuriSOK.github.io
+nvm use          # facultatif, si nvm est installé
 npm install
 ```
 

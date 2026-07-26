@@ -11,6 +11,9 @@ Règles permanentes du projet. À lire avant toute modification.
 
 ## Stack technique
 
+- Utiliser **Node.js 24 LTS** pour le développement local, les tests et GitHub Actions. La version
+  est déclarée dans `.nvmrc`, `.node-version` et le champ `engines` de `package.json` : ces trois
+  déclarations doivent rester cohérentes.
 - React, TypeScript et Vite.
 - TypeScript reste en **mode strict** (`strict: true`). Ne pas assouplir la configuration pour faire
   passer une erreur.
