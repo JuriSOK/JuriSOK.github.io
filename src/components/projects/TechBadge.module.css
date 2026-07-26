@@ -28,5 +28,5 @@
 [data-project-card]:hover .logo,
 [data-project-card]:has(a:focus-visible) .logo,
 [data-project-card]:active .logo {
-  color: color-mix(in oklab, var(--brand, var(--latte)) 55%, var(--latte));
+  color: color-mix(in oklab, var(--brand, var(--brand-mix)) 55%, var(--brand-mix));
 }

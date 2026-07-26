@@ -34,6 +34,9 @@ export default function App() {
       <GrainOverlay />
       <SiteHeader />
 
+      {/* L'ordre des sections suit le registre de `content/navigation.ts`.
+          Chaque section décide elle-même de se rendre, via `isSectionVisible` :
+          la page et la navigation lisent ainsi le même verdict. */}
       <main id="contenu">
         <Hero />
         <Projects />

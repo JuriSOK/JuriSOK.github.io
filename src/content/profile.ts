@@ -1,4 +1,4 @@
-import type { Profile } from './types'
+import type { Profile } from '../types/content'
 
 /**
  * Contenu textuel du profil.
@@ -17,4 +17,12 @@ export const profile: Profile = {
   location: 'France',
   year: '2026',
   edition: 'Édition 001',
+  domains: [
+    'Intelligence artificielle',
+    'Agents IA',
+    'ITSM',
+    'Gestion de projet',
+    'Développement logiciel',
+    'Systèmes d’information',
+  ],
 }

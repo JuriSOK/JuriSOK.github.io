@@ -1,6 +1,6 @@
-import generated from './projects.generated.json'
+import generated from '../data/projects.generated.json'
 import { groups, overrides } from './projects.overrides'
-import type { GeneratedProjects, GeneratedRepo, ProjectCardData, ProjectLink } from './types'
+import type { GeneratedProjects, GeneratedRepo, ProjectCardData, ProjectLink } from '../types/project'
 
 const data = generated as GeneratedProjects
 

@@ -1,39 +1,6 @@
-/** Types partagés de la couche contenu. */
+/** Types de la section Projets, de la synchronisation GitHub au rendu d'une carte. */
 
-export interface Profile {
-  readonly fullName: string
-  /** Découpage du nom pour l'affichage sur trois lignes du hero. */
-  readonly nameLines: readonly string[]
-  readonly role: string
-  readonly education: string
-  readonly company: string
-  /** Deux lignes courtes, affichées sous le nom. */
-  readonly intro: string
-  /** Niveau de précision volontairement large. */
-  readonly location: string
-  /** Millésime affiché dans le bandeau de crédits du hero. */
-  readonly year: string
-  readonly edition: string
-}
-
-export interface NavItem {
-  /** Identifiant de la section, utilisé comme ancre. */
-  readonly id: string
-  readonly number: string
-  readonly label: string
-}
-
-/** Liens externes. `null` signifie « pas encore fourni » : le lien n'est pas rendu. */
-export interface SiteLinks {
-  readonly github: string
-  readonly linkedin: string | null
-  readonly email: string | null
-  readonly cv: string | null
-}
-
-/* ---------- Projets ---------- */
-
-/** Dépôt tel que le script de synchronisation le restitue. */
+/** Dépôt tel que `scripts/sync-projects.mjs` le restitue. */
 export interface GeneratedRepo {
   readonly name: string
   readonly description: string | null

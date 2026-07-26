@@ -1,12 +1,28 @@
-import type { NavItem } from './types'
+import type { SectionDefinition } from '../types/content'
 
 /**
- * Sections numérotées comme les pistes d'une édition.
+ * Registre des sections du site.
  *
- * Seules les sections réellement construites y figurent : la navigation ne
- * pointe jamais vers une ancre inexistante. Les autres entrées seront ajoutées
- * en même temps que leurs sections.
+ * Une entrée ici signifie que la section est **réellement construite** et que son
+ * ancre existe dans le document : c'est ce qui rend un lien mort impossible. Les
+ * sections sont ajoutées à ce registre au fur et à mesure qu'elles sont bâties.
+ *
+ * Qu'une section apparaisse ou non à l'écran dépend ensuite de son contenu réel,
+ * calculé dans `sections.ts`.
  */
-export const navigation: readonly NavItem[] = [
-  { id: 'projets', number: '04', label: 'Projets' },
+export const sectionRegistry: readonly SectionDefinition[] = [
+  {
+    id: 'accueil',
+    label: 'Accueil',
+    inNav: true,
+    surface: 'ink',
+  },
+  {
+    id: 'projets',
+    number: '04',
+    label: 'Projets',
+    kicker: 'Une sélection tirée de mes dépôts.',
+    inNav: true,
+    surface: 'ink',
+  },
 ]

@@ -35,7 +35,7 @@ Règles permanentes du projet. À lire avant toute modification.
 ## Projets
 
 - La sélection vient des dépôts GitHub portant le topic **`portfolio`**, récupérés par
-  `npm run sync:projects` dans `src/content/projects.generated.json`, **qui est commité**.
+  `npm run sync:projects` dans `src/data/projects.generated.json`, **qui est commité**.
 - Aucun appel à l'API GitHub au moment du rendu, donc aucun jeton dans le frontend.
 - Les retouches se font dans `projects.overrides.ts`, jamais dans le fichier généré.
 - Plusieurs dépôts d'un même projet se réunissent par la table `groups` : leurs dépôts sont retirés
@@ -56,9 +56,25 @@ Règles permanentes du projet. À lire avant toute modification.
 
 - Séparer le **contenu**, la **logique** et les **composants** :
   - `src/content/` : données et textes ;
+  - `src/data/` : fichiers générés et commités, jamais édités à la main ;
+  - `src/types/` : types partagés (`content.ts`, `project.ts`) ;
   - `src/components/` : composants d'interface (`layout/`, `ui/`, `sections/`, `projects/`) ;
   - `src/hooks/` : logique réutilisable ;
   - `src/styles/` : jetons et styles globaux. Le style d'un composant vit dans son `.module.css`.
+
+## Sections et navigation
+
+- **Une section sans contenu réel ne se rend pas, et disparaît de la navigation.** Jamais un titre
+  suivi de vide, jamais une ancre morte. C'est la règle qui permet de publier le site avant que tous
+  les textes soient écrits.
+- `src/content/navigation.ts` est le **registre des sections construites** : une entrée garantit que
+  l'ancre existe. On y ajoute une section seulement quand son composant est écrit.
+- `src/content/sections.ts` croise ce registre avec le contenu réel et expose `visibleSections`,
+  `navSections`, `isSectionVisible()` et `getSection()`. **La page et la barre de navigation lisent
+  ce même verdict** : elles ne peuvent pas diverger.
+- Un composant de section lit son numéro, son titre et sa ligne éditoriale via `getSection()` plutôt
+  que de les écrire en dur.
+- La barre desktop bascule en menu mobile sous **1080 px**.
 - Privilégier des composants **accessibles et réutilisables**.
 - Maintenir une **excellente expérience mobile** (approche mobile-first).
 - Respecter la **navigation clavier** (focus visible, ordre de tabulation cohérent, pas de piège au

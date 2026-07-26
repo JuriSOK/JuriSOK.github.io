@@ -1,13 +1,15 @@
 import { useEffect, useRef, useState } from 'react'
 import { links } from '../../content/links'
-import { navigation } from '../../content/navigation'
+import { navSections, visibleSections } from '../../content/sections'
 import { profile } from '../../content/profile'
 import { useActiveSection } from '../../hooks/useActiveSection'
 import { Icon } from '../ui/Icon'
 import { MobileMenu } from './MobileMenu'
 import styles from './SiteHeader.module.css'
 
-const sectionIds = navigation.map((item) => item.id)
+/* On suit toutes les sections rendues, y compris celles absentes de la barre :
+   l'état actif doit rester juste quand on traverse une section non listée. */
+const sectionIds = visibleSections.map((section) => section.id)
 
 export function SiteHeader() {
   const [scrolled, setScrolled] = useState(false)
@@ -68,18 +70,20 @@ export function SiteHeader() {
 
         <nav className={styles.nav} aria-label="Sections du site">
           <ul className={styles.list}>
-            {navigation.map((item) => (
-              <li key={item.id}>
+            {navSections.map((section) => (
+              <li key={section.id}>
                 <a
                   className={styles.link}
-                  href={`#${item.id}`}
-                  data-active={active === item.id}
-                  {...(active === item.id ? { 'aria-current': 'true' as const } : {})}
+                  href={`#${section.id}`}
+                  data-active={active === section.id}
+                  {...(active === section.id ? { 'aria-current': 'true' as const } : {})}
                 >
-                  <span className={`label ${styles.number}`} aria-hidden="true">
-                    {item.number}
-                  </span>
-                  {item.label}
+                  {section.number !== undefined ? (
+                    <span className={`label ${styles.number}`} aria-hidden="true">
+                      {section.number}
+                    </span>
+                  ) : null}
+                  {section.label}
                 </a>
               </li>
             ))}

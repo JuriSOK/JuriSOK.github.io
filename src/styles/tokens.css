@@ -121,10 +121,20 @@
   /* ---- Textures ---- */
 
   --grain: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)'/%3E%3C/svg%3E");
+  /* Calque global, posé une fois sur toute la page. */
   --grain-opacity: 0.03;
+
+  /* Grain supplémentaire des inserts papier : le calque global étant en
+     `position: fixed`, il ne peut pas prendre l'opacité d'une section. Ce
+     second voile est donc porté par la section elle-même. */
+  --grain-paper: 0.028;
 
   /* Aucune ombre floue moderne : uniquement une lueur chaude très diffuse. */
   --glow-warm: 0 40px 120px -60px rgb(198 138 90 / 35%);
+
+  /* Teinte vers laquelle les logos de marque sont ramenés au survol : elle
+     bascule avec la surface pour rester lisible sur fond clair comme sombre. */
+  --brand-mix: var(--latte);
 }
 
 /**
@@ -151,5 +161,8 @@
   --hairline-strong: rgb(30 22 18 / 26%);
 
   --focus-ring: var(--bordeaux);
-  --grain-opacity: 0.045;
+
+  /* Sur crème, le latte serait presque invisible : les logos sont ramenés
+     vers le bordeaux. */
+  --brand-mix: var(--bordeaux);
 }

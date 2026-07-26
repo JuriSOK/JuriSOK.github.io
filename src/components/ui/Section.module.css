@@ -4,3 +4,20 @@
   background-color: var(--bg);
   color: var(--text);
 }
+
+/**
+ * Voile de fibres propre aux inserts papier.
+ *
+ * Le grain global est un calque `position: fixed` couvrant la fenêtre : il ne
+ * peut donc pas prendre une opacité différente selon la section survolée par le
+ * défilement. Les inserts clairs portent leur propre voile, qui s'ajoute au
+ * global pour donner au crème sa texture de papier.
+ */
+.section[data-surface='paper']::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-image: var(--grain);
+  opacity: var(--grain-paper);
+}

@@ -3,8 +3,8 @@ import { Rule } from './Rule'
 import styles from './SectionHeading.module.css'
 
 interface SectionHeadingProps {
-  /** Numéro de catalogue, en libellé condensé. */
-  readonly number: string
+  /** Numéro de catalogue, en libellé condensé. Absent pour une section non numérotée. */
+  readonly number?: string
   readonly title: string
   /** Ligne éditoriale en italique, sous le titre. */
   readonly kicker?: string
@@ -21,9 +21,11 @@ export function SectionHeading({ number, title, kicker, headingId }: SectionHead
 
   return (
     <header className={styles.heading}>
-      <p className={`label ${styles.number}`} aria-hidden="true">
-        {number}
-      </p>
+      {number !== undefined ? (
+        <p className={`label ${styles.number}`} aria-hidden="true">
+          {number}
+        </p>
+      ) : null}
 
       <div ref={ref} className={`${styles.text} reveal`}>
         <h2 id={headingId} className={styles.title}>

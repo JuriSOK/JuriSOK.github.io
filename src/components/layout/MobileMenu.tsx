@@ -1,6 +1,6 @@
 import { useEffect, useRef } from 'react'
 import { links } from '../../content/links'
-import { navigation } from '../../content/navigation'
+import { visibleSections } from '../../content/sections'
 import { profile } from '../../content/profile'
 import { useScrollLock } from '../../hooks/useScrollLock'
 import { Icon } from '../ui/Icon'
@@ -54,13 +54,17 @@ export function MobileMenu({ open, onClose }: MobileMenuProps) {
           </button>
         </div>
 
+        {/* Sommaire complet : contrairement à la barre desktop, le menu liste
+            toutes les sections rendues, y compris celles marquées hors navigation. */}
         <nav aria-label="Sections du site">
           <ul className={styles.list}>
-            {navigation.map((item) => (
-              <li key={item.id}>
-                <a className={styles.link} href={`#${item.id}`} onClick={onClose}>
-                  <span className={`label ${styles.number}`}>{item.number}</span>
-                  <span className={styles.label}>{item.label}</span>
+            {visibleSections.map((section) => (
+              <li key={section.id}>
+                <a className={styles.link} href={`#${section.id}`} onClick={onClose}>
+                  <span className={`label ${styles.number}`} aria-hidden="true">
+                    {section.number ?? '00'}
+                  </span>
+                  <span className={styles.label}>{section.label}</span>
                 </a>
               </li>
             ))}

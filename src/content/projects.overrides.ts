@@ -1,4 +1,4 @@
-import type { ProjectGroup, ProjectOverride } from './types'
+import type { ProjectGroup, ProjectOverride } from '../types/project'
 
 /**
  * Retouches manuelles de la sélection produite par `npm run sync:projects`.

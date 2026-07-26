@@ -1,4 +1,4 @@
-import type { SiteLinks } from './types'
+import type { SiteLinks } from '../types/content'
 
 /**
  * Liens externes du site.

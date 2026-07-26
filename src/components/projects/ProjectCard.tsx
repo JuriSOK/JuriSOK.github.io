@@ -1,5 +1,5 @@
 import type { CSSProperties } from 'react'
-import type { ProjectCardData } from '../../content/types'
+import type { ProjectCardData } from '../../types/project'
 import { useReveal } from '../../hooks/useReveal'
 import { ButtonLink } from '../ui/ButtonLink'
 import { ProjectSleeve } from './ProjectSleeve'

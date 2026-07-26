@@ -3,8 +3,17 @@
 Portfolio professionnel de Sok Vibol Arnaud, chef de projet IA et étudiant en Master MIAGE.
 
 > 🚧 **Portfolio en cours de construction.** L'identité visuelle *Warm Vintage Jazz Editorial* est
-> posée : navigation, hero et sélection de projets. Les sections Profil, Parcours, Compétences,
-> Face B et Contact restent à construire.
+> posée : navigation, hero et sélection de projets. Les sections À propos, Parcours, Compétences,
+> Centres d'intérêt et Contact sont en cours de construction.
+
+## Contenu et sections
+
+Tous les textes vivent dans `src/content/` : modifier une phrase du site ne demande jamais d'ouvrir
+un composant. Les fichiers portant la mention `À REMPLIR` attendent du contenu.
+
+**Une section sans contenu réel ne s'affiche pas et disparaît de la navigation.** Le site est donc
+publiable à tout moment : il n'affiche jamais un titre suivi de vide, et se remplit tout seul à
+mesure que les fichiers de contenu sont écrits.
 
 ## Stack actuelle
 
@@ -24,7 +33,7 @@ Les projets affichés sont les dépôts GitHub portant le topic **`portfolio`**.
 npm run sync:projects
 ```
 
-Le script interroge l'API publique GitHub et écrit `src/content/projects.generated.json`, qui est
+Le script interroge l'API publique GitHub et écrit `src/data/projects.generated.json`, qui est
 commité : le site ne fait donc aucun appel réseau chez le visiteur et se construit hors-ligne.
 Aucun jeton n'est nécessaire ni embarqué.
 
@@ -106,7 +115,9 @@ Les fichiers de production sont générés dans `dist/`.
 │   │   ├── ui/              # Section, SectionHeading, Rule, ButtonLink, Icon
 │   │   ├── sections/        # Hero et panneau d'édition
 │   │   └── projects/        # Grille, carte, pochette générée, pastilles techno
-│   ├── content/             # Contenu, données et registre des logos
+│   ├── content/             # Textes, données, registre de sections et de logos
+│   ├── data/                # Fichiers générés et commités (ne pas éditer)
+│   ├── types/               # content.ts et project.ts
 │   ├── hooks/               # Révélation, mouvement réduit, verrou de défilement, parallaxe
 │   ├── styles/              # Jetons, polices, styles globaux
 │   ├── App.tsx

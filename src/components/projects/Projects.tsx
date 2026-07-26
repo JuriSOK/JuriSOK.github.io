@@ -1,8 +1,11 @@
 import { projects } from '../../content/projects'
+import { getSection, isSectionVisible } from '../../content/sections'
 import { Section } from '../ui/Section'
 import { SectionHeading } from '../ui/SectionHeading'
 import { ProjectCard } from './ProjectCard'
 import styles from './Projects.module.css'
+
+const section = getSection('projets')
 
 /**
  * Grille de la sélection.
@@ -11,17 +14,19 @@ import styles from './Projects.module.css'
  * sélection resserrée se parcourt d'un seul coup d'œil.
  */
 export function Projects() {
-  /* Plutôt qu'un cadre vide : si rien n'est publié, la section n'existe pas. */
-  if (projects.length === 0) {
+  /* Plutôt qu'un cadre vide : si rien n'est publié, la section n'existe pas.
+     Le test vient de `sections.ts`, qui décide aussi de la navigation : impossible
+     que la barre affiche un lien vers une section absente de la page. */
+  if (section === undefined || !isSectionVisible(section.id)) {
     return null
   }
 
   return (
-    <Section id="projets" labelledBy="projets-titre">
+    <Section id={section.id} surface={section.surface} labelledBy="projets-titre">
       <SectionHeading
-        number="04"
-        title="Projets"
-        kicker="Une sélection tirée de mes dépôts."
+        {...(section.number !== undefined ? { number: section.number } : {})}
+        title={section.label}
+        {...(section.kicker !== undefined ? { kicker: section.kicker } : {})}
         headingId="projets-titre"
       />
 

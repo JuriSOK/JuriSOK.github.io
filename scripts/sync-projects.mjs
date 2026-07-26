@@ -2,7 +2,7 @@
  * Synchronise la sélection de projets depuis GitHub.
  *
  * Un dépôt est retenu s'il porte le topic `portfolio`. Le résultat est écrit dans
- * src/content/projects.generated.json, qui est commité : le site ne fait donc
+ * src/data/projects.generated.json, qui est commité : le site ne fait donc
  * aucun appel réseau chez le visiteur, ne dépend d'aucune limite de débit et se
  * construit hors-ligne.
  *
@@ -21,7 +21,7 @@ const OWNER = 'JuriSOK'
 const TOPIC = 'portfolio'
 
 const here = dirname(fileURLToPath(import.meta.url))
-const outputPath = join(here, '..', 'src', 'content', 'projects.generated.json')
+const outputPath = join(here, '..', 'src', 'data', 'projects.generated.json')
 
 const headers = {
   Accept: 'application/vnd.github+json',
@@ -90,7 +90,7 @@ async function main() {
 
   await writeFile(outputPath, `${JSON.stringify(payload, null, 2)}\n`, 'utf8')
 
-  console.log(`\n${repos.length} dépôt(s) écrit(s) dans src/content/projects.generated.json :`)
+  console.log(`\n${repos.length} dépôt(s) écrit(s) dans src/data/projects.generated.json :`)
   for (const repo of repos) {
     console.log(`  · ${repo.name} — ${repo.languages.join(', ') || 'aucun langage détecté'}`)
   }
