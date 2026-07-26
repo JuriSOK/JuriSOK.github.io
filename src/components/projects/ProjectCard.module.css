@@ -1,0 +1,79 @@
+.card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--surface);
+  border: 1px solid var(--hairline);
+  transition:
+    border-color var(--dur) var(--ease),
+    transform var(--dur) var(--ease);
+}
+
+/* Survol éditorial : la carte se soulève très légèrement et son filet passe au cuivre.
+   Le focus clavier déclenche exactement le même état. */
+.card:hover,
+.card:has(a:focus-visible) {
+  border-color: var(--accent);
+  transform: translateY(-6px);
+}
+
+.body {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: var(--space-3);
+  padding: var(--space-5) var(--space-5) var(--space-6);
+}
+
+.title {
+  margin: 0;
+  font-size: 1.5rem;
+  overflow-wrap: anywhere;
+}
+
+.summary {
+  color: var(--text-2);
+  font-size: var(--size-ui);
+  line-height: 1.55;
+}
+
+/**
+ * Le rognage à trois lignes n'existe qu'à partir de deux colonnes : il sert à
+ * aligner les pastilles et les liens d'une carte à l'autre sur une même rangée.
+ * En colonne unique, rien à aligner — et tronquer une description coûterait de
+ * l'information pour rien.
+ */
+@media (width >= 640px) {
+  .summary {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+    line-clamp: 3;
+    overflow: hidden;
+  }
+}
+
+.tech {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  margin-top: var(--space-1);
+}
+
+.links {
+  display: flex;
+  gap: var(--space-2);
+  margin-top: auto;
+  padding-top: var(--space-4);
+}
+
+.link {
+  flex: 1;
+}
+
+/* Deux liens côte à côte : ils s'empilent quand la carte devient étroite. */
+@media (width < 380px) {
+  .links[data-count='2'] {
+    flex-direction: column;
+  }
+}

@@ -2,8 +2,9 @@
 
 Portfolio professionnel de Sok Vibol Arnaud, chef de projet IA et étudiant en Master MIAGE.
 
-> 🚧 **Portfolio en cours de construction.** Le site affiche actuellement une page temporaire
-> minimale. La direction artistique et les sections de contenu seront ajoutées progressivement.
+> 🚧 **Portfolio en cours de construction.** L'identité visuelle *Warm Vintage Jazz Editorial* est
+> posée : navigation, hero et sélection de projets. Les sections Profil, Parcours, Compétences,
+> Face B et Contact restent à construire.
 
 ## Stack actuelle
 
@@ -11,6 +12,33 @@ Portfolio professionnel de Sok Vibol Arnaud, chef de projet IA et étudiant en M
 - [TypeScript](https://www.typescriptlang.org/) (mode strict)
 - [Vite](https://vite.dev/)
 - [ESLint](https://eslint.org/)
+
+Aucune dépendance de production hors React : les polices sont auto-hébergées, les logos sont des
+tracés SVG embarqués, et les animations reposent sur `IntersectionObserver`.
+
+## Sélection des projets
+
+Les projets affichés sont les dépôts GitHub portant le topic **`portfolio`**.
+
+```bash
+npm run sync:projects
+```
+
+Le script interroge l'API publique GitHub et écrit `src/content/projects.generated.json`, qui est
+commité : le site ne fait donc aucun appel réseau chez le visiteur et se construit hors-ligne.
+Aucun jeton n'est nécessaire ni embarqué.
+
+Pour ajouter un projet :
+
+```bash
+gh repo edit JuriSOK/NOM-DU-DEPOT --add-topic portfolio
+npm run sync:projects
+```
+
+Les descriptions, titres, technologies et l'ordre d'affichage se retouchent dans
+`src/content/projects.overrides.ts` — uniquement pour les dépôts qui en ont besoin. La table `groups`
+du même fichier réunit plusieurs dépôts sous une seule carte (cas de `personal-finance-tracker`,
+réparti entre frontend et backend).
 
 ## Prérequis
 
@@ -57,25 +85,42 @@ Les fichiers de production sont générés dans `dist/`.
 
 ## Autres commandes
 
-| Commande          | Description                                    |
-| ----------------- | ---------------------------------------------- |
-| `npm run lint`    | Analyse le code avec ESLint                    |
-| `npm run preview` | Sert localement le résultat de `npm run build` |
+| Commande               | Description                                     |
+| ---------------------- | ----------------------------------------------- |
+| `npm run lint`         | Analyse le code avec ESLint                     |
+| `npm run preview`      | Sert localement le résultat de `npm run build`  |
+| `npm run sync:projects`| Régénère la sélection depuis le topic GitHub    |
 
 ## Structure du projet
 
 ```
 .
 ├── index.html
+├── public/
+│   └── fonts/               # Fraunces et Archivo auto-hébergées (+ licences OFL)
+├── scripts/
+│   └── sync-projects.mjs    # Récupère les dépôts au topic `portfolio`
 ├── src/
-│   ├── components/     # Composants d'interface
-│   ├── content/        # Contenu et données du portfolio
-│   ├── styles/         # Styles globaux
+│   ├── components/
+│   │   ├── layout/          # En-tête, menu mobile, colophon, grain, lien d'évitement
+│   │   ├── ui/              # Section, SectionHeading, Rule, ButtonLink, Icon
+│   │   ├── sections/        # Hero et panneau d'édition
+│   │   └── projects/        # Grille, carte, pochette générée, pastilles techno
+│   ├── content/             # Contenu, données et registre des logos
+│   ├── hooks/               # Révélation, mouvement réduit, verrou de défilement, parallaxe
+│   ├── styles/              # Jetons, polices, styles globaux
 │   ├── App.tsx
 │   └── main.tsx
-├── CLAUDE.md           # Règles permanentes du projet
+├── CLAUDE.md                # Règles permanentes du projet
 └── vite.config.ts
 ```
+
+## Accessibilité
+
+Le site est vérifié au clavier et en mouvement réduit à chaque étape : lien d'évitement en premier,
+anneau de focus visible partout, cibles d'au moins 44 px, menu mobile en `<dialog>` modal natif
+(piège de focus et `Échap` assurés par le navigateur). Sous `prefers-reduced-motion`, aucune
+animation ne subsiste et l'intégralité du contenu reste affichée.
 
 ## Déploiement
 

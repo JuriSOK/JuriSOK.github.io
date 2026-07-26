@@ -1,0 +1,6 @@
+.section {
+  position: relative;
+  padding-block: var(--section-gap);
+  background-color: var(--bg);
+  color: var(--text);
+}

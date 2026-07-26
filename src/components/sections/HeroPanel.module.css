@@ -1,0 +1,143 @@
+.panel {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  aspect-ratio: 1;
+  padding: var(--space-6);
+  background-color: var(--ink-800);
+  border: 1px solid var(--hairline-strong);
+  box-shadow: var(--glow-warm);
+
+  /* Alimenté par useParallax, uniquement au pointeur fin sur grand écran. */
+  transform: translateY(var(--parallax, 0));
+}
+
+/* ---- Marques de coupe ---- */
+
+.crop {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  border-color: var(--line);
+  border-style: solid;
+  border-width: 0;
+  opacity: 0.75;
+}
+
+.cropTopLeft {
+  top: -1px;
+  left: -1px;
+  border-top-width: 1px;
+  border-left-width: 1px;
+}
+
+.cropTopRight {
+  top: -1px;
+  right: -1px;
+  border-top-width: 1px;
+  border-right-width: 1px;
+}
+
+.cropBottomLeft {
+  bottom: -1px;
+  left: -1px;
+  border-bottom-width: 1px;
+  border-left-width: 1px;
+}
+
+.cropBottomRight {
+  bottom: -1px;
+  right: -1px;
+  border-bottom-width: 1px;
+  border-right-width: 1px;
+}
+
+/* ---- Contenu ---- */
+
+.top {
+  padding-bottom: var(--space-4);
+  border-bottom: 1px solid var(--hairline);
+  color: var(--text-3);
+}
+
+/* Emplacement du futur portrait : la composition ne bougera pas. */
+.stage {
+  position: relative;
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  gap: var(--space-8);
+  min-height: 0;
+}
+
+.monogram {
+  font-family: var(--font-display);
+  font-variation-settings: var(--fraunces-display);
+  font-size: clamp(3rem, 9vw, 5.5rem);
+  font-weight: 600;
+  line-height: 0.9;
+  letter-spacing: 0.06em;
+
+  /* Contour plutôt qu'aplat : la teinte reste chaude sans peser visuellement. */
+  color: transparent;
+  -webkit-text-stroke: 1px var(--caramel);
+}
+
+.bars {
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+  width: 100%;
+}
+
+.bar {
+  height: 1px;
+  background-color: var(--hairline-strong);
+}
+
+.bar:nth-child(1) {
+  width: 68%;
+}
+
+.bar:nth-child(2) {
+  width: 44%;
+}
+
+.bar:nth-child(3) {
+  width: 26%;
+}
+
+.bottom {
+  display: flex;
+  justify-content: space-between;
+  padding-top: var(--space-4);
+  border-top: 1px solid var(--hairline);
+  color: var(--text-3);
+}
+
+/* Sur mobile, le panneau devient un bandeau : il ne doit pas voler la hauteur. */
+@media (width < 900px) {
+  .panel {
+    aspect-ratio: 16 / 9;
+    padding: var(--space-4) var(--space-5);
+    box-shadow: none;
+  }
+
+  .stage {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-6);
+  }
+
+  .monogram {
+    font-size: clamp(2.25rem, 12vw, 3.5rem);
+  }
+
+  .bars {
+    width: 45%;
+  }
+}

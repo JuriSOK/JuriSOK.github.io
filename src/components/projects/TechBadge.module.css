@@ -1,0 +1,32 @@
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.3rem 0.6rem;
+  background-color: var(--surface-raised);
+  border: 1px solid var(--hairline);
+  border-radius: var(--radius-chip);
+  color: var(--text-2);
+  font-size: var(--size-meta);
+  line-height: 1.3;
+  white-space: nowrap;
+}
+
+/**
+ * Au repos, le logo reste monochrome : aucune couleur de marque ne vient trouer
+ * la palette chaude. Elle n'apparaît qu'au survol, mélangée au latte, donc
+ * désaturée et réchauffée — jamais le bleu ou le vert d'origine à pleine force.
+ */
+.logo {
+  flex-shrink: 0;
+  color: var(--text-3);
+  transition: color var(--dur) var(--ease);
+}
+
+/* `[data-project-card]` est un attribut, donc non transformé par les CSS Modules :
+   c'est ce qui permet à la carte parente de piloter l'état de ses pastilles. */
+[data-project-card]:hover .logo,
+[data-project-card]:has(a:focus-visible) .logo,
+[data-project-card]:active .logo {
+  color: color-mix(in oklab, var(--brand, var(--latte)) 55%, var(--latte));
+}

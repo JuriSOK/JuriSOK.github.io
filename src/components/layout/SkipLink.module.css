@@ -1,0 +1,22 @@
+.skip {
+  position: fixed;
+  top: var(--space-2);
+  left: var(--space-2);
+  z-index: 100;
+  padding: 0.75rem 1.25rem;
+  background-color: var(--accent);
+  color: var(--accent-contrast);
+  font-family: var(--font-ui);
+  font-size: var(--size-ui);
+  font-weight: 500;
+  text-decoration: none;
+
+  /* Hors du flux visuel tant qu'il n'a pas le focus, mais toujours dans l'ordre
+     de tabulation — jamais display:none, qui le rendrait inatteignable. */
+  transform: translateY(calc(-100% - var(--space-4)));
+  transition: transform var(--dur) var(--ease);
+}
+
+.skip:focus-visible {
+  transform: translateY(0);
+}

@@ -1,0 +1,34 @@
+{
+  "generatedAt": "2026-07-26T15:23:10.994Z",
+  "owner": "JuriSOK",
+  "topic": "portfolio",
+  "repos": [
+    {
+      "name": "MiniSGBDR",
+      "description": "Ce projet consiste à développer un mini Système de Gestion de Base de Données (SGBD) en Rust. Un SGBD est un logiciel permettant de gérer, manipuler et interroger des données de manière structurée",
+      "url": "https://github.com/JuriSOK/MiniSGBDR",
+      "languages": [
+        "Rust"
+      ]
+    },
+    {
+      "name": "personal-finance-tracker-backend",
+      "description": "Backend Spring Boot API for Personal Finance Tracker",
+      "url": "https://github.com/JuriSOK/personal-finance-tracker-backend",
+      "languages": [
+        "Java"
+      ]
+    },
+    {
+      "name": "personal-finance-tracker-frontend",
+      "description": "Angular frontend for Personal Finance Tracker",
+      "url": "https://github.com/JuriSOK/personal-finance-tracker-frontend",
+      "languages": [
+        "TypeScript",
+        "HTML",
+        "SCSS",
+        "CSS"
+      ]
+    }
+  ]
+}

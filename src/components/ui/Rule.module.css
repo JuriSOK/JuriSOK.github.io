@@ -1,0 +1,15 @@
+.rule {
+  width: 100%;
+  border: 0;
+}
+
+.hair {
+  height: 1px;
+  background-color: var(--hairline);
+}
+
+.strong {
+  height: 1px;
+  background-color: var(--line);
+  opacity: 0.7;
+}

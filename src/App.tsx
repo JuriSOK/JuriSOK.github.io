@@ -1,6 +1,45 @@
-import { UnderConstruction } from './components/UnderConstruction'
-import { profile } from './content/profile'
+import { useEffect } from 'react'
+import { GrainOverlay } from './components/layout/GrainOverlay'
+import { SiteFooter } from './components/layout/SiteFooter'
+import { SiteHeader } from './components/layout/SiteHeader'
+import { SkipLink } from './components/layout/SkipLink'
+import { Projects } from './components/projects/Projects'
+import { Hero } from './components/sections/Hero'
+import { useReducedMotion } from './hooks/useReducedMotion'
 
 export default function App() {
-  return <UnderConstruction profile={profile} />
+  const reducedMotion = useReducedMotion()
+
+  /**
+   * Les états de départ des révélations n'existent que sous `data-motion="on"`.
+   * Poser l'attribut depuis React garantit que sans JavaScript — ou avec
+   * « mouvement réduit » — tout le contenu est affiché immédiatement.
+   */
+  useEffect(() => {
+    const root = document.documentElement
+
+    if (reducedMotion) {
+      root.removeAttribute('data-motion')
+      return
+    }
+
+    root.setAttribute('data-motion', 'on')
+
+    return () => root.removeAttribute('data-motion')
+  }, [reducedMotion])
+
+  return (
+    <>
+      <SkipLink />
+      <GrainOverlay />
+      <SiteHeader />
+
+      <main id="contenu">
+        <Hero />
+        <Projects />
+      </main>
+
+      <SiteFooter />
+    </>
+  )
 }
