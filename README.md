@@ -2,9 +2,10 @@
 
 Portfolio professionnel de Sok Vibol Arnaud, chef de projet IA et étudiant en Master MIAGE.
 
-> 🚧 **Portfolio en cours de construction.** Sections en ligne : Accueil, À propos, Parcours,
-> Projets et Centres d'intérêt. La section Compétences est développée mais reste masquée tant que
-> `src/content/skills.ts` n'est pas rempli. Reste à construire : Contact.
+> 🚧 **Portfolio en cours de construction.** Les sept sections sont développées. Cinq sont en ligne :
+> Accueil, À propos, Parcours, Projets et Centres d'intérêt. Deux restent masquées, faute de contenu :
+> **Compétences** attend `src/content/skills.ts`, **Contact** attend une adresse e-mail, une URL
+> LinkedIn ou un CV dans `src/content/links.ts`. Elles apparaîtront d'elles-mêmes une fois remplies.
 
 ## Contenu et sections
 

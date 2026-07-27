@@ -1,0 +1,62 @@
+.body {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--space-6);
+}
+
+.invitation {
+  max-width: 30ch;
+  font-family: var(--font-display);
+  font-variation-settings: var(--fraunces-title);
+  font-size: clamp(1.5rem, 3.5vw, 2.5rem);
+  font-style: italic;
+  font-weight: 400;
+  line-height: 1.2;
+}
+
+.email {
+  font-family: var(--font-display);
+  font-variation-settings: var(--fraunces-title);
+  font-size: clamp(1.5rem, 4vw, 3rem);
+  font-weight: 500;
+  line-height: 1.1;
+  overflow-wrap: anywhere;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.16em;
+}
+
+.channels {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-6);
+  padding-top: var(--space-4);
+  border-top: 1px solid var(--hairline);
+  width: 100%;
+}
+
+.channel {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  min-height: var(--tap-min);
+  color: var(--text-2);
+  font-size: var(--size-ui);
+  text-decoration: none;
+}
+
+.channel:hover {
+  color: var(--accent);
+}
+
+/**
+ * Miroir du hero : là où le nom occupait la gauche, la fermeture occupe la
+ * droite. La marge vide de gauche est l'écho de celle laissée à droite en haut
+ * de page.
+ */
+@media (width >= 1024px) {
+  .inner {
+    max-width: 42rem;
+    margin-left: auto;
+  }
+}

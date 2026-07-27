@@ -9,12 +9,19 @@ export function SiteFooter() {
     <footer className={styles.footer}>
       <div className={`shell ${styles.inner}`}>
         <p className={`label ${styles.mention}`}>
-          {profile.fullName} · {profile.edition}
+          {profile.fullName} · {profile.edition} · {profile.year}
         </p>
 
         <p className={styles.tech}>Conçu et développé avec React, TypeScript et Vite.</p>
 
         <div className={styles.right}>
+          {links.email !== null ? (
+            <a className={styles.social} href={`mailto:${links.email}`}>
+              <Icon name="arrowUpRight" size={16} />
+              E-mail
+            </a>
+          ) : null}
+
           <a className={styles.social} href={links.github} target="_blank" rel="noopener noreferrer">
             <Icon name="github" size={16} />
             GitHub

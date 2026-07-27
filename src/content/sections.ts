@@ -1,5 +1,6 @@
 import { about, facts } from './about'
 import { education } from './education'
+import { links } from './links'
 import { experiences } from './experiences'
 import { interests } from './interests'
 import { projects } from './projects'
@@ -34,6 +35,11 @@ const hasContent: Record<string, boolean> = {
 
   /* Les cinq intitulés sont des faits : la section est complète d'emblée. */
   interets: interests.length > 0,
+
+  /* GitHub figure déjà dans le hero et le colophon : à lui seul, il ne
+     justifie pas une section entière. Il faut un vrai moyen de prise de
+     contact — e-mail, LinkedIn ou CV. */
+  contact: links.email !== null || links.linkedin !== null || links.cv !== null,
 }
 
 /** Sections à monter dans la page, dans l'ordre du registre. */

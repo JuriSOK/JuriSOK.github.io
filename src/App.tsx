@@ -6,6 +6,7 @@ import { SkipLink } from './components/layout/SkipLink'
 import { Projects } from './components/projects/Projects'
 import { About } from './components/sections/About'
 import { Career } from './components/sections/Career'
+import { Contact } from './components/sections/Contact'
 import { Hero } from './components/sections/Hero'
 import { Interests } from './components/sections/Interests'
 import { Skills } from './components/sections/Skills'
@@ -48,6 +49,7 @@ export default function App() {
         <Skills />
         <Projects />
         <Interests />
+        <Contact />
       </main>
 
       <SiteFooter />

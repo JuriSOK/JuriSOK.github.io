@@ -57,4 +57,11 @@ export const sectionRegistry: readonly SectionDefinition[] = [
     inNav: false,
     surface: 'ink',
   },
+  {
+    id: 'contact',
+    number: '06',
+    label: 'Contact',
+    inNav: true,
+    surface: 'paper',
+  },
 ]
