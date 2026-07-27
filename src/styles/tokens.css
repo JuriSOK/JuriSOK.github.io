@@ -131,10 +131,6 @@
 
   /* Aucune ombre floue moderne : uniquement une lueur chaude très diffuse. */
   --glow-warm: 0 40px 120px -60px rgb(198 138 90 / 35%);
-
-  /* Teinte vers laquelle les logos de marque sont ramenés au survol : elle
-     bascule avec la surface pour rester lisible sur fond clair comme sombre. */
-  --brand-mix: var(--latte);
 }
 
 /**
@@ -161,8 +157,4 @@
   --hairline-strong: rgb(30 22 18 / 26%);
 
   --focus-ring: var(--bordeaux);
-
-  /* Sur crème, le latte serait presque invisible : les logos sont ramenés
-     vers le bordeaux. */
-  --brand-mix: var(--bordeaux);
 }

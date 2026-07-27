@@ -29,8 +29,13 @@ Règles permanentes du projet. À lire avant toute modification.
   aplats uniquement.
 - **Les polices embarquent le seul sous-ensemble `latin`.** Il couvre tout le français, mais pas les
   symboles comme `↗` ou `◇` : ceux-ci se dessinent en SVG (`Icon.tsx`), jamais en caractères.
-- **Logos de technologies** : monochrome au repos, teinte de marque seulement au survol et toujours
-  mélangée vers `--brand-mix`. Le nom est toujours affiché à côté du logo, qui reste `aria-hidden`.
+- **Logos de technologies** : couleur de marque affichée en permanence. Les valeurs de `tech.ts` ne
+  sont pas toujours le hex officiel — chacune est vérifiée contre le fond de pastille
+  (`--surface-raised`) et, sous 3:1, éclaircie **le long de sa propre teinte** jusqu'à passer. Une
+  couleur trop sombre et trop saturée pour y arriver sans virer au néon est mélangée vers le latte :
+  c'est pourquoi Rust, Java et Splunk, officiellement noirs, s'affichent en bronze chaud. Ne jamais
+  remettre un hex officiel sans revérifier son contraste. Le nom reste toujours affiché à côté du
+  logo, qui reste `aria-hidden`.
 - **Avatar** : `src/arnaud-avatar.png`, importé par Vite plutôt que référencé par URL — un fichier
   manquant casse alors le build au lieu de produire un 404 silencieux. `object-fit: contain`, cadre
   au ratio de la source, jamais de recadrage circulaire. Le monogramme « VAS » ne couvre qu'un vrai

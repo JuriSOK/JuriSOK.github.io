@@ -13,23 +13,26 @@
 }
 
 /**
- * Au repos, le logo reste monochrome : aucune couleur de marque ne vient trouer
- * la palette chaude. Elle n'apparaît qu'au survol, mélangée au latte, donc
- * désaturée et réchauffée — jamais le bleu ou le vert d'origine à pleine force.
+ * Brand colours, shown permanently rather than only on hover.
+ *
+ * The values in `tech.ts` are not always the official hex: each one is checked
+ * against this badge background (`--surface-raised`) and, when it falls under
+ * 3:1, brightened along its own hue until it passes. Colours too dark and too
+ * saturated to reach that without turning neon are mixed towards the warm
+ * `--latte`, which is why Rust, Java and Splunk — officially pure black —
+ * render as a warm bronze rather than an invisible smudge.
+ *
+ * `--brand` is set inline by `TechBadge`; the fallback covers text-only badges.
  */
 .logo {
   flex-shrink: 0;
-  color: var(--text-3);
-  transition: color var(--dur) var(--ease);
+  color: var(--brand, var(--text-3));
 }
 
-/* `[data-project-card]` est un attribut, donc non transformé par les CSS Modules :
-   c'est ce qui permet à la carte parente de piloter l'état de ses pastilles.
-   La pastille réagit aussi à son propre survol, pour les contextes sans carte
-   parente comme la section Compétences. */
-.badge:hover .logo,
-[data-project-card]:hover .logo,
-[data-project-card]:has(a:focus-visible) .logo,
-[data-project-card]:active .logo {
-  color: color-mix(in oklab, var(--brand, var(--brand-mix)) 55%, var(--brand-mix));
+/**
+ * On a cream insert those brightened colours would be unreadable. Badges do not
+ * appear on paper today, but the guard keeps that from becoming a bug later.
+ */
+[data-surface='paper'] .logo {
+  color: var(--text-2);
 }
