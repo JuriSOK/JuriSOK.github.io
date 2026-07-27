@@ -13,10 +13,6 @@
 }
 
 .item {
-  display: flex;
-  align-items: baseline;
-  gap: var(--space-4);
-  padding-block: var(--space-3);
   border-top: 1px solid var(--hairline);
 }
 
@@ -24,45 +20,94 @@
   border-bottom: 1px solid var(--hairline);
 }
 
-.name {
+.rowHeading {
+  margin: 0;
+  font-size: inherit;
+  font-variation-settings: normal;
+  font-weight: inherit;
+  line-height: inherit;
+}
+
+/* The whole row is the trigger: one large target, nothing nested inside. */
+.row {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  width: 100%;
+  min-height: 3.5rem;
+  padding-block: var(--space-2);
+  text-align: left;
+  color: var(--text);
+}
+
+.row:hover .name {
+  color: var(--accent-hover);
+}
+
+.icon {
   flex-shrink: 0;
+  width: 2rem;
+  height: 2rem;
+}
+
+.name {
+  flex: 1;
   font-family: var(--font-display);
   font-variation-settings: var(--fraunces-title);
   font-size: clamp(1.125rem, 2.2vw, 1.375rem);
   font-weight: 500;
   line-height: 1.2;
+  transition: color var(--dur-fast) var(--ease);
 }
 
-/* Leader rule: it takes the remaining space, with or without a note. */
-.lead {
-  flex: 1;
-  min-width: var(--space-8);
-  height: 1px;
-  background-color: var(--hairline);
-  transform: translateY(-0.3em);
-}
-
-.note {
+/* Subtle expand indicator, turned when open. */
+.chevron {
   flex-shrink: 0;
-  max-width: 34ch;
   color: var(--text-3);
-  font-size: var(--size-meta);
-  text-align: right;
+  transition: transform var(--dur) var(--ease);
 }
 
-/* Two lines on narrow screens: the leader rule would have no useful room. */
-@media (width < 640px) {
-  .item {
-    display: grid;
-    gap: var(--space-1);
-  }
+.row[aria-expanded='true'] .chevron {
+  transform: rotate(180deg);
+}
 
-  .lead {
-    display: none;
-  }
+/**
+ * Expansion animates grid rows only — no height measurement, no layout
+ * thrash. `visibility` keeps the collapsed content out of assistive
+ * technology and of the tab order while it is closed. The global
+ * `prefers-reduced-motion` rule collapses both transitions to ~0ms.
+ */
+.panel {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows var(--dur-slow) var(--ease);
+}
 
-  .note {
-    max-width: none;
-    text-align: left;
+.panel[data-open='true'] {
+  grid-template-rows: 1fr;
+}
+
+.panelInner {
+  overflow: hidden;
+  visibility: hidden;
+  transition: visibility var(--dur-slow);
+}
+
+.panel[data-open='true'] .panelInner {
+  visibility: visible;
+}
+
+.detail {
+  max-width: var(--measure);
+  padding: 0 0 var(--space-4) calc(2rem + var(--space-4));
+  color: var(--text-2);
+  font-size: var(--size-ui);
+  line-height: 1.6;
+}
+
+/* The icon indent would eat too much width on a phone. */
+@media (width < 480px) {
+  .detail {
+    padding-left: 0;
   }
 }

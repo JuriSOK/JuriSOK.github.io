@@ -1,0 +1,71 @@
+.grid {
+  display: grid;
+
+  /* Sized on the panel, not the viewport: two or three columns as space allows. */
+  grid-template-columns: repeat(auto-fill, minmax(min(15rem, 100%), 1fr));
+  gap: var(--grid-gap);
+}
+
+/**
+ * A café event flyer rather than a project card: the artwork sits in a framed
+ * strip, and a perforated (dashed) rule separates it from the text, like the
+ * stub line of an arcade ticket.
+ */
+.ticket {
+  display: flex;
+  flex-direction: column;
+  background-color: var(--surface);
+  border: 1px solid var(--hairline-strong);
+  outline: 1px solid var(--hairline);
+  outline-offset: 3px;
+}
+
+.art {
+  padding: var(--space-3) var(--space-3) 0;
+}
+
+.scene {
+  display: block;
+  width: 100%;
+  height: auto;
+  image-rendering: pixelated;
+  border: 1px solid var(--hairline);
+}
+
+.body {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: var(--space-3);
+  margin-top: var(--space-3);
+  padding: var(--space-4);
+  border-top: 1px dashed var(--hairline-strong);
+}
+
+/* The one honest status: these are ideas, not participations. */
+.status {
+  align-self: flex-start;
+  padding: 0.2rem 0.5rem;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-chip);
+  color: var(--accent);
+}
+
+.title {
+  margin: 0;
+  font-size: 1.375rem;
+}
+
+.summary {
+  color: var(--text-2);
+  font-size: var(--size-ui);
+  line-height: 1.55;
+}
+
+.tech {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  margin-top: auto;
+  padding-top: var(--space-2);
+}

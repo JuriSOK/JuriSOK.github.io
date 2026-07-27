@@ -1,4 +1,5 @@
 import { about, facts } from './about'
+import { hackathonConcepts } from './hackathons'
 import { education } from './education'
 import { experiences } from './experiences'
 import { interests } from './interests'
@@ -21,6 +22,10 @@ const hasContent: Record<string, boolean> = {
   resume: experiences.length > 0 || education.length > 0 || skills.some(hasDomainContent),
 
   projects: projects.length > 0,
+
+  /* Concepts only — the page says so itself. It disappears the day the file
+     is emptied while waiting for real entries. */
+  hackathons: hackathonConcepts.length > 0,
 
   contact: true,
 }

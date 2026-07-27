@@ -4,8 +4,12 @@ Professional portfolio of Vibol Arnaud Sok, AI Project Manager apprentice and Ma
 MIAGE.
 
 The site follows a **vCard layout**: a fixed identity sidebar and a main panel whose content switches
-by tabs — About, Resume, Projects and Contact — rendered in a *Warm Vintage Jazz Editorial* theme
-over an original animated pixel-art jazz café background.
+by tabs — About, Resume, Projects, Hackathons and Contact — rendered in a *Warm Vintage Jazz
+Editorial* theme over an animated pixel-art jazz café background, with original pixel-art
+illustrations throughout (interests, skill categories, project sleeves, hackathon concepts).
+
+The Hackathons page deliberately contains **concepts only** — every card is labelled « Concept »,
+because no hackathon has been attended yet. Nothing on that page is invented.
 
 > 🚧 **Work in progress.** Some wording is provisional and flagged with a `TODO` comment in the
 > content files. The word `TODO` never reaches the rendered page.
@@ -17,9 +21,9 @@ over an original animated pixel-art jazz café background.
 - [Vite](https://vite.dev/)
 - [ESLint](https://eslint.org/)
 
-No production dependency beyond React: fonts are self-hosted, technology logos are inlined SVG paths,
-the café background is hand-drawn SVG with CSS animation, and reveals use a native
-`IntersectionObserver`.
+No production dependency beyond React: fonts are self-hosted, technology logos are inlined SVG
+paths, pixel-art illustrations are original local drawings rendered by a small `PixelGrid`
+component, and reveals use a native `IntersectionObserver`.
 
 ## Content
 
@@ -99,14 +103,15 @@ The dev server starts on `http://localhost:5173`.
 │   └── sync-projects.mjs    # Fetches repositories carrying the `portfolio` topic
 ├── src/
 │   ├── components/
-│   │   ├── background/      # Animated pixel-art jazz café scene
+│   │   ├── background/      # Fixed animated café background
+│   │   ├── pixel-art/       # PixelGrid renderer and original pixel drawings
 │   │   ├── layout/          # Identity sidebar, tabs, grain, skip link
 │   │   ├── ui/              # Page, SectionHeading, Rule, ButtonLink, TechBadge, Icon
-│   │   ├── sections/        # About, Resume and Contact pages and their blocks
+│   │   ├── sections/        # About, Resume, Hackathons and Contact pages
 │   │   └── projects/        # Grid, card, generated artwork
 │   ├── content/             # Copy, data, page registry and logo registry
 │   ├── data/                # Generated, committed files (do not edit)
-│   ├── types/               # content.ts and project.ts
+│   ├── types/               # content.ts, project.ts, pixel-art.ts
 │   ├── hooks/               # Reveal, reduced motion, media queries
 │   ├── styles/              # Tokens, fonts, global styles
 │   ├── App.tsx

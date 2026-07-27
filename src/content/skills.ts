@@ -15,6 +15,7 @@ export const skills: readonly SkillDomain[] = [
   {
     id: 'ai-data',
     title: 'AI & Data',
+    icon: 'ai-data',
     usage:
       'Exploring data, comparing models and transforming analytical results into practical use cases.',
     tools: ['Python', 'Machine Learning', 'Data Analysis', 'Power BI'],
@@ -23,6 +24,7 @@ export const skills: readonly SkillDomain[] = [
   {
     id: 'software-development',
     title: 'Software Development',
+    icon: 'software',
     usage:
       'Building structured applications and working across frontend, backend and development tooling.',
     /* Ordered by prominence: the first entries carry the most weight visually. */
@@ -43,6 +45,7 @@ export const skills: readonly SkillDomain[] = [
   {
     id: 'databases',
     title: 'Databases',
+    icon: 'database',
     usage: 'Designing, querying and integrating relational and document-oriented databases.',
     tools: ['PostgreSQL', 'MySQL', 'MongoDB'],
     contexts: ['Academic applications', 'Backend projects', 'Database systems'],
@@ -50,6 +53,7 @@ export const skills: readonly SkillDomain[] = [
   {
     id: 'itsm-observability',
     title: 'ITSM, Project Management & Observability',
+    icon: 'observability',
     usage:
       'Structuring use cases, coordinating projects and working with IT service management and observability tools.',
     tools: ['ServiceNow', 'Jira', 'Confluence', 'Dynatrace', 'Splunk', 'ELK', 'Trello'],

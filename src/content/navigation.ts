@@ -28,6 +28,11 @@ export const sectionRegistry: readonly SectionDefinition[] = [
     kicker: 'A selection drawn from my repositories.',
   },
   {
+    id: 'hackathons',
+    label: 'Hackathons',
+    kicker: 'Concepts I would like to explore during future hackathons.',
+  },
+  {
     id: 'contact',
     label: 'Contact',
   },

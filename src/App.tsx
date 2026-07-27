@@ -8,6 +8,7 @@ import { Projects } from './components/projects/Projects'
 import { About } from './components/sections/About'
 import { Career } from './components/sections/Career'
 import { Contact } from './components/sections/Contact'
+import { Hackathons } from './components/sections/Hackathons'
 import { profile } from './content/profile'
 import { visibleSections } from './content/sections'
 import { useReducedMotion } from './hooks/useReducedMotion'
@@ -19,6 +20,7 @@ const pages: Record<string, ComponentType<PageProps>> = {
   about: About,
   resume: Career,
   projects: Projects,
+  hackathons: Hackathons,
   contact: Contact,
 }
 

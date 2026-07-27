@@ -72,6 +72,18 @@
   }
 }
 
+/**
+ * Five tabs share a 375 px bar: « Hackathons » is the widest label, so type
+ * and padding tighten one step. Targets keep their full height.
+ */
+@media (width < 460px) {
+  .tab {
+    padding-inline: var(--space-1);
+    font-size: 0.75rem;
+    letter-spacing: 0;
+  }
+}
+
 /* ---- Desktop : coin supérieur droit du panneau ---- */
 
 @media (width >= 1250px) {

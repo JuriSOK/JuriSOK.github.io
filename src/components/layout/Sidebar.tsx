@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { links } from '../../content/links'
 import { profile } from '../../content/profile'
 import { Icon } from '../ui/Icon'
+import { ParisTime } from './ParisTime'
 import avatarUrl from '../../arnaud-avatar.png'
 import styles from './Sidebar.module.css'
 
@@ -110,7 +111,11 @@ export function Sidebar() {
 
           <div className={styles.contact}>
             <dt className={`label ${styles.term}`}>Location</dt>
-            <dd className={styles.value}>{profile.location}</dd>
+            <dd className={`${styles.value} ${styles.locationValue}`}>
+              <span>{profile.location}</span>
+              <span aria-hidden="true">·</span>
+              <ParisTime />
+            </dd>
           </div>
         </dl>
       </div>

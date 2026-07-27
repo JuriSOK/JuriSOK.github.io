@@ -4,10 +4,6 @@
   overflow: hidden;
   background-color: var(--ink-800);
   border-bottom: 1px solid var(--hairline);
-
-  /* Teinte des marques, redéfinie par chaque duotone ; sur une image fournie,
-     le numéro de catalogue reste ainsi lisible en crème. */
-  --sleeve-mark: var(--paper);
 }
 
 .image {
@@ -16,7 +12,7 @@
   object-fit: cover;
 }
 
-/* Surcouche chaude légère : harmonise une capture d'écran avec les pochettes générées. */
+/* Surcouche chaude légère : harmonise une capture d'écran avec les pochettes. */
 .tint {
   position: absolute;
   inset: 0;
@@ -25,53 +21,21 @@
   opacity: 0.28;
 }
 
-/* ---- Composition générée ---- */
+/* ---- Scènes pixel-art ---- */
 
-.generated {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background-color: var(--sleeve-bg);
-}
-
-/**
- * Les duotones sont ramenés vers l'espresso : à pleine saturation, les pochettes
- * devenaient des aplats vifs qui écrasaient le reste de la page et sortaient de
- * l'ambiance tamisée. La teinte reste identifiable, l'intensité non.
- */
-
-.bordeaux {
-  --sleeve-bg: color-mix(in oklab, var(--bordeaux) 60%, var(--ink-900));
-  --sleeve-mark: var(--latte);
-}
-
-.caramel {
-  --sleeve-bg: color-mix(in oklab, var(--caramel) 45%, var(--ink-900));
-  --sleeve-mark: var(--paper);
-}
-
-.leather {
-  --sleeve-bg: var(--ink-700);
-  --sleeve-mark: var(--copper);
-}
-
-.motif {
-  position: absolute;
-  inset: 0;
+.scene {
+  display: block;
   width: 100%;
   height: 100%;
-  fill: var(--sleeve-mark);
-  opacity: 0.3;
+  image-rendering: pixelated;
 }
 
-.initials {
-  position: relative;
-  font-family: var(--font-display);
-  font-variation-settings: var(--fraunces-display);
-  font-size: clamp(2.5rem, 9vw, 4rem);
-  font-weight: 600;
-  letter-spacing: 0.02em;
-  color: transparent;
-  -webkit-text-stroke: 1.25px var(--sleeve-mark);
+/* Initials, demoted to a small corner tag on fallback artwork. */
+.tag {
+  position: absolute;
+  left: var(--space-3);
+  bottom: var(--space-3);
+  padding: 0.15rem 0.4rem;
+  background-color: rgb(20 16 13 / 70%);
+  color: var(--hazel);
 }
-

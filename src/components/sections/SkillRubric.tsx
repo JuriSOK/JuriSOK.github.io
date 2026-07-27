@@ -1,5 +1,6 @@
 import type { SkillDomain } from '../../types/content'
 import { useReveal } from '../../hooks/useReveal'
+import { PixelArtIcon } from '../pixel-art/PixelArtIcon'
 import { TechBadge } from '../ui/TechBadge'
 import styles from './SkillRubric.module.css'
 
@@ -19,8 +20,12 @@ export function SkillRubric({ domain }: SkillRubricProps) {
 
   return (
     <li ref={ref} className={`${styles.rubric} reveal`}>
-      {/* h4: the rubric belongs to the « Skills » movement, which owns the h3. */}
-      <h4 className={styles.title}>{domain.title}</h4>
+      {/* h4: the rubric belongs to the « Skills » movement, which owns the h3.
+          The pixel icon is decorative — the heading names the category. */}
+      <h4 className={styles.title}>
+        <PixelArtIcon name={domain.icon} className={styles.titleIcon} />
+        <span>{domain.title}</span>
+      </h4>
 
       {domain.usage !== undefined ? <p className={styles.usage}>{domain.usage}</p> : null}
 

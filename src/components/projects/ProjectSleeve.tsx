@@ -1,18 +1,23 @@
+import type { ProjectArtName } from '../../types/pixel-art'
+import { FallbackScene, ProjectScene } from '../pixel-art/ProjectPixelArt'
 import styles from './ProjectSleeve.module.css'
 
 /**
  * Project artwork.
  *
- * Without a supplied image, an abstract composition is drawn from a hash of the
- * project name: the same project therefore always gets the same artwork. That
- * is what keeps the grid coherent whatever the number of available images.
+ * The two current projects have hand-drawn pixel-art scenes in the café theme.
+ * A future repository, before it gets a scene or an image of its own, receives
+ * a deterministic thematic fallback — terminal window, file folders or data
+ * blocks — picked from a hash of its id, so the same project always shows the
+ * same artwork. Initials remain only as a small corner tag on fallbacks,
+ * never as the main visual.
  */
 
-const MOTIFS = ['rules', 'grid', 'bands', 'blocks'] as const
-const DUOTONES = ['bordeaux', 'caramel', 'leather'] as const
-
-type Motif = (typeof MOTIFS)[number]
-type Duotone = (typeof DUOTONES)[number]
+/** Hand-drawn scenes, by project id. */
+const sceneByProject: Record<string, ProjectArtName> = {
+  'personal-finance-tracker': 'personal-finance-tracker',
+  MiniSGBDR: 'minisgbdr',
+}
 
 /** Short, stable hash (FNV-1a, 32 bits). */
 function hash(value: string): number {
@@ -26,7 +31,7 @@ function hash(value: string): number {
   return result
 }
 
-/** First two initials of the title. */
+/** First two initials of the title, for the small fallback corner tag. */
 function initials(title: string): string {
   const words = title
     .replace(/[-_]/g, ' ')
@@ -70,59 +75,21 @@ export function ProjectSleeve({ id, title, image, eager }: ProjectSleeveProps) {
     )
   }
 
-  const seed = hash(id)
-  const motif: Motif = MOTIFS[seed % MOTIFS.length] ?? 'rules'
-  const duotone: Duotone = DUOTONES[(seed >>> 8) % DUOTONES.length] ?? 'bordeaux'
+  const scene = sceneByProject[id]
+
+  if (scene !== undefined) {
+    /* Decorative: the project title is read just below the sleeve. */
+    return (
+      <div className={styles.sleeve} aria-hidden="true">
+        <ProjectScene name={scene} className={styles.scene} />
+      </div>
+    )
+  }
 
   return (
-    <div
-      className={`${styles.sleeve} ${styles.generated} ${styles[duotone]}`}
-      /* Decorative: the project title is read just below. */
-      aria-hidden="true"
-    >
-      <svg className={styles.motif} viewBox="0 0 100 100" preserveAspectRatio="none">
-        {motif === 'rules'
-          ? Array.from({ length: 9 }, (_, index) => (
-              <rect key={index} x={8} y={16 + index * 8} width={84 - index * 7} height={0.9} />
-            ))
-          : null}
-
-        {motif === 'grid'
-          ? Array.from({ length: 16 }, (_, index) => (
-              <rect
-                key={index}
-                x={12 + (index % 4) * 20 + (Math.floor(index / 4) % 2) * 4}
-                y={14 + Math.floor(index / 4) * 20}
-                width={13}
-                height={13}
-              />
-            ))
-          : null}
-
-        {motif === 'bands'
-          ? Array.from({ length: 6 }, (_, index) => (
-              <rect
-                key={index}
-                x={-30 + index * 22}
-                y={-20}
-                width={7}
-                height={150}
-                transform="rotate(20 50 50)"
-              />
-            ))
-          : null}
-
-        {motif === 'blocks'
-          ? [
-              <rect key="a" x={10} y={12} width={40} height={40} />,
-              <rect key="b" x={56} y={30} width={30} height={30} />,
-              <rect key="c" x={22} y={62} width={56} height={4} />,
-              <rect key="d" x={22} y={72} width={34} height={4} />,
-            ]
-          : null}
-      </svg>
-
-      <span className={styles.initials}>{initials(title)}</span>
+    <div className={styles.sleeve} aria-hidden="true">
+      <FallbackScene seed={hash(id)} className={styles.scene} />
+      <span className={`label ${styles.tag}`}>{initials(title)}</span>
     </div>
   )
 }

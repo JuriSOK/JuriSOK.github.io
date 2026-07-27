@@ -11,7 +11,7 @@ function isExperience(entry: Experience | Education): entry is Experience {
   return 'organisation' in entry
 }
 
-/** Initials of an institution name, used as a typographic mark. */
+/** Initials of an institution name, used only when no official logo exists. */
 function initials(name: string): string {
   const skip = new Set(['de', 'du', 'des', 'la', 'le', 'les', 'and', 'of'])
 
@@ -26,9 +26,10 @@ function initials(name: string): string {
 /**
  * Credit sheet for one resume entry, experience or education.
  *
- * Every field but the organisation or degree is optional. Without a period the
- * left column disappears and the body reclaims the full width: never an empty
- * column.
+ * Organisation and institution logos are official assets stored locally, shown
+ * on a cream tile because they all carry dark ink. They are decorative
+ * (`alt=""`): the organisation name is always displayed right beside them, and
+ * a duplicate accessible name would be read twice.
  */
 export function CareerEntry({ entry }: CareerEntryProps) {
   const ref = useReveal<HTMLLIElement>()
@@ -38,8 +39,8 @@ export function CareerEntry({ entry }: CareerEntryProps) {
 
   /**
    * The title is the most precise fact available. Without a known job title
-   * the organisation takes the lead: an empty `<h4>` above a subtitle would be
-   * a hollow heading for screen readers and an unexplained blank on screen.
+   * the organisation takes the lead: an empty heading above a subtitle would
+   * be hollow for screen readers and an unexplained blank on screen.
    */
   const title = experience ? (experience.role ?? experience.organisation) : (education?.degree ?? '')
   const subtitle = experience
@@ -47,6 +48,9 @@ export function CareerEntry({ entry }: CareerEntryProps) {
       ? experience.organisation
       : undefined
     : education?.school
+
+  const logo = experience?.logo ?? education?.logo
+  const markName = education?.school
 
   const period = entry.period
 
@@ -67,29 +71,37 @@ export function CareerEntry({ entry }: CareerEntryProps) {
 
       <div className={styles.body}>
         <div className={styles.heading}>
-          {/* Education entries carry an institutional mark; no invented logo is
-              ever drawn — see education.ts. */}
-          {education?.school !== undefined ? (
-            education.logo !== undefined ? (
+          {logo !== undefined ? (
+            <span className={styles.logoTile}>
               <img
                 className={styles.logo}
-                src={education.logo}
-                alt={education.school}
-                width={96}
-                height={96}
+                src={logo}
+                alt=""
                 loading="lazy"
                 decoding="async"
               />
-            ) : (
-              <span className={styles.mark} aria-hidden="true">
-                {initials(education.school)}
-              </span>
-            )
+            </span>
+          ) : markName !== undefined ? (
+            <span className={styles.mark} aria-hidden="true">
+              {initials(markName)}
+            </span>
           ) : null}
 
           <div className={styles.titles}>
             <h4 className={styles.title}>{title}</h4>
-            {subtitle !== undefined ? <p className={styles.organisation}>{subtitle}</p> : null}
+
+            {education?.subtitle !== undefined ? (
+              <p className={styles.subtitle}>{education.subtitle}</p>
+            ) : null}
+
+            {subtitle !== undefined ? (
+              <p className={styles.organisation}>
+                {subtitle}
+                {education?.location !== undefined ? (
+                  <span className={styles.place}> · {education.location}</span>
+                ) : null}
+              </p>
+            ) : null}
           </div>
 
           {experience?.contract !== undefined || experience?.current === true ? (

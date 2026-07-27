@@ -11,6 +11,7 @@ export const experiences: readonly Experience[] = [
   {
     id: 'credit-agricole-assurances',
     organisation: 'Crédit Agricole Assurances',
+    logo: '/images/brands/credit-agricole.png',
     role: 'AI Project Manager',
     contract: 'Apprenticeship',
     period: 'September 2025 — Present',

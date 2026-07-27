@@ -12,7 +12,8 @@ export const profile: Profile = {
   contract: 'Apprenticeship',
   education: 'Master’s Degree in MIAGE',
   company: 'Crédit Agricole Assurances',
-  location: 'France',
+  location: 'Paris, France',
+  timezone: 'Europe/Paris',
   domains: [
     'Artificial Intelligence',
     'AI Agents',

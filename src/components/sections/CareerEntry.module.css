@@ -27,9 +27,7 @@
 }
 
 /**
- * Institutional mark, used when no official logo asset is available.
- * A neutral cream tile keeps a light-background logo legible if one is added
- * later, and reads as a deliberate typographic device in the meantime.
+ * Typographic mark, used only when no official logo asset exists.
  */
 .mark {
   display: flex;
@@ -48,20 +46,48 @@
   letter-spacing: 0.04em;
 }
 
-.logo {
+/**
+ * Cream tile for organisation and institution logos: they all carry dark ink
+ * and need a light ground on this espresso panel. Wide, not square — these
+ * are wordmarks (Dauphine is 7:1). `multiply` sinks any opaque white canvas
+ * (the Crédit Agricole file has one) into the cream instead of showing a
+ * white rectangle inside it.
+ */
+.logoTile {
+  display: flex;
   flex-shrink: 0;
-  width: 3rem;
+  align-items: center;
+  justify-content: center;
   height: 3rem;
-  object-fit: contain;
-  /* Cream tile: institutional logos are usually drawn for light backgrounds. */
-  padding: 0.35rem;
+  max-width: 9.5rem;
+  padding: 0.4rem 0.6rem;
   background-color: var(--paper);
   border: 1px solid var(--hairline-strong);
+}
+
+.logo {
+  max-width: 100%;
+  max-height: 100%;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  mix-blend-mode: multiply;
 }
 
 .title {
   margin: 0;
   font-size: clamp(1.25rem, 2.4vw, 1.625rem);
+}
+
+/* Secondary line of the degree, e.g. the field spelled out. */
+.subtitle {
+  margin-top: var(--space-1);
+  color: var(--text-2);
+  font-size: var(--size-ui);
+}
+
+.place {
+  color: var(--text-3);
 }
 
 .organisation {
@@ -115,5 +141,11 @@
 @media (width < 640px) {
   .stamp {
     margin-left: 0;
+  }
+
+  /* The wordmark tile takes its own line above the titles on narrow screens. */
+  .logoTile {
+    height: 2.5rem;
+    max-width: 8rem;
   }
 }

@@ -25,6 +25,16 @@ Règles permanentes du projet. À lire avant toute modification.
 - Un GIF ne peut pas être mis en pause en CSS. Sous `prefers-reduced-motion`, le calque bascule sur
   `jazz-cafe-background-still.png`, une image fixe de la même scène. Si le GIF est remplacé,
   **régénérer aussi cette image** : `sips -s format png <gif> --out <png>`.
+- **Icônes et scènes pixel-art** : dessins originaux uniquement, déclarés en cartes de pixels et
+  rendus par `PixelGrid` (`src/components/pixel-art/`), palette chaude partagée dans `palette.ts`.
+  Jamais d'emoji, de bibliothèque d'icônes, d'asset distant ni de sprite protégé pour ces
+  illustrations. Toujours décoratives (`aria-hidden`) : le texte visible nomme le sujet.
+- **Logos d'organisations et d'universités** : assets officiels stockés en local, sur tuile crème
+  (ils portent tous de l'encre sombre) avec `mix-blend-mode: multiply` pour fondre un éventuel fond
+  blanc opaque. `alt=""` quand le nom est affiché juste à côté — un nom accessible dupliqué serait
+  lu deux fois. Proportions toujours préservées, jamais de recadrage.
+- **Heure locale de la sidebar** : `Intl.DateTimeFormat` sur `profile.timezone`, jamais un décalage
+  UTC codé en dur ; mise à jour à la minute, minuteries nettoyées au démontage.
 - **`--caramel` n'est jamais une couleur de texte** (4,0:1, sous le seuil AA) : filets, cadres et
   aplats uniquement.
 - **Les polices embarquent le seul sous-ensemble `latin`.** Il couvre tout le français, mais pas les
@@ -125,6 +135,10 @@ Règles permanentes du projet. À lire avant toute modification.
 - Ne jamais ajouter d'information confidentielle d'entreprise, ni de résultat chiffré.
 - **Aucune expérience SNCF** ne doit figurer sur le site.
 - Ne jamais inventer d'expérience, de hackathon, de certification, ni de niveau de compétence.
+- **La page Hackathons ne contient que des concepts.** Statut littéral `'Concept'` sur chaque carte,
+  et le type `HackathonConcept` n'a volontairement aucun champ pour une date, un organisateur, un
+  lieu, une équipe, un classement ou un résultat. À remplacer par de vraies entrées après une
+  première participation réelle — jamais avant.
 
 ## Dépendances
 

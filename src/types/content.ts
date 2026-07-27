@@ -5,6 +5,8 @@
  * field is never rendered — no filler text, no dead link.
  */
 
+import type { HackathonArtName, PixelIconName } from './pixel-art'
+
 export interface Profile {
   readonly fullName: string
   readonly role: string
@@ -12,8 +14,10 @@ export interface Profile {
   readonly contract: string
   readonly education: string
   readonly company: string
-  /** Deliberately broad. Never a postal address. */
+  /** City-level at most. Never a postal address. */
   readonly location: string
+  /** IANA timezone used to display the local time, e.g. « Europe/Paris ». */
+  readonly timezone: string
   /** Professional domains, listed in the About facts. */
   readonly domains: readonly string[]
 }
@@ -79,6 +83,8 @@ export interface Fact {
 export interface Experience {
   readonly id: string
   readonly organisation: string
+  /** Locally stored organisation logo. Decorative: the name is displayed beside it. */
+  readonly logo?: string
   readonly role?: string
   /** Employment type, shown as a discreet stamp. */
   readonly contract?: string
@@ -94,7 +100,10 @@ export interface Experience {
 export interface Education {
   readonly id: string
   readonly degree: string
+  /** Secondary line under the degree, e.g. the field spelled out. */
+  readonly subtitle?: string
   readonly school?: string
+  readonly location?: string
   readonly period?: string
   /**
    * Path to a locally stored institutional logo. When absent, the institution
@@ -110,6 +119,8 @@ export interface Education {
 export interface SkillDomain {
   readonly id: string
   readonly title: string
+  /** Pixel-art icon beside the category heading. Decorative. */
+  readonly icon: PixelIconName
   /** What Vibol Arnaud Sok actually does with it. */
   readonly usage?: string
   /** Tools and technologies, rendered as logo + name badges. */
@@ -122,8 +133,10 @@ export interface SkillDomain {
 export interface Interest {
   readonly id: string
   readonly label: string
-  /** Very short note, in the right-hand column. */
-  readonly note?: string
+  /** Pixel-art icon shown on the closed row. Decorative. */
+  readonly icon: PixelIconName
+  /** Paragraph revealed when the row is expanded. */
+  readonly detail: string
 }
 
 /* ---------- Contact ---------- */
@@ -133,4 +146,22 @@ export interface ContactContent {
   readonly heading?: string
   /** Invitation sentence under the headline. */
   readonly invitation?: string
+}
+
+/* ---------- Hackathons ---------- */
+
+/**
+ * A hackathon **concept** — not a participation.
+ *
+ * No hackathon has been attended yet, and this type is built so nothing can
+ * pretend otherwise: the status is the literal `'Concept'`, and there is no
+ * field for a date, an organiser, a team, a ranking or a result.
+ */
+export interface HackathonConcept {
+  readonly id: string
+  readonly title: string
+  readonly summary: string
+  readonly technologies: readonly string[]
+  readonly status: 'Concept'
+  readonly pixelArt: HackathonArtName
 }
