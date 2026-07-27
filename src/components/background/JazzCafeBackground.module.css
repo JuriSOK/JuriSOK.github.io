@@ -1,0 +1,209 @@
+/**
+ * Fixed, decorative background layer.
+ *
+ * Sits behind everything, takes no pointer events and never scrolls with the
+ * content. All animation is CSS, restricted to `transform` and `opacity`.
+ */
+
+.layer {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  overflow: hidden;
+  pointer-events: none;
+  background-color: var(--ink-950);
+}
+
+.scene {
+  width: 100%;
+  height: 100%;
+  /* Keeps the pixel grid crisp when the scene is scaled up. */
+  image-rendering: pixelated;
+}
+
+/* ---- Readability veils ---- */
+
+/**
+ * Two stacked veils rather than one: a flat espresso wash to sink the whole
+ * scene, then a vignette that darkens the edges where the sidebar and panel
+ * sit. Text must never fight the artwork.
+ */
+.veil {
+  position: absolute;
+  inset: 0;
+  background-color: rgb(20 16 13 / 62%);
+}
+
+.vignette {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse at 50% 40%, transparent 0%, rgb(20 16 13 / 55%) 82%),
+    linear-gradient(to bottom, rgb(20 16 13 / 45%), transparent 20%, transparent 74%, rgb(20 16 13 / 66%));
+}
+
+/* ---- Animations ----
+ *
+ * Everything below is gated: it only runs when motion is allowed. The static
+ * scene is complete on its own — nothing appears or disappears.
+ */
+
+.rainDrop1,
+.rainDrop2,
+.rainDrop3,
+.rainDrop4,
+.steam1,
+.steam2,
+.mote1,
+.mote2,
+.mote3,
+.lampA,
+.lampB,
+.stage {
+  animation: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .rainDrop1 {
+    animation: fall 1.6s linear infinite;
+  }
+
+  .rainDrop2 {
+    animation: fall 2.1s linear infinite -0.7s;
+  }
+
+  .rainDrop3 {
+    animation: fall 1.85s linear infinite -1.2s;
+  }
+
+  .rainDrop4 {
+    animation: fall 2.4s linear infinite -0.3s;
+  }
+
+  .steam1 {
+    animation: rise 4.5s ease-in-out infinite;
+  }
+
+  .steam2 {
+    animation: rise 5.6s ease-in-out infinite -2s;
+  }
+
+  .mote1 {
+    animation: drift 11s ease-in-out infinite;
+  }
+
+  .mote2 {
+    animation: drift 14s ease-in-out infinite -4s;
+  }
+
+  .mote3 {
+    animation: drift 9.5s ease-in-out infinite -7s;
+  }
+
+  /* Barely perceptible: the lamps breathe rather than flicker. */
+  .lampA {
+    animation: flicker 7s ease-in-out infinite;
+  }
+
+  .lampB {
+    animation: flicker 9s ease-in-out infinite -3s;
+  }
+
+  .stage {
+    animation: flicker 12s ease-in-out infinite -5s;
+  }
+}
+
+@keyframes fall {
+  from {
+    transform: translateY(0);
+  }
+
+  to {
+    /* Past the bottom of the window frame; the frame is drawn over the rain. */
+    transform: translateY(96px);
+  }
+}
+
+@keyframes rise {
+  0% {
+    opacity: 0;
+    transform: translateY(0) scaleY(0.6);
+  }
+
+  30% {
+    opacity: 0.28;
+  }
+
+  100% {
+    opacity: 0;
+    transform: translateY(-14px) scaleY(1.1);
+  }
+}
+
+@keyframes drift {
+  0%,
+  100% {
+    opacity: 0.12;
+    transform: translate(0, 0);
+  }
+
+  50% {
+    opacity: 0.4;
+    transform: translate(6px, -10px);
+  }
+}
+
+@keyframes flicker {
+  0%,
+  100% {
+    opacity: 1;
+  }
+
+  45% {
+    opacity: 0.88;
+  }
+
+  70% {
+    opacity: 0.96;
+  }
+}
+
+/* ---- Tablet: fewer moving parts ---- */
+
+@media (width < 1250px) {
+  .mote1,
+  .mote2,
+  .mote3 {
+    animation: none;
+    opacity: 0.18;
+  }
+
+  .veil {
+    background-color: rgb(20 16 13 / 80%);
+  }
+}
+
+/* ---- Mobile: essentially static, and darker still ----
+ *
+ * The scene is drawn but barely animated: on a small screen it is a texture,
+ * not a subject, and battery matters more than rain.
+ */
+
+@media (width < 720px) {
+  .rainDrop1,
+  .rainDrop2,
+  .rainDrop3,
+  .rainDrop4,
+  .steam1,
+  .steam2,
+  .lampA,
+  .lampB,
+  .stage {
+    animation: none;
+  }
+
+  .veil {
+    background-color: rgb(20 16 13 / 86%);
+  }
+}
