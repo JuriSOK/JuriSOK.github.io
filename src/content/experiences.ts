@@ -22,6 +22,5 @@ export const experiences: readonly Experience[] = [
       'Contribute to cross-functional project coordination and monitoring.',
     ],
     domains: ['Artificial Intelligence', 'AI Agents', 'ITSM', 'Project Management'],
-    tools: ['ServiceNow', 'Splunk', 'Dynatrace', 'ELK / DORA'],
   },
 ]

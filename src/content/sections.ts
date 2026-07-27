@@ -1,4 +1,4 @@
-import { about, facts } from './about'
+import { about } from './about'
 import { hackathonConcepts } from './hackathons'
 import { education } from './education'
 import { experiences } from './experiences'
@@ -16,7 +16,7 @@ import type { SectionDefinition } from '../types/content'
  * empty tab, and the site fills itself in as content modules get written.
  */
 const hasContent: Record<string, boolean> = {
-  about: about.paragraphs.length > 0 || facts.length > 0 || interests.length > 0,
+  about: about.paragraphs.length > 0 || interests.length > 0,
 
   /* Skills live on this page, so they count towards it. */
   resume: experiences.length > 0 || education.length > 0 || skills.some(hasDomainContent),

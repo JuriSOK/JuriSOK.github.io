@@ -18,7 +18,11 @@ export interface Profile {
   readonly location: string
   /** IANA timezone used to display the local time, e.g. « Europe/Paris ». */
   readonly timezone: string
-  /** Professional domains, listed in the About facts. */
+  /**
+   * Professional domains. Kept as profile data although nothing surfaces them
+   * today: the About facts list that displayed them has been removed. The
+   * experience entries carry their own, separate `domains`.
+   */
   readonly domains: readonly string[]
 }
 
@@ -64,18 +68,8 @@ export interface PageProps {
 
 export interface AboutContent {
   readonly paragraphs: readonly string[]
-  /** Closing line, oriented towards getting in touch. */
-  readonly closing?: string
   /** Path to a portrait, or `null`. The page works perfectly without one. */
   readonly portrait: string | null
-}
-
-/** One line of the facts list. */
-export interface Fact {
-  readonly label: string
-  readonly value: string
-  /** Spans the full width when the list is laid out over two columns. */
-  readonly full?: boolean
 }
 
 /* ---------- Resume ---------- */
@@ -130,6 +124,14 @@ export interface SkillDomain {
 
 /* ---------- Interests ---------- */
 
+/** External profile linked from inside an expanded interest. */
+export interface InterestLink {
+  readonly label: string
+  readonly href: string
+  /** Brand mark drawn beside the label. */
+  readonly mark: 'letterboxd'
+}
+
 export interface Interest {
   readonly id: string
   readonly label: string
@@ -137,6 +139,8 @@ export interface Interest {
   readonly icon: PixelIconName
   /** Paragraph revealed when the row is expanded. */
   readonly detail: string
+  /** Optional link, revealed with the detail. Never on the closed row. */
+  readonly link?: InterestLink
 }
 
 /* ---------- Contact ---------- */

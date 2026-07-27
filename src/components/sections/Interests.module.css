@@ -105,9 +105,36 @@
   line-height: 1.6;
 }
 
+/* External profile link, revealed with the detail. */
+.link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  min-height: var(--tap-min);
+  margin-left: calc(2rem + var(--space-4));
+  margin-bottom: var(--space-3);
+  color: var(--accent);
+  font-size: var(--size-ui);
+  font-weight: 500;
+  text-decoration: none;
+}
+
+.link:hover {
+  color: var(--accent-hover);
+  text-decoration: underline;
+  text-underline-offset: 0.25em;
+}
+
+.mark,
+.linkArrow {
+  flex-shrink: 0;
+}
+
 /* The icon indent would eat too much width on a phone. */
 @media (width < 480px) {
-  .detail {
+  .detail,
+  .link {
     padding-left: 0;
+    margin-left: 0;
   }
 }

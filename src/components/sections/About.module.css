@@ -5,16 +5,6 @@
   max-width: var(--measure);
 }
 
-/* Closing line, oriented towards getting in touch. */
-.closing {
-  margin-top: var(--space-2);
-  color: var(--accent);
-  font-family: var(--font-display);
-  font-variation-settings: var(--fraunces-text);
-  font-style: italic;
-  font-size: var(--size-lead);
-}
-
 /**
  * No drop cap. `::first-letter` swallows the apostrophe that follows, so a text
  * opening on « I’m » would enlarge « I’ » and orphan the « m ». The page opens
@@ -46,9 +36,4 @@
   background-color: var(--bordeaux);
   mix-blend-mode: color;
   opacity: 0.22;
-}
-
-.facts {
-  margin-top: var(--space-8);
-  min-width: 0;
 }

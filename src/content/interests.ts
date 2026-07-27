@@ -37,6 +37,11 @@ export const interests: readonly Interest[] = [
     icon: 'cinema',
     detail:
       'I enjoy discovering distinctive visual universes, storytelling choices and creative direction across films and television series.',
+    link: {
+      label: 'View my Letterboxd profile',
+      href: 'https://letterboxd.com/arnaud_sk/',
+      mark: 'letterboxd',
+    },
   },
   {
     id: 'reading',

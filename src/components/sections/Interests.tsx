@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { interests } from '../../content/interests'
 import { Icon } from '../ui/Icon'
 import { PixelArtIcon } from '../pixel-art/PixelArtIcon'
+import { LetterboxdMark } from '../ui/LetterboxdMark'
 import styles from './Interests.module.css'
 
 /**
@@ -73,6 +74,24 @@ export function Interests() {
               >
                 <div className={styles.panelInner}>
                   <p className={styles.detail}>{interest.detail}</p>
+
+                  {/* Lives in the panel, never in the button: no interactive
+                      element is nested inside another, and `visibility: hidden`
+                      on the collapsed panel keeps this out of the tab order
+                      until the row is expanded. */}
+                  {interest.link !== undefined ? (
+                    <a
+                      className={styles.link}
+                      href={interest.link.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      <LetterboxdMark className={styles.mark} />
+                      {interest.link.label}
+                      <span className="sr-only"> (opens in a new tab)</span>
+                      <Icon name="arrowUpRight" size={15} className={styles.linkArrow} />
+                    </a>
+                  ) : null}
                 </div>
               </div>
             </li>
