@@ -15,7 +15,8 @@ export const education: readonly Education[] = [
     subtitle: 'Computer Science Applied to Business Management',
     school: 'Université Paris Dauphine-PSL',
     location: 'Paris, France',
-    period: '2025 — 2026',
+    /* Ongoing: same open-ended wording as the current experience entry. */
+    period: '2025 — Present',
     logo: '/images/education/dauphine-psl.png',
   },
   {
