@@ -75,10 +75,3 @@
   -webkit-text-stroke: 1.25px var(--sleeve-mark);
 }
 
-.catalog {
-  position: absolute;
-  right: var(--space-3);
-  bottom: var(--space-3);
-  color: var(--sleeve-mark);
-  opacity: 0.85;
-}

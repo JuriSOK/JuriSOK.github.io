@@ -7,7 +7,7 @@
 
 .period {
   color: var(--accent);
-  /* Chiffres de même largeur : les périodes s'alignent d'une entrée à l'autre. */
+  /* Tabular figures: periods line up from one entry to the next. */
   font-variant-numeric: tabular-nums;
 }
 
@@ -18,19 +18,56 @@
 .heading {
   display: flex;
   flex-wrap: wrap;
-  align-items: baseline;
-  gap: var(--space-4);
+  align-items: center;
+  gap: var(--space-3) var(--space-4);
+}
+
+.titles {
+  min-width: 0;
+}
+
+/**
+ * Institutional mark, used when no official logo asset is available.
+ * A neutral cream tile keeps a light-background logo legible if one is added
+ * later, and reads as a deliberate typographic device in the meantime.
+ */
+.mark {
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  width: 3rem;
+  aspect-ratio: 1;
+  background-color: var(--surface-raised);
+  border: 1px solid var(--hairline-strong);
+  color: var(--text-2);
+  font-family: var(--font-display);
+  font-variation-settings: var(--fraunces-title);
+  font-size: 0.9375rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+}
+
+.logo {
+  flex-shrink: 0;
+  width: 3rem;
+  height: 3rem;
+  object-fit: contain;
+  /* Cream tile: institutional logos are usually drawn for light backgrounds. */
+  padding: 0.35rem;
+  background-color: var(--paper);
+  border: 1px solid var(--hairline-strong);
 }
 
 .title {
   margin: 0;
-  font-size: clamp(1.375rem, 2.6vw, 1.75rem);
+  font-size: clamp(1.25rem, 2.4vw, 1.625rem);
 }
 
 .organisation {
   margin-top: var(--space-1);
   color: var(--accent);
-  font-size: var(--size-lead);
+  font-size: var(--size-ui);
 }
 
 .summary {
@@ -43,6 +80,7 @@
   display: inline-flex;
   align-items: center;
   gap: 0.4rem;
+  margin-left: auto;
   padding: 0.2rem 0.5rem;
   border: 1px solid var(--hairline-strong);
   border-radius: var(--radius-chip);
@@ -56,7 +94,7 @@
   background-color: var(--accent);
 }
 
-/* Le corps est séparé de l'en-tête par un filet, comme des liner notes. */
+/* The body is parted from the heading by a rule, like liner notes. */
 .body > dl {
   margin-top: var(--space-5);
   padding-top: var(--space-5);
@@ -64,7 +102,7 @@
 }
 
 @media (width >= 900px) {
-  /* La période occupe une colonne fixe ; sans elle, le corps la récupère. */
+  /* The period takes a fixed column; without one, the body reclaims it. */
   .entry[data-period='true'] {
     grid-template-columns: 10rem minmax(0, 1fr);
   }
@@ -72,9 +110,10 @@
   .entry[data-period='false'] {
     grid-template-columns: minmax(0, 1fr);
   }
+}
 
-  /* Décalage alterné : c'est ce qui casse l'effet timeline, sans ligne ni point. */
-  .entry:nth-child(even) {
-    padding-left: 6%;
+@media (width < 640px) {
+  .stamp {
+    margin-left: 0;
   }
 }

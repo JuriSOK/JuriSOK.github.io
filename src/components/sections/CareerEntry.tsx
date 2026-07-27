@@ -11,12 +11,24 @@ function isExperience(entry: Experience | Education): entry is Experience {
   return 'organisation' in entry
 }
 
+/** Initials of an institution name, used as a typographic mark. */
+function initials(name: string): string {
+  const skip = new Set(['de', 'du', 'des', 'la', 'le', 'les', 'and', 'of'])
+
+  return name
+    .split(/[\s-]+/)
+    .filter((word) => word.length > 0 && !skip.has(word.toLowerCase()))
+    .slice(0, 3)
+    .map((word) => word.charAt(0).toUpperCase())
+    .join('')
+}
+
 /**
- * Fiche de crédits d'une entrée de parcours, expérience ou formation.
+ * Credit sheet for one resume entry, experience or education.
  *
- * Tous les champs sauf l'organisation ou le diplôme sont optionnels. Sans
- * période, la colonne de gauche disparaît et le contenu se recale sur toute la
- * largeur : jamais de colonne vide.
+ * Every field but the organisation or degree is optional. Without a period the
+ * left column disappears and the body reclaims the full width: never an empty
+ * column.
  */
 export function CareerEntry({ entry }: CareerEntryProps) {
   const ref = useReveal<HTMLLIElement>()
@@ -25,10 +37,9 @@ export function CareerEntry({ entry }: CareerEntryProps) {
   const education = isExperience(entry) ? null : entry
 
   /**
-   * Le titre est le fait le plus précis dont on dispose. Sans intitulé de poste
-   * connu, c'est l'organisation qui prend la tête : un `<h3>` vide surmontant
-   * un sous-titre serait un titre creux pour les lecteurs d'écran et un blanc
-   * inexpliqué à l'œil.
+   * The title is the most precise fact available. Without a known job title
+   * the organisation takes the lead: an empty `<h4>` above a subtitle would be
+   * a hollow heading for screen readers and an unexplained blank on screen.
    */
   const title = experience ? (experience.role ?? experience.organisation) : (education?.degree ?? '')
   const subtitle = experience
@@ -42,12 +53,12 @@ export function CareerEntry({ entry }: CareerEntryProps) {
   const rows: CreditRow[] = experience
     ? [
         { label: 'Missions', values: experience.missions ?? [] },
-        { label: 'Domaines', values: experience.domains ?? [], inline: true },
-        { label: 'Outils', values: experience.tools ?? [], inline: true },
+        { label: 'Domains', values: experience.domains ?? [], inline: true },
+        { label: 'Tools', values: experience.tools ?? [], inline: true },
       ]
     : [
-        { label: 'Domaines', values: education?.fields ?? [], inline: true },
-        { label: 'Travaux', values: education?.highlights ?? [] },
+        { label: 'Fields', values: education?.fields ?? [], inline: true },
+        { label: 'Highlights', values: education?.highlights ?? [] },
       ]
 
   return (
@@ -56,18 +67,40 @@ export function CareerEntry({ entry }: CareerEntryProps) {
 
       <div className={styles.body}>
         <div className={styles.heading}>
-          {/* h4 : l'entrée appartient au mouvement « Expériences » ou
-              « Formation », qui porte déjà un h3. */}
-          <h4 className={styles.title}>{title}</h4>
-          {experience?.current === true ? (
+          {/* Education entries carry an institutional mark; no invented logo is
+              ever drawn — see education.ts. */}
+          {education?.school !== undefined ? (
+            education.logo !== undefined ? (
+              <img
+                className={styles.logo}
+                src={education.logo}
+                alt={education.school}
+                width={96}
+                height={96}
+                loading="lazy"
+                decoding="async"
+              />
+            ) : (
+              <span className={styles.mark} aria-hidden="true">
+                {initials(education.school)}
+              </span>
+            )
+          ) : null}
+
+          <div className={styles.titles}>
+            <h4 className={styles.title}>{title}</h4>
+            {subtitle !== undefined ? <p className={styles.organisation}>{subtitle}</p> : null}
+          </div>
+
+          {experience?.contract !== undefined || experience?.current === true ? (
             <p className={`label ${styles.stamp}`}>
-              <span className={styles.dot} aria-hidden="true" />
-              En poste
+              {experience.current === true ? (
+                <span className={styles.dot} aria-hidden="true" />
+              ) : null}
+              {experience.contract ?? 'Current'}
             </p>
           ) : null}
         </div>
-
-        {subtitle !== undefined ? <p className={styles.organisation}>{subtitle}</p> : null}
 
         {experience?.summary !== undefined ? (
           <p className={styles.summary}>{experience.summary}</p>

@@ -1,6 +1,7 @@
 /**
- * L'insert papier du thème, devenu carte dans le panneau. `data-surface`
- * bascule tout le jeu de jetons : encre, accents bordeaux, filets sombres.
+ * The cream insert of the theme, framed as a card inside the panel.
+ * `data-surface` swaps the whole token set: ink text, bordeaux accents,
+ * dark hairlines.
  */
 .paper {
   position: relative;
@@ -9,7 +10,7 @@
   color: var(--text);
 }
 
-/* Voile de fibres, comme les anciens inserts pleine page. */
+/* Paper fibre veil, as on the former full-width inserts. */
 .paper::before {
   content: '';
   position: absolute;
@@ -24,25 +25,29 @@
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  gap: var(--space-6);
+  gap: var(--space-4);
+}
+
+.invitationHeading {
+  font-family: var(--font-display);
+  font-variation-settings: var(--fraunces-title);
+  font-size: clamp(1.75rem, 4vw, 2.75rem);
+  font-weight: 500;
+  line-height: 1.1;
 }
 
 .invitation {
-  max-width: 30ch;
-  font-family: var(--font-display);
-  font-variation-settings: var(--fraunces-title);
-  font-size: clamp(1.5rem, 3.5vw, 2.5rem);
-  font-style: italic;
-  font-weight: 400;
-  line-height: 1.2;
+  max-width: 46ch;
+  color: var(--text-2);
 }
 
 .email {
+  margin-top: var(--space-2);
   font-family: var(--font-display);
   font-variation-settings: var(--fraunces-title);
-  font-size: clamp(1.5rem, 4vw, 3rem);
+  font-size: clamp(1.375rem, 3.4vw, 2.25rem);
   font-weight: 500;
-  line-height: 1.1;
+  line-height: 1.15;
   overflow-wrap: anywhere;
   text-decoration-thickness: 1px;
   text-underline-offset: 0.16em;
@@ -51,10 +56,12 @@
 .channels {
   display: flex;
   flex-wrap: wrap;
+  align-items: center;
   gap: var(--space-6);
+  width: 100%;
+  margin-top: var(--space-2);
   padding-top: var(--space-4);
   border-top: 1px solid var(--hairline);
-  width: 100%;
 }
 
 .channel {
@@ -62,8 +69,9 @@
   align-items: center;
   gap: 0.45rem;
   min-height: var(--tap-min);
-  color: var(--text-2);
+  color: var(--text);
   font-size: var(--size-ui);
+  font-weight: 500;
   text-decoration: none;
 }
 
@@ -71,3 +79,9 @@
   color: var(--accent);
 }
 
+/* GitHub is a secondary channel: same row, lighter weight. */
+.minor {
+  color: var(--text-2);
+  font-size: var(--size-meta);
+  font-weight: 400;
+}

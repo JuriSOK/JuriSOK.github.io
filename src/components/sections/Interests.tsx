@@ -3,18 +3,16 @@ import { interests } from '../../content/interests'
 import { useReveal } from '../../hooks/useReveal'
 import styles from './Interests.module.css'
 
-/** Au-delà, la cascade deviendrait une attente. */
+/** Beyond this, the stagger turns into a wait. */
 const MAX_STAGGER = 6
 
 /**
- * Centres d'intérêt en tracklist de face B.
+ * Interests, embedded at the end of the About page.
  *
- * Bloc embarqué en fin de page « À propos » — il remplace les sections
- * testimonials/clients du format d'origine. Aucune icône, aucun compteur,
- * aucun niveau : la personnalité passe par la composition typographique.
- * Sans note, le filet de conduite s'étend jusqu'au bord et la ligne reste juste.
+ * A typographic list: name, leader rule, short note. No icon, no counter, no
+ * level, and no track numbering — the identity rests on type and spacing.
  */
-export function FaceB() {
+export function Interests() {
   const ref = useReveal<HTMLUListElement>()
 
   if (interests.length === 0) {
@@ -22,9 +20,9 @@ export function FaceB() {
   }
 
   return (
-    <section className={styles.faceB} aria-labelledby="face-b-titre">
-      <h3 id="face-b-titre" className={`label ${styles.title}`}>
-        Face B · Centres d’intérêt
+    <section className={styles.interests} aria-labelledby="interests-title">
+      <h3 id="interests-title" className={`label ${styles.title}`}>
+        Interests
       </h3>
 
       <ul ref={ref} className={`${styles.list} reveal`}>
@@ -34,9 +32,6 @@ export function FaceB() {
             className={styles.item}
             style={{ '--reveal-delay': `${Math.min(index, MAX_STAGGER) * 60}ms` } as CSSProperties}
           >
-            <span className={`label ${styles.index}`} aria-hidden="true">
-              B{index + 1}
-            </span>
             <span className={styles.name}>{interest.label}</span>
             <span className={styles.lead} aria-hidden="true" />
             {interest.note !== undefined ? (

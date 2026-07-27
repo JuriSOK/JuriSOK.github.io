@@ -3,12 +3,8 @@
   border-top: 1px solid var(--hairline);
 }
 
-.number {
-  color: var(--accent);
-}
-
 .title {
-  margin-top: var(--space-1);
+  margin-top: 0;
   font-size: clamp(1.25rem, 2.2vw, 1.5rem);
 }
 

@@ -38,17 +38,17 @@
 }
 
 /**
- * Le rognage à trois lignes n'existe qu'à partir de deux colonnes : il sert à
- * aligner les pastilles et les liens d'une carte à l'autre sur une même rangée.
- * En colonne unique, rien à aligner — et tronquer une description coûterait de
- * l'information pour rien.
+ * Clamping only applies from two columns up: it aligns the badges and links
+ * from one card to the next on a shared row. In a single column there is
+ * nothing to align, and truncating a description would cost information for
+ * nothing.
  */
 @media (width >= 640px) {
   .summary {
     display: -webkit-box;
     -webkit-box-orient: vertical;
-    -webkit-line-clamp: 3;
-    line-clamp: 3;
+    -webkit-line-clamp: 4;
+    line-clamp: 4;
     overflow: hidden;
   }
 }

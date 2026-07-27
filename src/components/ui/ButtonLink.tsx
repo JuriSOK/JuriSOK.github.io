@@ -40,7 +40,7 @@ export function ButtonLink({
       {srSuffix !== undefined || external ? (
         <span className="sr-only">
           {srSuffix !== undefined ? ` ${srSuffix}` : ''}
-          {external ? ' (nouvel onglet)' : ''}
+          {external ? ' (opens in a new tab)' : ''}
         </span>
       ) : null}
       {icon !== undefined ? <Icon name={icon} className={styles.icon} /> : null}

@@ -1,15 +1,11 @@
 import styles from './ProjectSleeve.module.css'
 
 /**
- * Pochette d'un projet.
+ * Project artwork.
  *
- * Sans image fournie, une composition abstraite est dessinée à partir d'un
- * hachage du nom du projet : le même projet reçoit donc toujours la même
- * pochette. C'est ce qui garde la grille cohérente quel que soit le nombre
- * d'images disponibles.
- *
- * Aucun motif n'est un disque : les cercles concentriques ont été volontairement
- * écartés pour ne pas évoquer un vinyle.
+ * Without a supplied image, an abstract composition is drawn from a hash of the
+ * project name: the same project therefore always gets the same artwork. That
+ * is what keeps the grid coherent whatever the number of available images.
  */
 
 const MOTIFS = ['rules', 'grid', 'bands', 'blocks'] as const
@@ -18,7 +14,7 @@ const DUOTONES = ['bordeaux', 'caramel', 'leather'] as const
 type Motif = (typeof MOTIFS)[number]
 type Duotone = (typeof DUOTONES)[number]
 
-/** Hachage court et stable (FNV-1a 32 bits). */
+/** Short, stable hash (FNV-1a, 32 bits). */
 function hash(value: string): number {
   let result = 0x811c9dc5
 
@@ -30,7 +26,7 @@ function hash(value: string): number {
   return result
 }
 
-/** Deux premières initiales du titre. */
+/** First two initials of the title. */
 function initials(title: string): string {
   const words = title
     .replace(/[-_]/g, ' ')
@@ -52,26 +48,24 @@ interface ProjectSleeveProps {
   readonly id: string
   readonly title: string
   readonly image: string | null
-  readonly catalogNumber: string
-  /** Les pochettes au-delà des premières cartes sont chargées paresseusement. */
+  /** Artwork beyond the first cards is lazily loaded. */
   readonly eager: boolean
 }
 
-export function ProjectSleeve({ id, title, image, catalogNumber, eager }: ProjectSleeveProps) {
+export function ProjectSleeve({ id, title, image, eager }: ProjectSleeveProps) {
   if (image !== null) {
     return (
       <div className={styles.sleeve}>
         <img
           className={styles.image}
           src={image}
-          alt={`Visuel du projet ${title}`}
+          alt={`${title} project artwork`}
           width={800}
           height={800}
           loading={eager ? 'eager' : 'lazy'}
           decoding="async"
         />
         <span className={styles.tint} aria-hidden="true" />
-        <span className={`label ${styles.catalog}`}>{catalogNumber}</span>
       </div>
     )
   }
@@ -83,7 +77,7 @@ export function ProjectSleeve({ id, title, image, catalogNumber, eager }: Projec
   return (
     <div
       className={`${styles.sleeve} ${styles.generated} ${styles[duotone]}`}
-      /* Décoratif : le titre du projet est déjà lu juste en dessous. */
+      /* Decorative: the project title is read just below. */
       aria-hidden="true"
     >
       <svg className={styles.motif} viewBox="0 0 100 100" preserveAspectRatio="none">
@@ -129,7 +123,6 @@ export function ProjectSleeve({ id, title, image, catalogNumber, eager }: Projec
       </svg>
 
       <span className={styles.initials}>{initials(title)}</span>
-      <span className={`label ${styles.catalog}`}>{catalogNumber}</span>
     </div>
   )
 }

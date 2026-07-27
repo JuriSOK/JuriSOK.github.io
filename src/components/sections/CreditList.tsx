@@ -3,7 +3,7 @@ import styles from './CreditList.module.css'
 export interface CreditRow {
   readonly label: string
   readonly values: readonly string[]
-  /** Valeurs réunies sur une ligne, séparées par des points médians. */
+  /** Values joined on one line, parted by middle dots. */
   readonly inline?: boolean
 }
 
@@ -12,10 +12,10 @@ interface CreditListProps {
 }
 
 /**
- * Structure « Libellé — valeurs », façon crédits de pochette.
+ * « Label — values » structure, in the manner of sleeve credits.
  *
- * Une ligne sans valeur n'est pas rendue : c'est ce qui permet à une entrée de
- * parcours incomplète de rester propre plutôt que d'afficher un libellé orphelin.
+ * A row without values is not rendered: that is what lets an incomplete resume
+ * entry stay clean rather than show an orphan label.
  */
 export function CreditList({ rows }: CreditListProps) {
   const filled = rows.filter((row) => row.values.length > 0)

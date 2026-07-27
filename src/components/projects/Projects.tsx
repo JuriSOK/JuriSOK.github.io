@@ -1,32 +1,25 @@
 import { projects } from '../../content/projects'
-import { getSection, isSectionVisible } from '../../content/sections'
+import type { PageProps } from '../../types/content'
 import { Page } from '../ui/Page'
 import { SectionHeading } from '../ui/SectionHeading'
 import { ProjectCard } from './ProjectCard'
 import styles from './Projects.module.css'
 
-const section = getSection('projets')
-
 /**
- * Page « Projets » : la grille de la sélection.
+ * Projects page: the selection grid.
  *
- * Aucun filtre, contrairement au format d'origine : le topic `portfolio` fait
- * déjà le tri en amont, et une sélection resserrée se parcourt d'un seul coup
- * d'œil. Le test de présence vient de `sections.ts`, qui décide aussi des
- * onglets : impossible qu'un onglet pointe vers une page vide.
+ * No filters, unlike the reference layout: the `portfolio` topic already does
+ * the sorting upstream, and a tight selection is taken in at a glance. The
+ * presence test comes from `sections.ts`, which also decides the tabs: a tab
+ * can never point at an empty page.
  */
-export function Projects() {
-  if (section === undefined || !isSectionVisible(section.id)) {
-    return null
-  }
-
+export function Projects({ section }: PageProps) {
   return (
-    <Page id={section.id} labelledBy="projets-titre">
+    <Page id={section.id} labelledBy="projects-title">
       <SectionHeading
-        {...(section.number !== undefined ? { number: section.number } : {})}
         title={section.label}
         {...(section.kicker !== undefined ? { kicker: section.kicker } : {})}
-        headingId="projets-titre"
+        headingId="projects-title"
       />
 
       <ul className={styles.grid}>

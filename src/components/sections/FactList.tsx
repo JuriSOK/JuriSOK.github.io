@@ -4,15 +4,15 @@ import styles from './FactList.module.css'
 interface FactListProps {
   readonly facts: readonly Fact[]
   /**
-   * `column` : colonne étroite à côté de la prose.
-   * `spread` : deux colonnes pleine largeur, quand la prose n'est pas encore écrite.
+   * `column`: narrow column beside the prose.
+   * `spread`: two full-width columns.
    */
   readonly layout: 'column' | 'spread'
 }
 
 /**
- * Fiche de faits, présentée comme des notes d'édition : libellé condensé,
- * valeur en dessous, filet de séparation.
+ * Facts list, presented as edition notes: condensed label, value below,
+ * separating rule.
  */
 export function FactList({ facts, layout }: FactListProps) {
   return (

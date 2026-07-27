@@ -5,23 +5,23 @@
   max-width: var(--measure);
 }
 
-.leadParagraph {
-  color: var(--text-2);
-}
-
-/* Lettrine d'ouverture, seul ornement de la page. */
-.prose > p:first-of-type::first-letter {
-  float: left;
-  margin: 0.08em 0.1em 0 0;
-  font-family: var(--font-display);
-  font-variation-settings: var(--fraunces-display);
-  font-size: 3.4em;
-  font-weight: 600;
-  line-height: 0.82;
+/* Closing line, oriented towards getting in touch. */
+.closing {
+  margin-top: var(--space-2);
   color: var(--accent);
+  font-family: var(--font-display);
+  font-variation-settings: var(--fraunces-text);
+  font-style: italic;
+  font-size: var(--size-lead);
 }
 
-/* ---- Portrait, facultatif ---- */
+/**
+ * No drop cap. `::first-letter` swallows the apostrophe that follows, so a text
+ * opening on « I’m » would enlarge « I’ » and orphan the « m ». The page opens
+ * on plain prose instead.
+ */
+
+/* ---- Optional portrait ---- */
 
 .portrait {
   position: relative;

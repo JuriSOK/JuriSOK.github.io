@@ -3,30 +3,24 @@ import { Rule } from './Rule'
 import styles from './SectionHeading.module.css'
 
 interface SectionHeadingProps {
-  /** Numéro de catalogue, en libellé condensé. Absent pour une section non numérotée. */
-  readonly number?: string
   readonly title: string
-  /** Ligne éditoriale en italique, sous le titre. */
+  /** Editorial line, in italics, under the title. */
   readonly kicker?: string
-  /** Identifiant du titre, référencé par `aria-labelledby` de la section. */
+  /** Id of the heading, referenced by the page's `aria-labelledby`. */
   readonly headingId: string
 }
 
 /**
- * En-tête commun à toutes les sections : numéro de catalogue, titre, ligne
- * éditoriale, filet. C'est la grammaire qui tient l'ensemble du site.
+ * Heading shared by every page: title, editorial line, rule.
+ *
+ * No catalogue number: the identity now rests on typography, warm colour,
+ * spacing and fine rules alone.
  */
-export function SectionHeading({ number, title, kicker, headingId }: SectionHeadingProps) {
+export function SectionHeading({ title, kicker, headingId }: SectionHeadingProps) {
   const ref = useReveal<HTMLDivElement>()
 
   return (
     <header className={styles.heading}>
-      {number !== undefined ? (
-        <p className={`label ${styles.number}`} aria-hidden="true">
-          {number}
-        </p>
-      ) : null}
-
       <div ref={ref} className={`${styles.text} reveal`}>
         <h2 id={headingId} className={styles.title}>
           {title}

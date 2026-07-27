@@ -5,32 +5,28 @@ import styles from './SkillRubric.module.css'
 
 interface SkillRubricProps {
   readonly domain: SkillDomain
-  readonly number: string
 }
 
 /**
- * Une rubrique de la carte des compétences.
+ * One rubric of the skills menu.
  *
- * Ni pourcentage, ni jauge, ni niveau : le domaine, ce qu'on en fait, avec quoi,
- * et dans quels cadres. Les outils reprennent la pastille logo + nom des cartes
- * projets, donc le même vocabulaire visuel.
+ * No percentage, no gauge, no level: the domain, what it is used for, with
+ * which tools, and in which contexts. Tools reuse the logo + name badge of the
+ * project cards, so the visual vocabulary stays the same.
  */
-export function SkillRubric({ domain, number }: SkillRubricProps) {
+export function SkillRubric({ domain }: SkillRubricProps) {
   const ref = useReveal<HTMLLIElement>()
 
   return (
     <li ref={ref} className={`${styles.rubric} reveal`}>
-      <p className={`label ${styles.number}`} aria-hidden="true">
-        {number}
-      </p>
-
-      <h3 className={styles.title}>{domain.title}</h3>
+      {/* h4: the rubric belongs to the « Skills » movement, which owns the h3. */}
+      <h4 className={styles.title}>{domain.title}</h4>
 
       {domain.usage !== undefined ? <p className={styles.usage}>{domain.usage}</p> : null}
 
       {(domain.tools?.length ?? 0) > 0 ? (
         <div className={styles.block}>
-          <p className={`label ${styles.blockTitle}`}>Outils</p>
+          <p className={`label ${styles.blockTitle}`}>Tools</p>
           <ul className={styles.tools}>
             {(domain.tools ?? []).map((tool) => (
               <TechBadge key={tool} name={tool} />
@@ -41,7 +37,7 @@ export function SkillRubric({ domain, number }: SkillRubricProps) {
 
       {(domain.contexts?.length ?? 0) > 0 ? (
         <div className={styles.block}>
-          <p className={`label ${styles.blockTitle}`}>Contextes</p>
+          <p className={`label ${styles.blockTitle}`}>Contexts</p>
           <p className={styles.contexts}>{(domain.contexts ?? []).join(' · ')}</p>
         </div>
       ) : null}

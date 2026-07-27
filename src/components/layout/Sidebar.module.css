@@ -14,16 +14,30 @@
   gap: var(--space-4);
 }
 
-/* Monogramme en attendant un portrait : même vocabulaire que les pochettes. */
+/**
+ * Editorial panel rather than a round profile picture: square frame, warm
+ * inner glow, hairline border. The avatar keeps its transparency and its
+ * proportions — `object-fit: contain` never crops or stretches it.
+ */
 .avatar {
+  position: relative;
   display: flex;
   flex-shrink: 0;
   align-items: center;
   justify-content: center;
-  width: 4.5rem;
+  width: 5rem;
   aspect-ratio: 1;
-  background-color: var(--ink-700);
+  padding: 0.35rem;
+  background:
+    radial-gradient(circle at 50% 42%, rgb(198 138 90 / 22%), transparent 68%),
+    var(--ink-700);
   border: 1px solid var(--hairline-strong);
+}
+
+.avatarImage {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
 }
 
 .monogram {
@@ -128,9 +142,40 @@
   color: var(--accent-hover);
 }
 
-.edition {
-  margin-top: var(--space-6);
-  color: var(--text-3);
+/**
+ * Narrow screens: the identity row has to fit an avatar, a three-word name, a
+ * role chip and the toggle. Everything shrinks a step so the name keeps to two
+ * lines instead of three.
+ */
+@media (width < 480px) {
+  .sidebar {
+    padding: var(--space-4);
+  }
+
+  .identity {
+    gap: var(--space-3);
+  }
+
+  .avatar {
+    width: 3.75rem;
+  }
+
+  .monogram {
+    font-size: 1.125rem;
+  }
+
+  .name {
+    font-size: 1.125rem;
+  }
+
+  .role {
+    margin-top: var(--space-1);
+    font-size: 0.75rem;
+  }
+
+  .toggle {
+    padding-inline: var(--space-2);
+  }
 }
 
 /* ---- Deux colonnes de coordonnées sur tablette ---- */
@@ -157,11 +202,12 @@
   }
 
   .avatar {
-    width: 7rem;
+    width: 9.5rem;
+    padding: 0.6rem;
   }
 
   .monogram {
-    font-size: 2.25rem;
+    font-size: 2.75rem;
   }
 
   .name {

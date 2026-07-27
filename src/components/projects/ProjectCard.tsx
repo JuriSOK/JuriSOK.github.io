@@ -6,7 +6,7 @@ import { ProjectSleeve } from './ProjectSleeve'
 import { TechBadge } from '../ui/TechBadge'
 import styles from './ProjectCard.module.css'
 
-/** Au-delà, la cascade de révélation deviendrait une attente. */
+/** Beyond this, the reveal stagger turns into a wait. */
 const MAX_STAGGER = 6
 
 interface ProjectCardProps {
@@ -17,7 +17,6 @@ interface ProjectCardProps {
 export function ProjectCard({ project, index }: ProjectCardProps) {
   const ref = useReveal<HTMLLIElement>()
   const single = project.links.length === 1
-  const catalogNumber = `N° ${String(index + 1).padStart(3, '0')}`
 
   return (
     <li
@@ -30,7 +29,6 @@ export function ProjectCard({ project, index }: ProjectCardProps) {
         id={project.id}
         title={project.title}
         image={project.image}
-        catalogNumber={catalogNumber}
         eager={index < 2}
       />
 
@@ -55,9 +53,9 @@ export function ProjectCard({ project, index }: ProjectCardProps) {
               external
               icon="arrowUpRight"
               className={styles.link}
-              /* Un lien unique s'étend à toute la carte : une seule tabulation,
-                 et la carte entière reste cliquable. Avec deux liens, c'est
-                 impossible sans imbriquer des éléments interactifs. */
+              /* A single link stretches across the whole card: one tab stop,
+                 and the entire card stays clickable. With two links that is
+                 impossible without nesting interactive elements. */
               {...(single ? { stretched: true } : { srSuffix: `— ${project.title}` })}
             >
               {link.label}

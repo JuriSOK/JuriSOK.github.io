@@ -1,10 +1,10 @@
 import styles from './SkipLink.module.css'
 
-/** Premier élément focusable de la page : permet de sauter la navigation. */
+/** First focusable element on the page: lets keyboard users skip navigation. */
 export function SkipLink() {
   return (
-    <a className={styles.skip} href="#contenu">
-      Aller au contenu
+    <a className={styles.skip} href="#content">
+      Skip to content
     </a>
   )
 }

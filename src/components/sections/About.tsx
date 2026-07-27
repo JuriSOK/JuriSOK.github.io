@@ -1,45 +1,40 @@
 import { about, facts } from '../../content/about'
 import { profile } from '../../content/profile'
-import { getSection, isSectionVisible } from '../../content/sections'
 import { useReveal } from '../../hooks/useReveal'
+import type { PageProps } from '../../types/content'
 import { Page } from '../ui/Page'
 import { SectionHeading } from '../ui/SectionHeading'
 import { FactList } from './FactList'
-import { FaceB } from './Interests'
+import { Interests } from './Interests'
 import styles from './About.module.css'
 
-const section = getSection('a-propos')
-
 /**
- * Page « À propos » : présentation, fiche de faits, Face B.
+ * About page: introduction, a short facts list, then interests.
  *
- * La phrase d'introduction du profil ouvre la page ; les paragraphes rédigés
- * la prolongeront. La fiche de faits, dérivée de `profile.ts`, porte la page
- * tant que la prose n'est pas écrite.
+ * The facts list deliberately holds only what the identity sidebar does not
+ * already show — repeating role, employer and education here would fill the
+ * page with echoes.
  */
-export function About() {
+export function About({ section }: PageProps) {
   const proseRef = useReveal<HTMLDivElement>()
   const factsRef = useReveal<HTMLDivElement>()
 
-  if (section === undefined || !isSectionVisible(section.id)) {
-    return null
-  }
-
   return (
-    <Page id={section.id} labelledBy="a-propos-titre">
+    <Page id={section.id} labelledBy="about-title">
       <SectionHeading
-        {...(section.number !== undefined ? { number: section.number } : {})}
         title={section.label}
         {...(section.kicker !== undefined ? { kicker: section.kicker } : {})}
-        headingId="a-propos-titre"
+        headingId="about-title"
       />
 
       <div ref={proseRef} className={`${styles.prose} reveal`}>
-        <p className={styles.leadParagraph}>{profile.intro}</p>
-
         {about.paragraphs.map((paragraph) => (
           <p key={paragraph.slice(0, 40)}>{paragraph}</p>
         ))}
+
+        {about.closing !== undefined ? (
+          <p className={styles.closing}>{about.closing}</p>
+        ) : null}
       </div>
 
       {about.portrait !== null ? (
@@ -47,7 +42,7 @@ export function About() {
           <img
             className={styles.portraitImage}
             src={about.portrait}
-            alt={`Portrait de ${profile.fullName}`}
+            alt={`Portrait of ${profile.fullName}`}
             width={800}
             height={1000}
             loading="lazy"
@@ -57,11 +52,13 @@ export function About() {
         </div>
       ) : null}
 
-      <div ref={factsRef} className={`${styles.facts} reveal`}>
-        <FactList facts={facts} layout="spread" />
-      </div>
+      {facts.length > 0 ? (
+        <div ref={factsRef} className={`${styles.facts} reveal`}>
+          <FactList facts={facts} layout="spread" />
+        </div>
+      ) : null}
 
-      <FaceB />
+      <Interests />
     </Page>
   )
 }

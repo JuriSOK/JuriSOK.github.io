@@ -1,39 +1,31 @@
 import { education } from '../../content/education'
 import { experiences } from '../../content/experiences'
-import { getSection, isSectionVisible } from '../../content/sections'
+import type { PageProps } from '../../types/content'
 import { Page } from '../ui/Page'
 import { SectionHeading } from '../ui/SectionHeading'
 import { CareerEntry } from './CareerEntry'
 import { SkillsBlock } from './Skills'
 import styles from './Career.module.css'
 
-const section = getSection('parcours')
-
 /**
- * Page « Parcours » : expériences, formation, puis compétences.
+ * Resume page: experience, education, then skills.
  *
- * Pas de timeline : chaque entrée est une fiche de crédits, et les entrées sont
- * décalées alternativement pour casser l'alignement rigide. Le bloc compétences
- * clôt la page, à la place des barres de progression du format d'origine.
+ * No timeline: each entry is a credit sheet. The skills block closes the page,
+ * where the reference layout put progress bars — gauges stay banned.
  */
-export function Career() {
-  if (section === undefined || !isSectionVisible(section.id)) {
-    return null
-  }
-
+export function Career({ section }: PageProps) {
   return (
-    <Page id={section.id} labelledBy="parcours-titre">
+    <Page id={section.id} labelledBy="resume-title">
       <SectionHeading
-        {...(section.number !== undefined ? { number: section.number } : {})}
         title={section.label}
         {...(section.kicker !== undefined ? { kicker: section.kicker } : {})}
-        headingId="parcours-titre"
+        headingId="resume-title"
       />
 
       {experiences.length > 0 ? (
-        <section className={styles.movement} aria-labelledby="parcours-experiences">
-          <h3 id="parcours-experiences" className={`label ${styles.movementTitle}`}>
-            Expériences
+        <section className={styles.movement} aria-labelledby="resume-experience">
+          <h3 id="resume-experience" className={`label ${styles.movementTitle}`}>
+            Experience
           </h3>
           <ul className={styles.entries}>
             {experiences.map((experience) => (
@@ -44,9 +36,9 @@ export function Career() {
       ) : null}
 
       {education.length > 0 ? (
-        <section className={styles.movement} aria-labelledby="parcours-formation">
-          <h3 id="parcours-formation" className={`label ${styles.movementTitle}`}>
-            Formation
+        <section className={styles.movement} aria-labelledby="resume-education">
+          <h3 id="resume-education" className={`label ${styles.movementTitle}`}>
+            Education
           </h3>
           <ul className={styles.entries}>
             {education.map((entry) => (

@@ -22,10 +22,6 @@
   color: var(--text);
 }
 
-.number {
-  color: var(--accent);
-}
-
 /* Souligné cuivre de l'onglet courant, hérité de l'ancienne barre. */
 .tab::after {
   content: '';
@@ -73,11 +69,6 @@
 
   .tab {
     min-height: 3.5rem;
-  }
-
-  /* Le numéro de catalogue serait du bruit dans une barre étroite. */
-  .number {
-    display: none;
   }
 }
 

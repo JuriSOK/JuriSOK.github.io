@@ -1,16 +1,5 @@
 .heading {
-  display: grid;
-  grid-template-columns: auto 1fr;
-  column-gap: var(--space-6);
-  row-gap: var(--space-4);
-  align-items: baseline;
   margin-bottom: var(--space-12);
-}
-
-.number {
-  color: var(--accent);
-  /* Aligne le numéro sur la première ligne du titre plutôt que sur sa base. */
-  padding-top: 0.4em;
 }
 
 .text {
@@ -32,17 +21,5 @@
 }
 
 .rule {
-  grid-column: 1 / -1;
-  margin-top: var(--space-2);
-}
-
-@media (width < 640px) {
-  .heading {
-    grid-template-columns: 1fr;
-    row-gap: var(--space-2);
-  }
-
-  .number {
-    padding-top: 0;
-  }
+  margin-top: var(--space-4);
 }
