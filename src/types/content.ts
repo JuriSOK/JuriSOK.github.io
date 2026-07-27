@@ -12,7 +12,6 @@ export interface Profile {
   readonly role: string
   /** Employment type, e.g. « Apprenticeship ». */
   readonly contract: string
-  readonly education: string
   readonly company: string
   /** City-level at most. Never a postal address. */
   readonly location: string
@@ -137,8 +136,8 @@ export interface Interest {
   readonly label: string
   /** Pixel-art icon shown on the closed row. Decorative. */
   readonly icon: PixelIconName
-  /** Paragraph revealed when the row is expanded. */
-  readonly detail: string
+  /** Paragraphs revealed when the row is expanded. May be empty. */
+  readonly detail: readonly string[]
   /** Optional link, revealed with the detail. Never on the closed row. */
   readonly link?: InterestLink
 }

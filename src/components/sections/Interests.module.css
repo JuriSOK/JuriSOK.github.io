@@ -99,13 +99,33 @@
 
 .detail {
   max-width: var(--measure);
-  padding: 0 0 var(--space-4) calc(2rem + var(--space-4));
+  padding-left: calc(2rem + var(--space-4));
   color: var(--text-2);
   font-size: var(--size-ui);
   line-height: 1.6;
 }
 
+/* Space between paragraphs, and below the last one before the link or the
+   next row. An entry with no prose collapses to nothing. */
+.detail + .detail {
+  margin-top: var(--space-3);
+}
+
+.detail:last-child {
+  padding-bottom: var(--space-4);
+}
+
 /* External profile link, revealed with the detail. */
+/* Breathing room above the link, whether it follows a paragraph or opens the
+   panel on its own (Series & Films carries no prose). */
+.link {
+  margin-top: var(--space-2);
+}
+
+.detail + .link {
+  margin-top: var(--space-3);
+}
+
 .link {
   display: inline-flex;
   align-items: center;

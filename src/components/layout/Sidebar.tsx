@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { education } from '../../content/education'
 import { links } from '../../content/links'
 import { profile } from '../../content/profile'
 import { Icon } from '../ui/Icon'
@@ -28,6 +29,9 @@ const channels: readonly Channel[] = [
  *
  * On narrow screens the card collapses: a button reveals the contact details.
  */
+/** Most recent entry: the one worth showing on the identity card. */
+const current = education[0]
+
 export function Sidebar() {
   const [open, setOpen] = useState(false)
   const [avatarFailed, setAvatarFailed] = useState(false)
@@ -104,10 +108,19 @@ export function Sidebar() {
             <dd className={styles.value}>{profile.contract}</dd>
           </div>
 
-          <div className={styles.contact}>
-            <dt className={`label ${styles.term}`}>Education</dt>
-            <dd className={styles.value}>{profile.education}</dd>
-          </div>
+          {/* Degree and institution both read from the current education entry,
+              so the sidebar can never drift from the Resume page. */}
+          {current !== undefined ? (
+            <div className={styles.contact}>
+              <dt className={`label ${styles.term}`}>Education</dt>
+              <dd className={styles.value}>
+                {current.degree}
+                {current.school !== undefined ? (
+                  <span className={styles.school}>{current.school}</span>
+                ) : null}
+              </dd>
+            </div>
+          ) : null}
 
           <div className={styles.contact}>
             <dt className={`label ${styles.term}`}>Location</dt>

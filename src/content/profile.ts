@@ -10,7 +10,6 @@ export const profile: Profile = {
   fullName: 'Vibol Arnaud Sok',
   role: 'AI Project Manager',
   contract: 'Apprenticeship',
-  education: 'Master’s Degree in MIAGE',
   company: 'Crédit Agricole Assurances',
   location: 'Paris, France',
   timezone: 'Europe/Paris',

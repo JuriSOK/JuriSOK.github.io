@@ -73,7 +73,11 @@ export function Interests() {
                 data-open={open}
               >
                 <div className={styles.panelInner}>
-                  <p className={styles.detail}>{interest.detail}</p>
+                  {interest.detail.map((paragraph) => (
+                    <p key={paragraph.slice(0, 40)} className={styles.detail}>
+                      {paragraph}
+                    </p>
+                  ))}
 
                   {/* Lives in the panel, never in the button: no interactive
                       element is nested inside another, and `visibility: hidden`

@@ -146,6 +146,14 @@
   color: var(--accent-hover);
 }
 
+/* Institution under the degree, one notch quieter. */
+.school {
+  display: block;
+  margin-top: 0.15rem;
+  color: var(--text-3);
+  font-size: var(--size-meta);
+}
+
 /* Location and live time on one line, wrapping cleanly when narrow. */
 .locationValue {
   display: flex;

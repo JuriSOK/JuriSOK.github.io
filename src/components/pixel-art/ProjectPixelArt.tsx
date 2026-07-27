@@ -2,60 +2,70 @@ import type { ProjectArtName } from '../../types/pixel-art'
 import { PixelGrid } from './PixelGrid'
 
 /**
- * Sleeve scenes for the current projects, plus thematic fallback motifs for
- * future repositories — 20 × 20 cells, warm café palette, original work.
+ * Sleeve scenes for the current projects (24 × 24), plus thematic fallback
+ * motifs for future repositories (20 × 20) — warm café palette, original work.
  *
  * No bank logo, currency brand or copyrighted asset appears anywhere.
  */
 
-/* A café accounting desk: wall receipt, framed rising chart, open ledger and a
-   stack of coins on the counter. */
+/* A presentation board on its tripod: gridded chart face, a green trend line
+   climbing to the top right, and a gold coin resting on the horizontal axis.
+   The coin carries no currency symbol — no brand, no bank, no copyrighted
+   mark, and the whole scene is redrawn in the warm café palette. */
 const personalFinanceTracker: readonly string[] = [
-  'bbbbbbbbbbbbbbbbbbbb',
-  'bbbbbbbbbbbbbbbbbbbb',
-  'bbbMMMMbbbbAAAAAAAbb',
-  'bbbMHHMbbbbAKKKKKAbb',
-  'bbbMMMMbbbbAKKKKCAbb',
-  'bbbMHHMbbbbAKKLKCAbb',
-  'bbbMMMMbbbbAGKLKCAbb',
-  'bbbMHHMbbbbAGKLKCAbb',
-  'bbbMMMMbbbbAAAAAAAbb',
-  'bbbMMMMbbbbbbbbbbbbb',
-  'bbbbbbbbbbbbbbbbbbbb',
-  'bbbbbbbbbbbbbbbbbbbb',
-  'bbbbbbbbbbbbbbbbbbbb',
-  'AAAAAAAAAAAAAAAAAAAA',
-  'kkBMMMMBMMMMBkkkkkkk',
-  'kkBMAAMBMAAMBkCCCkkk',
-  'kkBMMMMBMMMMBkCCCkkk',
-  'kkBBBBBBBBBBBGAAACCk',
-  'kkkkkkkkkkkkkkkkkkkk',
-  'kkkkkkkkkkkkkkkkkkkk',
+  'bbbbbbbbbbbKKbbbbbbbbbbb',
+  'bbbbbbbbKKKKKKKKbbbbbbbb',
+  'bbbbKKKKKKKKKKKKKKKKbbbb',
+  'bKKKKKKKKKKKKKKKKKKKKKKb',
+  'bKMMMMMMMMMMMMMMMMMMMMKb',
+  'bKMkMMMMHMMMMHMMMMHGGMKb',
+  'bKkkkMMMHMMMMHMMMMGGGMKb',
+  'bKMkMMMMHMMMMHMMMGGGGMKb',
+  'bKMkHHHHHHHHHHHGGGGHGHKb',
+  'bKMkMMMMHMMMMHGGGGGMMMKb',
+  'bKMkMMMMHMMMGGGGMMHMMMKb',
+  'bKMkMMMMHMMGGGGGMMHMMMKb',
+  'bKMkHHHHHGGGGHHHHHHHHHKb',
+  'bKMkMMMMGGGGGHMMMMHMMMKb',
+  'bKMMKKKMGGMMMHMMMMHMMMKb',
+  'bKMKCCCKGGMMMHMMMMHMMMKb',
+  'bKMKCACKHHHHHHHHHHHHHkKb',
+  'bKMKCCCKkkkkkkkkkkkkkkKb',
+  'bKMMKKKMMMMMMMMMMMMMMkKb',
+  'bKKKKKKKKKKKKKKKKKKKKKKb',
+  'bbbbbbbbbbbAAbbbbbbbbbbb',
+  'bbbbbbbbbAbAAbAbbbbbbbbb',
+  'bbbbbbbbAbbAAbbAbbbbbbbb',
+  'bbbbbbbAbbbAAbbbAbbbbbbb',
 ]
 
-/* A server cabinet with lit drawers, a terminal showing a green prompt, and a
-   few data blocks drifting between the two. */
+/* A filing cabinet of three labelled drawers with a metal top, beside a stack
+   of data cylinders — the paper archive and the database, side by side. */
 const minisgbdr: readonly string[] = [
-  'bbbbbbbbbbbbbbbbbbbb',
-  'bbbbbbbbbbbbbbbbbbbb',
-  'bbKKKKKKKbbbbbbbbbbb',
-  'bbKLkkGgKbbbbbbbbbbb',
-  'bbKkkkkkKCbbbbbbbbbb',
-  'bbKKKKKKKbbbkkkkkkbb',
-  'bbKLkkGgKbbbkKKKKkbb',
-  'bbKkkkkkKbLbkGGKKkbb',
-  'bbKKKKKKKbbbkKKKKkbb',
-  'bbKLkkGgKGbbkGGGKkbb',
-  'bbKkkkkkKbbbkKKKLkbb',
-  'bbKKKKKKKbCbkkkkkkbb',
-  'bbKLkkGgKbbAAAAAAAAb',
-  'bbKkkkkkKbbbkbbbbkbb',
-  'bbKKKKKKKbbbkbbbbkbb',
-  'AAAAAAAAAAAAAAAAAAAA',
-  'kkkkkkkkkkkkkkkkkkkk',
-  'kkkkkkkkkkkkkkkkkkkk',
-  'kkkkkkkkkkkkkkkkkkkk',
-  'kkkkkkkkkkkkkkkkkkkk',
+  'bbbbbbbbbbbbbbbbbbbbbbbb',
+  'bbbHHHHHHHHHHHHHbbbbbbbb',
+  'bbHHHHHHHHHHHHHHHbbbbbbb',
+  'bKKKKKKKKKKKKKKKKbbbbbbb',
+  'bKLLLLLLLLLLLLLLKbbbbbbb',
+  'bKLLLLKKKKKKLLLLKbbbbbbb',
+  'bKLLLLKMMMMKLLLLKbbbbbbb',
+  'bKLLLLKKKKKKLLLLKbbbbbbb',
+  'bKLLLLLLLLLLLLLLKbbbbbbb',
+  'bKKKKKKKKKKKKKKKKbbbbbbb',
+  'bKLLLLLLLLLLLLLLKbbbbbbb',
+  'bKLLLLKKKKKKLLLLKbbbbbbb',
+  'bKLLLLKMMMMKLLLLKKKKKKKb',
+  'bKLLLLKKKKKKLLLLKKGGGGKb',
+  'bKLLLLLLLLLLLLLLKKggggKb',
+  'bKKKKKKKKKKKKKKKKKGGGGKb',
+  'bKLLLLLLLLLLLLLLKKGGGGKb',
+  'bKLLLLKKKKKKLLLLKKggggKb',
+  'bKLLLLKMMMMKLLLLKKGGGGKb',
+  'bKLLLLKKKKKKLLLLKKGGGGKb',
+  'bKLLLLLLLLLLLLLLKKggggKb',
+  'bbbbbbbbbbbbbbbbbKGGGGKb',
+  'bbbbbbbbbbbbbbbbbKKKKKKb',
+  'bbbbbbbbbbbbbbbbbbbbbbbb',
 ]
 
 const scenes: Record<ProjectArtName, readonly string[]> = {
