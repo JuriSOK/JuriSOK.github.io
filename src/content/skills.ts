@@ -18,8 +18,8 @@ export const skills: readonly SkillDomain[] = [
     icon: 'ai-data',
     usage:
       'Exploring data, comparing models and transforming analytical results into practical use cases.',
-    tools: ['Python', 'Machine Learning', 'Data Analysis', 'Power BI'],
-    contexts: ['Academic projects', 'AI project management', 'Personal learning'],
+    tools: ['Python', 'Machine Learning', 'Data Analysis', 'Power BI', 'ETL'],
+    contexts: ['Academic projects', 'Apprenticeship', 'Personal learning'],
   },
   {
     id: 'software-development',

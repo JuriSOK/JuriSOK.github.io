@@ -4,7 +4,7 @@ Règles permanentes du projet. À lire avant toute modification.
 
 ## Nature du projet
 
-- Ce projet est le **portfolio professionnel** de Vibol Arnaud Sok (AI Project Manager en alternance,
+- Ce projet est le **portfolio professionnel** de Vibol Arnaud Sok (Data Analyst en alternance,
   Master MIAGE). L'interface est intégralement en anglais.
 - La direction artistique est **`Warm Vintage Jazz Editorial`**, désormais implémentée. Les règles
   ci-dessous sont opposables à toute évolution.

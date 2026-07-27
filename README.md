@@ -1,6 +1,6 @@
 # Portfolio — Vibol Arnaud Sok
 
-Professional portfolio of Vibol Arnaud Sok, AI Project Manager apprentice and Master's student in
+Professional portfolio of Vibol Arnaud Sok, Data Analyst apprentice and Master's student in
 MIAGE.
 
 The site follows a **vCard layout**: a fixed identity sidebar and a main panel whose content switches

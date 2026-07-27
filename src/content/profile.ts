@@ -8,16 +8,16 @@ import type { Profile } from '../types/content'
  */
 export const profile: Profile = {
   fullName: 'Vibol Arnaud Sok',
-  role: 'AI Project Manager',
+  role: 'Data Analyst',
   contract: 'Apprenticeship',
   company: 'Crédit Agricole Assurances',
   location: 'Paris, France',
   timezone: 'Europe/Paris',
   domains: [
-    'Artificial Intelligence',
-    'AI Agents',
+    'Data Analysis',
+    'Data Visualization',
+    'ETL',
     'ITSM',
-    'Project Management',
     'Information Systems',
   ],
 }
