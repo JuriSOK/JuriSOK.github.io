@@ -4,20 +4,24 @@ Règles permanentes du projet. À lire avant toute modification.
 
 ## Nature du projet
 
-- Ce projet est le **portfolio professionnel** de Sok Vibol Arnaud (chef de projet IA, Master MIAGE).
+- Ce projet est le **portfolio professionnel** de Vibol Arnaud Sok (AI Project Manager en alternance,
+  Master MIAGE). L'interface est intégralement en anglais.
 - La direction artistique est **`Warm Vintage Jazz Editorial`**, désormais implémentée. Les règles
   ci-dessous sont opposables à toute évolution.
 
 ## Direction artistique — règles opposables
 
-- **Budget d'ornement : trois éléments graphiques non textuels au maximum par section** (filet,
-  numéro de catalogue, cadre, marque de coupe…). Un ornement qui ne porte aucune information saute.
+- **Budget d'ornement : trois éléments graphiques non textuels au maximum par page** (filet, cadre,
+  pastille…). Un ornement qui ne porte aucune information saute.
 - **La référence jazz reste typographique, jamais illustrative.** Aucun disque ou vinyle, aucun
   saxophone, aucune note de musique, aucune tasse de café. L'univers passe par la matière (teintes,
-  grain, lumière) et le vocabulaire d'édition (numéros de catalogue, crédits, Face A / Face B).
+  grain, lumière, fond pixel-art) et le vocabulaire d'édition (crédits, filets, mises en page).
 - **Accent selon la surface** : cuivre sur fond espresso (6,0:1), bordeaux sur insert papier (7,3:1).
   Jamais l'inverse — le cuivre tombe à 3,6:1 sur le crème. Le composant `Section` applique
   automatiquement le bon jeu de jetons via `data-surface`, ne pas le contourner.
+- **Fond pixel-art** : SVG original dessiné dans le projet, jamais d'illustration tierce, de GIF, de
+  vidéo ni de canvas. Animations CSS en `transform`/`opacity` uniquement, toutes coupées sous
+  `prefers-reduced-motion`, et un voile espresso garantit la lisibilité du panneau.
 - **`--caramel` n'est jamais une couleur de texte** (4,0:1, sous le seuil AA) : filets, cadres et
   aplats uniquement.
 - **Les polices embarquent le seul sous-ensemble `latin`.** Il couvre tout le français, mais pas les
@@ -28,7 +32,7 @@ Règles permanentes du projet. À lire avant toute modification.
 ## Contenu
 
 - **Ne jamais inventer** une expérience, une mission, une compétence, un résultat ou un chiffre.
-  Seuls les faits fournis par Sok Vibol Arnaud figurent dans `src/content/`.
+  Seuls les faits fournis par Vibol Arnaud Sok figurent dans `src/content/`.
 - Un champ manquant se rend conditionnellement : pas de texte de remplissage, pas de lien mort, pas
   de bouton désactivé. `links.ts` utilise `null` pour ce qui n'est pas encore fourni.
 
@@ -64,19 +68,27 @@ Règles permanentes du projet. À lire avant toute modification.
 
 ## Format et navigation
 
+- **Toute l'interface est en anglais** : navigation, titres, contenu, métadonnées, libellés
+  accessibles, textes réservés aux lecteurs d'écran. Ne pas réintroduire de français à l'écran.
+  Exception : les noms propres (Crédit Agricole Assurances, Université Paris Dauphine-PSL,
+  Université Paris Cité, MiniSGBDR, Personal Finance Tracker).
 - Le site suit un **format vCard** (référence : codewithsadee/vcard-personal-portfolio) : une
-  **sidebar d'identité** — monogramme, nom, rôle, coordonnées repliables — et un **panneau principal
+  **sidebar d'identité** — avatar, nom, rôle, coordonnées repliables — et un **panneau principal
   dont le contenu bascule par onglets**. Pas de hero, pas de défilement de sections.
-- Quatre pages : À propos (avec la Face B des centres d'intérêt), Parcours (avec le bloc
-  compétences), Projets, Contact. **Centres d'intérêt et compétences n'ont pas d'onglet propre.**
+- Quatre pages : About (avec les centres d'intérêt), Resume (avec le bloc compétences), Projects,
+  Contact. **Centres d'intérêt et compétences n'ont pas d'onglet propre.**
+- **Aucune numérotation éditoriale.** Ni numéros de section, ni numéros de piste, ni numéros de
+  catalogue, ni mention d'édition. L'identité repose sur la typographie, les teintes chaudes, les
+  filets fins, l'espacement, la texture et le fond pixel-art.
+- Chaque page reçoit sa `SectionDefinition` **en prop** depuis `App`. Ne jamais la rechercher par
+  identifiant dans le composant : une recherche par chaîne peut échouer silencieusement quand un id
+  change, laissant un onglet qui ouvre un panneau vide — c'est arrivé.
 - **Un onglet sans contenu réel n'existe pas.** Jamais un titre suivi de vide, jamais un onglet
   creux. C'est la règle qui permet de publier le site avant que tous les textes soient écrits.
 - `src/content/navigation.ts` est le **registre des pages construites** ; `src/content/sections.ts`
   le croise avec le contenu réel et expose `visibleSections`, `isSectionVisible()` et `getSection()`.
   **Le panneau et les onglets lisent ce même verdict** : ils ne peuvent pas diverger.
-- Un composant de page lit son numéro, son titre et sa ligne éditoriale via `getSection()` plutôt
-  que de les écrire en dur.
-- La bascule d'onglet met à jour le hash (`#projets` reste un lien profond partageable), gère le
+- La bascule d'onglet met à jour le hash (`#projects` reste un lien profond partageable), gère le
   bouton retour via `popstate`, et déplace le focus sur le panneau.
 - Sous **1250 px**, la sidebar passe au-dessus du panneau (coordonnées repliées derrière le bouton
   « Contacts ») et les onglets deviennent une **barre fixe en bas**, sous le pouce.
@@ -92,10 +104,15 @@ Règles permanentes du projet. À lire avant toute modification.
   d'animation qui laisserait du contenu invisible en cas d'échec.
 - N'animer que `transform` et `opacity`.
 
-## Sécurité
+## Sécurité et vie privée
 
 - Ne **jamais** placer de clé API, token ou secret dans le frontend.
 - Ne **jamais** committer de fichier `.env`.
+- **Ne jamais publier** : numéro de téléphone, adresse postale, CV. Ne pas créer de bouton CV.
+  `SiteLinks` ne contient volontairement que `email`, `linkedin` et `github` — ne pas l'étendre.
+- Ne jamais ajouter d'information confidentielle d'entreprise, ni de résultat chiffré.
+- **Aucune expérience SNCF** ne doit figurer sur le site.
+- Ne jamais inventer d'expérience, de hackathon, de certification, ni de niveau de compétence.
 
 ## Dépendances
 

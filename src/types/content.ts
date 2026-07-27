@@ -1,81 +1,93 @@
 /**
- * Types de la couche contenu.
+ * Content layer types.
  *
- * Règle générale : tout ce qui n'est pas encore fourni est **optionnel** ou `null`.
- * Un champ absent n'est jamais rendu — ni texte de remplissage, ni lien mort.
+ * General rule: anything not yet provided is **optional** or `null`. A missing
+ * field is never rendered — no filler text, no dead link.
  */
 
 export interface Profile {
   readonly fullName: string
   readonly role: string
+  /** Employment type, e.g. « Apprenticeship ». */
+  readonly contract: string
   readonly education: string
   readonly company: string
-  /** Phrase d'introduction, en ouverture de la page « À propos ». */
-  readonly intro: string
-  /** Niveau de précision volontairement large. */
+  /** Deliberately broad. Never a postal address. */
   readonly location: string
-  /** Millésime affiché dans la sidebar et le colophon. */
-  readonly year: string
-  readonly edition: string
-  /** Domaines professionnels, repris dans la fiche de faits. */
+  /** Professional domains, listed in the About facts. */
   readonly domains: readonly string[]
 }
 
-/** Liens externes. `null` signifie « pas encore fourni » : le lien n'est pas rendu. */
+/**
+ * Public contact channels.
+ *
+ * Deliberately limited to three. Phone number, postal address and CV are
+ * excluded by instruction and must not be added to this type.
+ */
 export interface SiteLinks {
+  readonly email: string
+  readonly linkedin: string
   readonly github: string
-  readonly linkedin: string | null
-  readonly email: string | null
-  readonly cv: string | null
 }
 
-/* ---------- Registre de pages ---------- */
+/* ---------- Page registry ---------- */
 
 /**
- * Une page du panneau principal. Le registre ne décrit que des pages
- * **réellement construites** : une entrée ici garantit que le composant
- * existe. Sa présence en onglet dépend ensuite de `hasContent`, calculé
- * dans `sections.ts`.
+ * A page of the main panel. The registry only describes **pages that are
+ * actually built**: an entry here guarantees the component exists. Whether it
+ * becomes a tab depends on `hasContent`, computed in `sections.ts`.
  */
 export interface SectionDefinition {
   readonly id: string
-  /** Numéro de catalogue, affiché dans l'en-tête de page et l'onglet desktop. */
-  readonly number?: string
   readonly label: string
-  /** Ligne éditoriale affichée sous le titre de page. */
+  /** Editorial line shown under the page title. */
   readonly kicker?: string
 }
 
-/* ---------- À propos ---------- */
+/**
+ * Props every page component receives.
+ *
+ * The definition is handed down by `App` rather than looked up by id inside the
+ * component. That is deliberate: a lookup by string can silently fail when an
+ * id changes, leaving a tab that opens an empty panel. Passing the object makes
+ * the tab and its page the same value, so they cannot disagree.
+ */
+export interface PageProps {
+  readonly section: SectionDefinition
+}
+
+/* ---------- About ---------- */
 
 export interface AboutContent {
-  /** Paragraphes de présentation. Vide tant qu'ils ne sont pas rédigés. */
   readonly paragraphs: readonly string[]
-  /** Chemin d'un portrait, ou `null`. La section fonctionne parfaitement sans. */
+  /** Closing line, oriented towards getting in touch. */
+  readonly closing?: string
+  /** Path to a portrait, or `null`. The page works perfectly without one. */
   readonly portrait: string | null
 }
 
-/** Une ligne de la fiche de faits. */
+/** One line of the facts list. */
 export interface Fact {
   readonly label: string
   readonly value: string
-  /** Occupe toute la largeur quand la fiche est étalée sur deux colonnes. */
+  /** Spans the full width when the list is laid out over two columns. */
   readonly full?: boolean
 }
 
-/* ---------- Parcours ---------- */
+/* ---------- Resume ---------- */
 
 export interface Experience {
   readonly id: string
-  /** Seul champ toujours renseigné : le reste s'ajoute au fil de l'eau. */
   readonly organisation: string
   readonly role?: string
+  /** Employment type, shown as a discreet stamp. */
+  readonly contract?: string
   readonly period?: string
   readonly summary?: string
   readonly missions?: readonly string[]
   readonly domains?: readonly string[]
   readonly tools?: readonly string[]
-  /** Affiche la pastille « en poste ». */
+  /** Shows the « Current » stamp. */
   readonly current?: boolean
 }
 
@@ -84,35 +96,41 @@ export interface Education {
   readonly degree: string
   readonly school?: string
   readonly period?: string
+  /**
+   * Path to a locally stored institutional logo. When absent, the institution
+   * name is rendered as a typographic mark instead — never an invented logo.
+   */
+  readonly logo?: string
   readonly fields?: readonly string[]
-  /** Projets ou enseignements marquants. */
   readonly highlights?: readonly string[]
 }
 
-/* ---------- Compétences ---------- */
+/* ---------- Skills ---------- */
 
 export interface SkillDomain {
   readonly id: string
   readonly title: string
-  /** Ce que Sok Vibol Arnaud en fait concrètement. */
+  /** What Vibol Arnaud Sok actually does with it. */
   readonly usage?: string
-  /** Technologies et outils, rendus en pastilles logo + nom. */
+  /** Tools and technologies, rendered as logo + name badges. */
   readonly tools?: readonly string[]
   readonly contexts?: readonly string[]
 }
 
-/* ---------- Centres d'intérêt ---------- */
+/* ---------- Interests ---------- */
 
 export interface Interest {
   readonly id: string
   readonly label: string
-  /** Note très courte, en colonne droite de la tracklist. */
+  /** Very short note, in the right-hand column. */
   readonly note?: string
 }
 
 /* ---------- Contact ---------- */
 
 export interface ContactContent {
-  /** Phrase d'invitation ouvrant la section. */
+  /** Headline opening the page. */
+  readonly heading?: string
+  /** Invitation sentence under the headline. */
   readonly invitation?: string
 }

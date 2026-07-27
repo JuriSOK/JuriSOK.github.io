@@ -92,7 +92,7 @@ export function buildProjects(): readonly ProjectCardData[] {
         summary: override?.summary ?? repo.description,
         tech: pickTech(override?.tech, repo.languages),
         image: override?.image ?? null,
-        links: [{ label: 'Voir sur GitHub', url: repo.url }],
+        links: [{ label: 'View on GitHub', url: repo.url }],
       },
     })
   }

@@ -1,34 +1,35 @@
 import type { ProjectGroup, ProjectOverride } from '../types/project'
 
 /**
- * Retouches manuelles de la sélection produite par `npm run sync:projects`.
+ * Manual edits to the selection produced by `npm run sync:projects`.
  *
- * Rien n'est obligatoire ici : un dépôt absent de ce fichier utilise sa
- * description GitHub et ses langages détectés. On n'écrit donc que pour les
- * dépôts dont la description est vide, trop technique ou mal tournée.
+ * Nothing is mandatory here: a repository absent from this file falls back to
+ * its GitHub description and detected languages. We only write for repositories
+ * whose description is empty, too technical, or not in English.
  */
 export const overrides: Record<string, ProjectOverride> = {
   MiniSGBDR: {
     summary:
-      'Mini système de gestion de base de données en Rust : stockage et interrogation de données structurées.',
+      'A lightweight database management system built from scratch, supporting core SQL-like operations and structured data storage.',
+    tech: ['Rust'],
     order: 2,
   },
 }
 
 /**
- * Projets répartis sur plusieurs dépôts, réunis sous une seule carte.
+ * Projects spread across several repositories, gathered under a single card.
  *
- * Les dépôts cités ici sont retirés du flux normal avant tout rendu : ils ne
- * peuvent donc jamais produire de carte individuelle en plus de la carte du
- * groupe, quel que soit le nombre de dépôts portant le topic.
+ * Repositories listed here are removed from the normal flow before any render:
+ * they can therefore never produce an individual card on top of the group card,
+ * whatever the number of repositories carrying the topic.
  */
 export const groups: readonly ProjectGroup[] = [
   {
     id: 'personal-finance-tracker',
     title: 'Personal Finance Tracker',
     summary:
-      'Suivi de finances personnelles : interface Angular et API REST Spring Boot.',
-    tech: ['Angular', 'TypeScript', 'Java', 'Spring Boot'],
+      'A personal finance tracking application with an Angular interface and a Spring Boot REST API.',
+    tech: ['Angular', 'TypeScript', 'Java', 'Spring Boot', 'PostgreSQL'],
     order: 1,
     repos: [
       { label: 'Frontend', name: 'personal-finance-tracker-frontend' },

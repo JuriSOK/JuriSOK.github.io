@@ -1,27 +1,23 @@
 import type { Profile } from '../types/content'
 
 /**
- * Contenu textuel du profil.
+ * Profile facts.
  *
- * Aucune expérience, mission, compétence ou réalisation n'est inventée ici :
- * ce fichier ne contient que des faits fournis par Sok Vibol Arnaud.
+ * Nothing here is invented: every value was provided by Vibol Arnaud Sok.
+ * No phone number, no postal address, no CV — by explicit instruction.
  */
 export const profile: Profile = {
-  fullName: 'Sok Vibol Arnaud',
-  role: 'Chef de projet IA',
-  education: 'Master MIAGE',
+  fullName: 'Vibol Arnaud Sok',
+  role: 'AI Project Manager',
+  contract: 'Apprenticeship',
+  education: 'Master’s Degree in MIAGE',
   company: 'Crédit Agricole Assurances',
-  intro:
-    'Je conduis des projets d’intelligence artificielle et d’agents IA, à la croisée des systèmes d’information et de la gestion de projet.',
   location: 'France',
-  year: '2026',
-  edition: 'Édition 001',
   domains: [
-    'Intelligence artificielle',
-    'Agents IA',
+    'Artificial Intelligence',
+    'AI Agents',
     'ITSM',
-    'Gestion de projet',
-    'Développement logiciel',
-    'Systèmes d’information',
+    'Project Management',
+    'Information Systems',
   ],
 }

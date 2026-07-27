@@ -1,28 +1,26 @@
 import type { Experience } from '../types/content'
 
 /**
- * Expériences professionnelles.
+ * Professional experience.
  *
- * Seuls les faits fournis par Sok Vibol Arnaud figurent ici. Aucune mission,
- * date, responsabilité, technologie ni résultat n'a été inventé.
- *
- * Tous les champs sauf `organisation` sont optionnels : une entrée incomplète
- * se rend proprement avec ce qu'elle a, sans trou ni texte de remplissage.
- *
- * À REMPLIR pour chaque entrée — `period`, `missions`, `tools`, et
- * l'intitulé officiel exact du poste.
+ * Only facts provided by Vibol Arnaud Sok. No invented mission, date,
+ * responsibility, technology or result — and no quantitative achievement or
+ * confidential project detail, by explicit instruction.
  */
 export const experiences: readonly Experience[] = [
   {
     id: 'credit-agricole-assurances',
     organisation: 'Crédit Agricole Assurances',
-    role: 'Chef de projet IA',
+    role: 'AI Project Manager',
+    contract: 'Apprenticeship',
+    period: 'September 2025 — Present',
     current: true,
-    domains: ['Intelligence artificielle', 'Agents IA', 'ITSM', 'Gestion de projet'],
-  },
-  {
-    id: 'sncf',
-    organisation: 'SNCF',
-    domains: ['Systèmes d’information RH'],
+    missions: [
+      'Define business needs and artificial intelligence use cases.',
+      'Design AI and AI-agent solutions to improve ITSM processes.',
+      'Contribute to cross-functional project coordination and monitoring.',
+    ],
+    domains: ['Artificial Intelligence', 'AI Agents', 'ITSM', 'Project Management'],
+    tools: ['ServiceNow', 'Splunk', 'Dynatrace', 'ELK / DORA'],
   },
 ]

@@ -2,27 +2,33 @@ import { profile } from './profile'
 import type { AboutContent, Fact } from '../types/content'
 
 /**
- * Section « À propos ».
+ * About page.
  *
- * Les paragraphes sont volontairement vides : ils doivent être écrits par Sok
- * Vibol Arnaud. Tant qu'ils le sont, la section se rend malgré tout grâce à la
- * fiche de faits ci-dessous, qui ne contient que des informations vérifiées.
+ * TODO — provisional wording, to be rewritten by Vibol Arnaud Sok.
+ * The word « TODO » must never reach the rendered page: this note is a code
+ * comment only.
  *
- * À REMPLIR — 2 à 4 paragraphes courts. Le site est lisible sans, mais creux.
+ * Two claims are deliberately worded with care and must not be strengthened:
+ * following hackathons is not the same as having taken part in many, and an
+ * interest in entrepreneurship is not a track record.
  */
 export const about: AboutContent = {
-  paragraphs: [],
+  paragraphs: [
+    'I’m an AI Project Manager apprentice and a Master’s student in MIAGE, with a strong interest in artificial intelligence, AI agents, information systems and digital transformation.',
+    'I enjoy working at the intersection of technology and project coordination, turning emerging ideas into practical and structured solutions.',
+    'I closely follow hackathons and the fast-paced collaboration they encourage. I am also interested in entrepreneurship and in building useful digital products.',
+  ],
+  closing: 'Interested in exchanging ideas, projects or opportunities? Let’s keep in touch.',
   portrait: null,
 }
 
 /**
- * Fiche de faits, dérivée du profil : aucune information nouvelle n'est
- * introduite ici, tout provient de `profile.ts`.
+ * Facts list.
+ *
+ * Only what the sidebar does **not** already show. Role, education, employer
+ * and location all live in the identity card; repeating them here would fill
+ * the page with echoes rather than information.
  */
 export const facts: readonly Fact[] = [
-  { label: 'Rôle', value: profile.role },
-  { label: 'Formation', value: profile.education },
-  { label: 'Actuellement', value: profile.company },
-  { label: 'Localisation', value: profile.location },
-  { label: 'Domaines', value: profile.domains.join(' · '), full: true },
+  { label: 'Domains', value: profile.domains.join(' · '), full: true },
 ]

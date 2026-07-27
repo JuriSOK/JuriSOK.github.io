@@ -1,37 +1,34 @@
 import type { SectionDefinition } from '../types/content'
 
 /**
- * Registre des pages du site.
+ * Page registry.
  *
- * Le site suit un format « vCard » : une sidebar d'identité fixe, et un panneau
- * principal dont le contenu bascule par onglets. Chaque entrée de ce registre
- * est un onglet potentiel ; sa présence réelle dépend de son contenu, calculée
- * dans `sections.ts`. Un onglet sans contenu n'apparaît nulle part.
+ * The site follows a « vCard » format: a fixed identity sidebar, and a main
+ * panel whose content switches by tabs. Each entry is a potential tab; whether
+ * it actually appears depends on its content, computed in `sections.ts`.
  *
- * Les centres d'intérêt vivent dans la page « À propos » (en Face B), et les
- * compétences dans la page « Parcours » : ils n'ont pas d'onglet propre.
+ * Interests live inside the About page, and skills inside Resume: neither has
+ * a tab of its own.
+ *
+ * Ids double as URL hashes — `#projects` is a shareable deep link.
  */
 export const sectionRegistry: readonly SectionDefinition[] = [
   {
-    id: 'a-propos',
-    number: '01',
-    label: 'À propos',
+    id: 'about',
+    label: 'About',
   },
   {
-    id: 'parcours',
-    number: '02',
-    label: 'Parcours',
-    kicker: 'Expériences et formation.',
+    id: 'resume',
+    label: 'Resume',
+    kicker: 'Experience, education and skills.',
   },
   {
-    id: 'projets',
-    number: '03',
-    label: 'Projets',
-    kicker: 'Une sélection tirée de mes dépôts.',
+    id: 'projects',
+    label: 'Projects',
+    kicker: 'A selection drawn from my repositories.',
   },
   {
     id: 'contact',
-    number: '04',
     label: 'Contact',
   },
 ]

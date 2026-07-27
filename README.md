@@ -1,145 +1,133 @@
-# Portfolio — Sok Vibol Arnaud
+# Portfolio — Vibol Arnaud Sok
 
-Portfolio professionnel de Sok Vibol Arnaud, chef de projet IA et étudiant en Master MIAGE.
+Professional portfolio of Vibol Arnaud Sok, AI Project Manager apprentice and Master's student in
+MIAGE.
 
-> 🚧 **Portfolio en cours de construction.** Le site suit un format « vCard » : une sidebar
-> d'identité et un panneau à onglets. Trois onglets sont en ligne : À propos (avec les centres
-> d'intérêt en Face B), Parcours et Projets. L'onglet **Contact** reste masqué tant qu'aucune
-> coordonnée n'est renseignée dans `src/content/links.ts`, et le bloc **Compétences** de la page
-> Parcours attend `src/content/skills.ts`. Ils apparaîtront d'eux-mêmes une fois remplis.
+The site follows a **vCard layout**: a fixed identity sidebar and a main panel whose content switches
+by tabs — About, Resume, Projects and Contact — rendered in a *Warm Vintage Jazz Editorial* theme
+over an original animated pixel-art jazz café background.
 
-## Contenu et sections
+> 🚧 **Work in progress.** Some wording is provisional and flagged with a `TODO` comment in the
+> content files. The word `TODO` never reaches the rendered page.
 
-Tous les textes vivent dans `src/content/` : modifier une phrase du site ne demande jamais d'ouvrir
-un composant. Les fichiers portant la mention `À REMPLIR` attendent du contenu.
-
-**Une section sans contenu réel ne s'affiche pas et disparaît de la navigation.** Le site est donc
-publiable à tout moment : il n'affiche jamais un titre suivi de vide, et se remplit tout seul à
-mesure que les fichiers de contenu sont écrits.
-
-## Stack actuelle
+## Stack
 
 - [React](https://react.dev/) 19
-- [TypeScript](https://www.typescriptlang.org/) (mode strict)
+- [TypeScript](https://www.typescriptlang.org/) (strict mode)
 - [Vite](https://vite.dev/)
 - [ESLint](https://eslint.org/)
 
-Aucune dépendance de production hors React : les polices sont auto-hébergées, les logos sont des
-tracés SVG embarqués, et les animations reposent sur `IntersectionObserver`.
+No production dependency beyond React: fonts are self-hosted, technology logos are inlined SVG paths,
+the café background is hand-drawn SVG with CSS animation, and reveals use a native
+`IntersectionObserver`.
 
-## Sélection des projets
+## Content
 
-Les projets affichés sont les dépôts GitHub portant le topic **`portfolio`**.
+All copy lives in `src/content/`: changing a sentence never requires opening a component.
+
+**A tab with no real content does not exist** — no title followed by emptiness, no hollow tab. The
+site is therefore publishable at any time and fills itself in as content files are written.
+
+Interests are part of the About page and skills are part of Resume; neither has its own tab.
+
+## Project selection
+
+Displayed projects are the GitHub repositories carrying the **`portfolio`** topic.
 
 ```bash
 npm run sync:projects
 ```
 
-Le script interroge l'API publique GitHub et écrit `src/data/projects.generated.json`, qui est
-commité : le site ne fait donc aucun appel réseau chez le visiteur et se construit hors-ligne.
-Aucun jeton n'est nécessaire ni embarqué.
+The script queries the public GitHub API and writes `src/data/projects.generated.json`, which is
+committed: the site makes no network call for visitors and builds offline. No token is needed or
+embedded.
 
-Pour ajouter un projet :
+To add a project:
 
 ```bash
-gh repo edit JuriSOK/NOM-DU-DEPOT --add-topic portfolio
+gh repo edit JuriSOK/REPO-NAME --add-topic portfolio
 npm run sync:projects
 ```
 
-Les descriptions, titres, technologies et l'ordre d'affichage se retouchent dans
-`src/content/projects.overrides.ts` — uniquement pour les dépôts qui en ont besoin. La table `groups`
-du même fichier réunit plusieurs dépôts sous une seule carte (cas de `personal-finance-tracker`,
-réparti entre frontend et backend).
+Descriptions, titles, technologies and ordering are refined in `src/content/projects.overrides.ts`.
+The `groups` table in the same file gathers several repositories under a single card — as with
+`personal-finance-tracker`, split between frontend and backend.
 
-## Prérequis
+## Requirements
 
-- **Node.js 24 LTS** (requis — la contrainte est déclarée dans le champ `engines` de `package.json`)
-- npm 11 ou supérieur (fourni avec Node.js 24)
+- **Node.js 24 LTS** (declared in `.nvmrc`, `.node-version` and the `engines` field)
+- npm 11 or later
 
-L'usage d'un gestionnaire de versions comme [`nvm`](https://github.com/nvm-sh/nvm),
-[`fnm`](https://github.com/Schniz/fnm) ou [`mise`](https://mise.jdx.dev/) est recommandé afin de
-garder la même version entre le développement local et les futurs workflows GitHub Actions. La
-version attendue est déclarée dans les fichiers `.nvmrc` et `.node-version`.
-
-Si `nvm` est installé, il suffit d'exécuter à la racine du projet :
+Using a version manager such as [`nvm`](https://github.com/nvm-sh/nvm),
+[`fnm`](https://github.com/Schniz/fnm) or [`mise`](https://mise.jdx.dev/) is recommended:
 
 ```bash
-nvm use
+nvm use          # first time: nvm install 24
 ```
 
-(la première fois : `nvm install 24`)
-
-## Installation
+## Install and run
 
 ```bash
 git clone https://github.com/JuriSOK/JuriSOK.github.io.git
 cd JuriSOK.github.io
-nvm use          # facultatif, si nvm est installé
+nvm use
 npm install
-```
-
-## Développement
-
-```bash
 npm run dev
 ```
 
-Le serveur de développement démarre sur `http://localhost:5173`.
+The dev server starts on `http://localhost:5173`.
 
-## Build
+## Commands
 
-```bash
-npm run build
-```
+| Command                 | Description                                     |
+| ----------------------- | ----------------------------------------------- |
+| `npm run dev`           | Development server                              |
+| `npm run build`         | Production build into `dist/`                   |
+| `npm run lint`          | ESLint                                          |
+| `npm run preview`       | Serves the production build locally             |
+| `npm run sync:projects` | Refreshes the selection from the GitHub topic   |
 
-Les fichiers de production sont générés dans `dist/`.
-
-## Autres commandes
-
-| Commande               | Description                                     |
-| ---------------------- | ----------------------------------------------- |
-| `npm run lint`         | Analyse le code avec ESLint                     |
-| `npm run preview`      | Sert localement le résultat de `npm run build`  |
-| `npm run sync:projects`| Régénère la sélection depuis le topic GitHub    |
-
-## Structure du projet
+## Structure
 
 ```
 .
 ├── index.html
 ├── public/
-│   └── fonts/               # Fraunces et Archivo auto-hébergées (+ licences OFL)
+│   ├── fonts/               # Self-hosted Fraunces and Archivo (+ OFL licences)
+│   └── images/              # Avatar, institution logos
 ├── scripts/
-│   └── sync-projects.mjs    # Récupère les dépôts au topic `portfolio`
+│   └── sync-projects.mjs    # Fetches repositories carrying the `portfolio` topic
 ├── src/
 │   ├── components/
-│   │   ├── layout/          # Sidebar d'identité, onglets, grain, lien d'évitement
+│   │   ├── background/      # Animated pixel-art jazz café scene
+│   │   ├── layout/          # Identity sidebar, tabs, grain, skip link
 │   │   ├── ui/              # Page, SectionHeading, Rule, ButtonLink, TechBadge, Icon
-│   │   ├── sections/        # Pages À propos, Parcours, Contact et leurs blocs
-│   │   └── projects/        # Grille, carte, pochette générée
-│   ├── content/             # Textes, données, registre de sections et de logos
-│   ├── data/                # Fichiers générés et commités (ne pas éditer)
-│   ├── types/               # content.ts et project.ts
-│   ├── hooks/               # Révélation, mouvement réduit, verrou de défilement, parallaxe
-│   ├── styles/              # Jetons, polices, styles globaux
+│   │   ├── sections/        # About, Resume and Contact pages and their blocks
+│   │   └── projects/        # Grid, card, generated artwork
+│   ├── content/             # Copy, data, page registry and logo registry
+│   ├── data/                # Generated, committed files (do not edit)
+│   ├── types/               # content.ts and project.ts
+│   ├── hooks/               # Reveal, reduced motion, media queries
+│   ├── styles/              # Tokens, fonts, global styles
 │   ├── App.tsx
 │   └── main.tsx
-├── CLAUDE.md                # Règles permanentes du projet
+├── CLAUDE.md                # Permanent project rules
 └── vite.config.ts
 ```
 
-## Accessibilité
+## Accessibility
 
-Le site est vérifié au clavier et en mouvement réduit à chaque étape : lien d'évitement en premier,
-anneau de focus visible partout, cibles d'au moins 44 px. Le changement d'onglet est annoncé aux
-lecteurs d'écran (`aria-current`, focus déplacé sur le panneau) et reste synchronisé avec l'URL —
-`#projets` est un lien profond, et le bouton retour du navigateur fonctionne. Sous
-`prefers-reduced-motion`, aucune animation ne subsiste et l'intégralité du contenu reste affichée.
+Verified with a real browser at every step: skip link first, visible focus ring throughout, targets of
+at least 44 px. Tab changes are announced to screen readers (`aria-current`, focus moved to the panel)
+and stay in sync with the URL — `#projects` is a deep link and the browser back button works. Under
+`prefers-reduced-motion`, no animation remains, the café background becomes fully static and all
+content stays visible.
 
-## Déploiement
+## Privacy
 
-Le site sera publié via GitHub Pages à l'adresse suivante :
+The site publishes only three contact channels: email, LinkedIn and GitHub. **No phone number, no
+postal address and no CV** are ever displayed — this is enforced by the `SiteLinks` type itself.
 
-**https://JuriSOK.github.io**
+## Deployment
 
-Le déploiement n'est pas encore configuré ; il sera mis en place après validation du design.
+The site will be published on GitHub Pages at **https://JuriSOK.github.io** — not configured yet.

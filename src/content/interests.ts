@@ -1,19 +1,31 @@
 import type { Interest } from '../types/content'
 
 /**
- * Centres d'intérêt, présentés en tracklist de face B.
+ * Interests.
  *
- * Les cinq intitulés sont des faits fournis : la section est donc complète et
- * se rend telle quelle, sans qu'aucun texte n'ait à être écrit.
+ * TODO — provisional notes, to be reviewed by Vibol Arnaud Sok. The word
+ * « TODO » must never reach the rendered page: this note is a code comment only.
  *
- * À REMPLIR, facultatif — `note` : trois à cinq mots par entrée. Sans note, le
- * filet de conduite s'étend simplement jusqu'au bord droit et la composition
- * reste juste. Une note ne doit affirmer ni niveau, ni performance, ni résultat.
+ * A note must never claim a level, a performance or a result.
  */
 export const interests: readonly Interest[] = [
-  { id: 'photographie', label: 'Photographie' },
-  { id: 'beatbox', label: 'Beatbox' },
-  { id: 'course', label: 'Course' },
-  { id: 'musculation', label: 'Musculation' },
-  { id: 'technologies', label: 'Nouvelles technologies' },
+  { id: 'photography', label: 'Photography', note: 'Framing moments and visual stories.' },
+  { id: 'beatbox', label: 'Beatbox', note: 'Rhythm, creativity and improvisation.' },
+  { id: 'running', label: 'Running', note: 'Consistency, endurance and progress.' },
+  {
+    id: 'strength-training',
+    label: 'Strength Training',
+    note: 'Discipline and long-term progression.',
+  },
+  {
+    id: 'new-technologies',
+    label: 'New Technologies',
+    note: 'Exploring emerging tools and ideas.',
+  },
+  {
+    id: 'series-films',
+    label: 'Series & Films',
+    note: 'Stories, direction and visual universes.',
+  },
+  { id: 'reading', label: 'Reading', note: 'Learning through ideas and perspectives.' },
 ]

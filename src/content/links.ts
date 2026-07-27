@@ -1,16 +1,13 @@
 import type { SiteLinks } from '../types/content'
 
 /**
- * Liens externes du site.
+ * Public contact details.
  *
- * `null` signifie « pas encore fourni » : le lien correspondant n'est tout
- * simplement pas rendu. Aucun lien mort, aucun bouton désactivé.
- *
- * Pour activer le CV, déposer le PDF dans `public/cv/` et renseigner le chemin.
+ * These three are the only channels to publish. No phone number, no postal
+ * address and no CV are ever exposed — see CLAUDE.md.
  */
 export const links: SiteLinks = {
+  email: 'vibolsok.pro@gmail.com',
+  linkedin: 'https://www.linkedin.com/in/vibol-arnaud-sok-02a241284/',
   github: 'https://github.com/JuriSOK',
-  linkedin: null,
-  email: null,
-  cv: null,
 }
