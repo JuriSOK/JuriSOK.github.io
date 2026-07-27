@@ -1,18 +1,20 @@
 import { education } from '../../content/education'
 import { experiences } from '../../content/experiences'
 import { getSection, isSectionVisible } from '../../content/sections'
-import { Section } from '../ui/Section'
+import { Page } from '../ui/Page'
 import { SectionHeading } from '../ui/SectionHeading'
 import { CareerEntry } from './CareerEntry'
+import { SkillsBlock } from './Skills'
 import styles from './Career.module.css'
 
 const section = getSection('parcours')
 
 /**
- * Parcours, en deux mouvements : expériences puis formation.
+ * Page « Parcours » : expériences, formation, puis compétences.
  *
  * Pas de timeline : chaque entrée est une fiche de crédits, et les entrées sont
- * décalées alternativement pour casser l'alignement rigide.
+ * décalées alternativement pour casser l'alignement rigide. Le bloc compétences
+ * clôt la page, à la place des barres de progression du format d'origine.
  */
 export function Career() {
   if (section === undefined || !isSectionVisible(section.id)) {
@@ -20,7 +22,7 @@ export function Career() {
   }
 
   return (
-    <Section id={section.id} surface={section.surface} labelledBy="parcours-titre">
+    <Page id={section.id} labelledBy="parcours-titre">
       <SectionHeading
         {...(section.number !== undefined ? { number: section.number } : {})}
         title={section.label}
@@ -53,6 +55,8 @@ export function Career() {
           </ul>
         </section>
       ) : null}
-    </Section>
+
+      <SkillsBlock />
+    </Page>
   )
 }

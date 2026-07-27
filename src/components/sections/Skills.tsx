@@ -1,34 +1,27 @@
 import { hasDomainContent, skills } from '../../content/skills'
-import { getSection, isSectionVisible } from '../../content/sections'
-import { Section } from '../ui/Section'
-import { SectionHeading } from '../ui/SectionHeading'
 import { SkillRubric } from './SkillRubric'
 import styles from './Skills.module.css'
-
-const section = getSection('competences')
 
 /**
  * Compétences, en composition de carte de café.
  *
- * Deux colonnes de rubriques séparées par des filets continus, sans cartes
- * flottantes ni ombres : c'est ce qui évite la grille de cartes identiques.
+ * Bloc embarqué dans la page « Parcours », à la place du bloc de barres de
+ * progression du format d'origine — jauges et pourcentages restent interdits.
+ * Deux colonnes de rubriques séparées par des filets continus, sans cartes.
  */
-export function Skills() {
-  if (section === undefined || !isSectionVisible(section.id)) {
-    return null
-  }
-
+export function SkillsBlock() {
   /* Une rubrique réduite à son titre n'apprendrait rien : on ne la rend pas. */
   const rubrics = skills.filter(hasDomainContent)
 
+  if (rubrics.length === 0) {
+    return null
+  }
+
   return (
-    <Section id={section.id} surface={section.surface} labelledBy="competences-titre">
-      <SectionHeading
-        {...(section.number !== undefined ? { number: section.number } : {})}
-        title={section.label}
-        {...(section.kicker !== undefined ? { kicker: section.kicker } : {})}
-        headingId="competences-titre"
-      />
+    <section className={styles.movement} aria-labelledby="parcours-competences">
+      <h3 id="parcours-competences" className={`label ${styles.movementTitle}`}>
+        Compétences
+      </h3>
 
       <div className={styles.menu}>
         <ul className={styles.grid}>
@@ -41,6 +34,6 @@ export function Skills() {
           ))}
         </ul>
       </div>
-    </Section>
+    </section>
   )
 }

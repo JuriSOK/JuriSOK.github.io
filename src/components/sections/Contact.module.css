@@ -1,4 +1,26 @@
+/**
+ * L'insert papier du thème, devenu carte dans le panneau. `data-surface`
+ * bascule tout le jeu de jetons : encre, accents bordeaux, filets sombres.
+ */
+.paper {
+  position: relative;
+  padding: clamp(1.5rem, 4vw, 3rem);
+  background-color: var(--bg);
+  color: var(--text);
+}
+
+/* Voile de fibres, comme les anciens inserts pleine page. */
+.paper::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-image: var(--grain);
+  opacity: var(--grain-paper);
+}
+
 .body {
+  position: relative;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -49,14 +71,3 @@
   color: var(--accent);
 }
 
-/**
- * Miroir du hero : là où le nom occupait la gauche, la fermeture occupe la
- * droite. La marge vide de gauche est l'écho de celle laissée à droite en haut
- * de page.
- */
-@media (width >= 1024px) {
-  .inner {
-    max-width: 42rem;
-    margin-left: auto;
-  }
-}

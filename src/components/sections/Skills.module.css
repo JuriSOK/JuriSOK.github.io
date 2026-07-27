@@ -1,3 +1,12 @@
+.movement {
+  margin-top: var(--space-16);
+}
+
+.movementTitle {
+  color: var(--text-3);
+  margin-bottom: var(--space-2);
+}
+
 .menu {
   position: relative;
 }

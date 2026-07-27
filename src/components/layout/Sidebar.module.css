@@ -1,0 +1,178 @@
+.sidebar {
+  position: relative;
+  padding: var(--space-6);
+  background-color: var(--ink-800);
+  border: 1px solid var(--hairline);
+  box-shadow: var(--glow-warm);
+}
+
+/* ---- Identité ---- */
+
+.identity {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+}
+
+/* Monogramme en attendant un portrait : même vocabulaire que les pochettes. */
+.avatar {
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  width: 4.5rem;
+  aspect-ratio: 1;
+  background-color: var(--ink-700);
+  border: 1px solid var(--hairline-strong);
+}
+
+.monogram {
+  font-family: var(--font-display);
+  font-variation-settings: var(--fraunces-display);
+  font-size: 1.5rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  color: transparent;
+  -webkit-text-stroke: 1px var(--caramel);
+}
+
+.who {
+  min-width: 0;
+}
+
+.name {
+  margin: 0;
+  font-size: 1.375rem;
+  font-variation-settings: var(--fraunces-title);
+  line-height: 1.15;
+  text-wrap: balance;
+}
+
+.role {
+  display: inline-block;
+  margin-top: var(--space-2);
+  padding: 0.2rem 0.6rem;
+  background-color: var(--surface-raised);
+  border-radius: var(--radius-chip);
+  color: var(--text-2);
+  font-size: var(--size-meta);
+}
+
+/* ---- Bouton de repli (écrans étroits) ---- */
+
+.toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  min-height: var(--tap-min);
+  margin-left: auto;
+  padding-inline: var(--space-3);
+  color: var(--accent);
+  font-size: var(--size-meta);
+  font-weight: 500;
+}
+
+.toggle:hover {
+  color: var(--accent-hover);
+}
+
+.chevron {
+  transition: transform var(--dur) var(--ease);
+}
+
+.sidebar[data-open='true'] .chevron {
+  transform: rotate(180deg);
+}
+
+/* ---- Coordonnées ---- */
+
+.details {
+  display: none;
+}
+
+.sidebar[data-open='true'] .details {
+  display: block;
+}
+
+.rule {
+  height: 1px;
+  margin-block: var(--space-5);
+  background-color: var(--hairline);
+}
+
+.contacts {
+  display: grid;
+  gap: var(--space-4);
+  margin: 0;
+}
+
+.term {
+  color: var(--text-3);
+}
+
+.value {
+  margin: var(--space-1) 0 0;
+  font-size: var(--size-ui);
+  overflow-wrap: anywhere;
+}
+
+.link {
+  display: inline-flex;
+  min-height: var(--tap-min);
+  align-items: center;
+  color: var(--text);
+  text-decoration: none;
+}
+
+.link:hover {
+  color: var(--accent-hover);
+}
+
+.edition {
+  margin-top: var(--space-6);
+  color: var(--text-3);
+}
+
+/* ---- Deux colonnes de coordonnées sur tablette ---- */
+
+@media (width >= 640px) and (width < 1250px) {
+  .contacts {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    column-gap: var(--space-8);
+  }
+}
+
+/* ---- Desktop : carte fixe, coordonnées toujours visibles ---- */
+
+@media (width >= 1250px) {
+  .sidebar {
+    position: sticky;
+    top: var(--space-6);
+  }
+
+  .identity {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--space-5);
+  }
+
+  .avatar {
+    width: 7rem;
+  }
+
+  .monogram {
+    font-size: 2.25rem;
+  }
+
+  .name {
+    font-size: 1.5rem;
+  }
+
+  .toggle {
+    display: none;
+  }
+
+  .details {
+    display: block;
+  }
+}

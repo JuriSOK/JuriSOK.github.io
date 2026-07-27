@@ -8,7 +8,6 @@ import type { Profile } from '../types/content'
  */
 export const profile: Profile = {
   fullName: 'Sok Vibol Arnaud',
-  nameLines: ['Sok', 'Vibol', 'Arnaud'],
   role: 'Chef de projet IA',
   education: 'Master MIAGE',
   company: 'Crédit Agricole Assurances',

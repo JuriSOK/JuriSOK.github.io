@@ -1,17 +1,9 @@
 .grid {
   display: grid;
-  grid-template-columns: 1fr;
+
+  /* La grille se dimensionne sur la largeur du panneau, pas sur celle de la
+     fenêtre : dans le format à sidebar, les deux n'ont plus rien à voir.
+     Chaque carte reçoit au moins 16rem ; les colonnes suivent. */
+  grid-template-columns: repeat(auto-fill, minmax(min(16rem, 100%), 1fr));
   gap: var(--grid-gap);
-}
-
-@media (width >= 640px) {
-  .grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-}
-
-@media (width >= 1024px) {
-  .grid {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-  }
 }

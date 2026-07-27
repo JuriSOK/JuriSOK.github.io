@@ -16,8 +16,6 @@
 html {
   -webkit-text-size-adjust: 100%;
   scroll-behavior: smooth;
-  /* Compense la hauteur de l'en-tête collant lors d'une navigation par ancre. */
-  scroll-padding-top: 5rem;
 }
 
 body {

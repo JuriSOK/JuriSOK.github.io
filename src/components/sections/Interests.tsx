@@ -1,12 +1,7 @@
 import type { CSSProperties } from 'react'
 import { interests } from '../../content/interests'
-import { getSection, isSectionVisible } from '../../content/sections'
 import { useReveal } from '../../hooks/useReveal'
-import { Section } from '../ui/Section'
-import { SectionHeading } from '../ui/SectionHeading'
 import styles from './Interests.module.css'
-
-const section = getSection('interets')
 
 /** Au-delà, la cascade deviendrait une attente. */
 const MAX_STAGGER = 6
@@ -14,25 +9,23 @@ const MAX_STAGGER = 6
 /**
  * Centres d'intérêt en tracklist de face B.
  *
- * Aucune icône, aucune image, aucun compteur, aucun niveau : la personnalité
- * passe par la composition typographique. Sans note, le filet de conduite
- * s'étend jusqu'au bord et la ligne reste juste.
+ * Bloc embarqué en fin de page « À propos » — il remplace les sections
+ * testimonials/clients du format d'origine. Aucune icône, aucun compteur,
+ * aucun niveau : la personnalité passe par la composition typographique.
+ * Sans note, le filet de conduite s'étend jusqu'au bord et la ligne reste juste.
  */
-export function Interests() {
+export function FaceB() {
   const ref = useReveal<HTMLUListElement>()
 
-  if (section === undefined || !isSectionVisible(section.id)) {
+  if (interests.length === 0) {
     return null
   }
 
   return (
-    <Section id={section.id} surface={section.surface} labelledBy="interets-titre">
-      <SectionHeading
-        {...(section.number !== undefined ? { number: section.number } : {})}
-        title={section.label}
-        {...(section.kicker !== undefined ? { kicker: section.kicker } : {})}
-        headingId="interets-titre"
-      />
+    <section className={styles.faceB} aria-labelledby="face-b-titre">
+      <h3 id="face-b-titre" className={`label ${styles.title}`}>
+        Face B · Centres d’intérêt
+      </h3>
 
       <ul ref={ref} className={`${styles.list} reveal`}>
         {interests.map((interest, index) => (
@@ -52,6 +45,6 @@ export function Interests() {
           </li>
         ))}
       </ul>
-    </Section>
+    </section>
   )
 }

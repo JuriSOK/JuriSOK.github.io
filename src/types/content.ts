@@ -7,16 +7,14 @@
 
 export interface Profile {
   readonly fullName: string
-  /** Découpage du nom pour l'affichage sur trois lignes du hero. */
-  readonly nameLines: readonly string[]
   readonly role: string
   readonly education: string
   readonly company: string
-  /** Deux lignes courtes, affichées sous le nom. */
+  /** Phrase d'introduction, en ouverture de la page « À propos ». */
   readonly intro: string
   /** Niveau de précision volontairement large. */
   readonly location: string
-  /** Millésime affiché dans le bandeau de crédits du hero. */
+  /** Millésime affiché dans la sidebar et le colophon. */
   readonly year: string
   readonly edition: string
   /** Domaines professionnels, repris dans la fiche de faits. */
@@ -31,23 +29,21 @@ export interface SiteLinks {
   readonly cv: string | null
 }
 
-/* ---------- Registre de sections ---------- */
+/* ---------- Registre de pages ---------- */
 
 /**
- * Une section du site. Le registre ne décrit que des sections **réellement
- * construites** : une entrée ici garantit que l'ancre existe dans le document.
- * Sa présence à l'écran dépend ensuite de `hasContent`, calculé dans `sections.ts`.
+ * Une page du panneau principal. Le registre ne décrit que des pages
+ * **réellement construites** : une entrée ici garantit que le composant
+ * existe. Sa présence en onglet dépend ensuite de `hasContent`, calculé
+ * dans `sections.ts`.
  */
 export interface SectionDefinition {
   readonly id: string
-  /** Numéro de catalogue. Absent pour l'accueil, qui fait office de couverture. */
+  /** Numéro de catalogue, affiché dans l'en-tête de page et l'onglet desktop. */
   readonly number?: string
   readonly label: string
-  /** Ligne éditoriale affichée sous le titre de section. */
+  /** Ligne éditoriale affichée sous le titre de page. */
   readonly kicker?: string
-  /** Visible dans la barre de navigation desktop. */
-  readonly inNav: boolean
-  readonly surface: 'ink' | 'paper'
 }
 
 /* ---------- À propos ---------- */

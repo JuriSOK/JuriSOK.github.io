@@ -2,10 +2,11 @@
 
 Portfolio professionnel de Sok Vibol Arnaud, chef de projet IA et étudiant en Master MIAGE.
 
-> 🚧 **Portfolio en cours de construction.** Les sept sections sont développées. Cinq sont en ligne :
-> Accueil, À propos, Parcours, Projets et Centres d'intérêt. Deux restent masquées, faute de contenu :
-> **Compétences** attend `src/content/skills.ts`, **Contact** attend une adresse e-mail, une URL
-> LinkedIn ou un CV dans `src/content/links.ts`. Elles apparaîtront d'elles-mêmes une fois remplies.
+> 🚧 **Portfolio en cours de construction.** Le site suit un format « vCard » : une sidebar
+> d'identité et un panneau à onglets. Trois onglets sont en ligne : À propos (avec les centres
+> d'intérêt en Face B), Parcours et Projets. L'onglet **Contact** reste masqué tant qu'aucune
+> coordonnée n'est renseignée dans `src/content/links.ts`, et le bloc **Compétences** de la page
+> Parcours attend `src/content/skills.ts`. Ils apparaîtront d'eux-mêmes une fois remplis.
 
 ## Contenu et sections
 
@@ -112,10 +113,10 @@ Les fichiers de production sont générés dans `dist/`.
 │   └── sync-projects.mjs    # Récupère les dépôts au topic `portfolio`
 ├── src/
 │   ├── components/
-│   │   ├── layout/          # En-tête, menu mobile, colophon, grain, lien d'évitement
-│   │   ├── ui/              # Section, SectionHeading, Rule, ButtonLink, Icon
-│   │   ├── sections/        # Hero et panneau d'édition
-│   │   └── projects/        # Grille, carte, pochette générée, pastilles techno
+│   │   ├── layout/          # Sidebar d'identité, onglets, grain, lien d'évitement
+│   │   ├── ui/              # Page, SectionHeading, Rule, ButtonLink, TechBadge, Icon
+│   │   ├── sections/        # Pages À propos, Parcours, Contact et leurs blocs
+│   │   └── projects/        # Grille, carte, pochette générée
 │   ├── content/             # Textes, données, registre de sections et de logos
 │   ├── data/                # Fichiers générés et commités (ne pas éditer)
 │   ├── types/               # content.ts et project.ts
@@ -130,9 +131,10 @@ Les fichiers de production sont générés dans `dist/`.
 ## Accessibilité
 
 Le site est vérifié au clavier et en mouvement réduit à chaque étape : lien d'évitement en premier,
-anneau de focus visible partout, cibles d'au moins 44 px, menu mobile en `<dialog>` modal natif
-(piège de focus et `Échap` assurés par le navigateur). Sous `prefers-reduced-motion`, aucune
-animation ne subsiste et l'intégralité du contenu reste affichée.
+anneau de focus visible partout, cibles d'au moins 44 px. Le changement d'onglet est annoncé aux
+lecteurs d'écran (`aria-current`, focus déplacé sur le panneau) et reste synchronisé avec l'URL —
+`#projets` est un lien profond, et le bouton retour du navigateur fonctionne. Sous
+`prefers-reduced-motion`, aucune animation ne subsiste et l'intégralité du contenu reste affichée.
 
 ## Déploiement
 

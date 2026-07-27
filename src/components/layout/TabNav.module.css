@@ -1,0 +1,101 @@
+.list {
+  display: flex;
+}
+
+.tab {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.45rem;
+  min-height: var(--tap-min);
+  width: 100%;
+  padding-inline: var(--space-3);
+  color: var(--text-2);
+  font-size: var(--size-meta);
+  font-weight: 500;
+  white-space: nowrap;
+  transition: color var(--dur-fast) var(--ease);
+}
+
+.tab:hover {
+  color: var(--text);
+}
+
+.number {
+  color: var(--accent);
+}
+
+/* Souligné cuivre de l'onglet courant, hérité de l'ancienne barre. */
+.tab::after {
+  content: '';
+  position: absolute;
+  inset-inline: var(--space-3);
+  bottom: 0.35rem;
+  height: 2px;
+  background-color: var(--accent);
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform var(--dur) var(--ease);
+}
+
+.tab[data-active='true'] {
+  color: var(--text);
+}
+
+.tab[data-active='true']::after {
+  transform: scaleX(1);
+}
+
+/* ---- Écrans étroits : barre fixe en bas, sous le pouce ---- */
+
+@media (width < 1250px) {
+  .nav {
+    position: fixed;
+    inset-inline: 0;
+    bottom: 0;
+    z-index: 30;
+    background-color: rgb(30 22 18 / 94%);
+    backdrop-filter: blur(8px);
+    border-top: 1px solid var(--hairline);
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+
+  .list {
+    justify-content: space-around;
+    max-width: 32rem;
+    margin-inline: auto;
+  }
+
+  .item {
+    flex: 1;
+  }
+
+  .tab {
+    min-height: 3.5rem;
+  }
+
+  /* Le numéro de catalogue serait du bruit dans une barre étroite. */
+  .number {
+    display: none;
+  }
+}
+
+/* ---- Desktop : coin supérieur droit du panneau ---- */
+
+@media (width >= 1250px) {
+  .nav {
+    position: absolute;
+    top: 0;
+    right: 0;
+    z-index: 5;
+    background-color: rgb(42 32 27 / 92%);
+    border-left: 1px solid var(--hairline);
+    border-bottom: 1px solid var(--hairline);
+  }
+
+  .tab {
+    min-height: 3.25rem;
+    padding-inline: var(--space-5);
+  }
+}

@@ -62,19 +62,26 @@ Règles permanentes du projet. À lire avant toute modification.
   - `src/hooks/` : logique réutilisable ;
   - `src/styles/` : jetons et styles globaux. Le style d'un composant vit dans son `.module.css`.
 
-## Sections et navigation
+## Format et navigation
 
-- **Une section sans contenu réel ne se rend pas, et disparaît de la navigation.** Jamais un titre
-  suivi de vide, jamais une ancre morte. C'est la règle qui permet de publier le site avant que tous
-  les textes soient écrits.
-- `src/content/navigation.ts` est le **registre des sections construites** : une entrée garantit que
-  l'ancre existe. On y ajoute une section seulement quand son composant est écrit.
-- `src/content/sections.ts` croise ce registre avec le contenu réel et expose `visibleSections`,
-  `navSections`, `isSectionVisible()` et `getSection()`. **La page et la barre de navigation lisent
-  ce même verdict** : elles ne peuvent pas diverger.
-- Un composant de section lit son numéro, son titre et sa ligne éditoriale via `getSection()` plutôt
+- Le site suit un **format vCard** (référence : codewithsadee/vcard-personal-portfolio) : une
+  **sidebar d'identité** — monogramme, nom, rôle, coordonnées repliables — et un **panneau principal
+  dont le contenu bascule par onglets**. Pas de hero, pas de défilement de sections.
+- Quatre pages : À propos (avec la Face B des centres d'intérêt), Parcours (avec le bloc
+  compétences), Projets, Contact. **Centres d'intérêt et compétences n'ont pas d'onglet propre.**
+- **Un onglet sans contenu réel n'existe pas.** Jamais un titre suivi de vide, jamais un onglet
+  creux. C'est la règle qui permet de publier le site avant que tous les textes soient écrits.
+- `src/content/navigation.ts` est le **registre des pages construites** ; `src/content/sections.ts`
+  le croise avec le contenu réel et expose `visibleSections`, `isSectionVisible()` et `getSection()`.
+  **Le panneau et les onglets lisent ce même verdict** : ils ne peuvent pas diverger.
+- Un composant de page lit son numéro, son titre et sa ligne éditoriale via `getSection()` plutôt
   que de les écrire en dur.
-- La barre desktop bascule en menu mobile sous **1080 px**.
+- La bascule d'onglet met à jour le hash (`#projets` reste un lien profond partageable), gère le
+  bouton retour via `popstate`, et déplace le focus sur le panneau.
+- Sous **1250 px**, la sidebar passe au-dessus du panneau (coordonnées repliées derrière le bouton
+  « Contacts ») et les onglets deviennent une **barre fixe en bas**, sous le pouce.
+- Interdits hérités du modèle mais refusés ici : jauges et pourcentages de compétences, formulaire
+  de contact, carte géographique, filtres de projets.
 - Privilégier des composants **accessibles et réutilisables**.
 - Maintenir une **excellente expérience mobile** (approche mobile-first).
 - Respecter la **navigation clavier** (focus visible, ordre de tabulation cohérent, pas de piège au

@@ -1,0 +1,52 @@
+.layout {
+  display: grid;
+  align-items: start;
+  gap: var(--space-6);
+  padding-top: var(--space-6);
+
+  /* La barre d'onglets fixe du bas ne doit jamais recouvrir le contenu. */
+  padding-bottom: calc(5rem + env(safe-area-inset-bottom));
+}
+
+.mainColumn {
+  position: relative;
+  min-width: 0;
+}
+
+.panel {
+  display: block;
+  padding: clamp(1.5rem, 4vw, 3rem);
+  background-color: var(--ink-800);
+  border: 1px solid var(--hairline);
+}
+
+/* Le focus programmatique du panneau ne doit pas dessiner d'anneau : il sert
+   aux lecteurs d'écran et au défilement, pas à la navigation par Tab. */
+.panel:focus {
+  outline: none;
+}
+
+.colophon {
+  margin-top: var(--space-4);
+  color: var(--text-3);
+  font-size: var(--size-meta);
+  text-align: center;
+}
+
+/* ---- Desktop : sidebar à gauche, panneau à droite ---- */
+
+@media (width >= 1250px) {
+  .layout {
+    grid-template-columns: 21.25rem minmax(0, 1fr);
+    padding-block: var(--space-12);
+  }
+
+  /* Dégage le coin supérieur droit, occupé par les onglets. */
+  .panel {
+    padding-top: 4.5rem;
+  }
+
+  .colophon {
+    text-align: right;
+  }
+}

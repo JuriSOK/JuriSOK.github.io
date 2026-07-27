@@ -3,20 +3,19 @@ import { links } from '../../content/links'
 import { getSection, isSectionVisible } from '../../content/sections'
 import { useReveal } from '../../hooks/useReveal'
 import { Icon } from '../ui/Icon'
-import { Section } from '../ui/Section'
+import { Page } from '../ui/Page'
 import { SectionHeading } from '../ui/SectionHeading'
 import styles from './Contact.module.css'
 
 const section = getSection('contact')
 
 /**
- * Insert de fermeture.
+ * Page « Contact ».
  *
- * Composition asymétrique inversée par rapport au hero — contenu à droite,
- * marge à gauche — pour refermer la boucle visuelle du site.
- *
- * Pas de formulaire : il imposerait un service tiers, donc une dépendance et un
- * risque de secret dans le frontend. Lien `mailto:` direct.
+ * L'insert papier crème — la respiration claire du thème — devient ici une
+ * carte à l'intérieur du panneau. Pas de formulaire ni de carte géographique,
+ * contrairement au format d'origine : un formulaire imposerait un service
+ * tiers, donc une dépendance et un risque de secret. Lien `mailto:` direct.
  */
 export function Contact() {
   const ref = useReveal<HTMLDivElement>()
@@ -26,15 +25,15 @@ export function Contact() {
   }
 
   return (
-    <Section id={section.id} surface={section.surface} labelledBy="contact-titre">
-      <div className={styles.inner}>
-        <SectionHeading
-          {...(section.number !== undefined ? { number: section.number } : {})}
-          title={section.label}
-          {...(section.kicker !== undefined ? { kicker: section.kicker } : {})}
-          headingId="contact-titre"
-        />
+    <Page id={section.id} labelledBy="contact-titre">
+      <SectionHeading
+        {...(section.number !== undefined ? { number: section.number } : {})}
+        title={section.label}
+        {...(section.kicker !== undefined ? { kicker: section.kicker } : {})}
+        headingId="contact-titre"
+      />
 
+      <div className={styles.paper} data-surface="paper">
         <div ref={ref} className={`${styles.body} reveal`}>
           {contact.invitation !== undefined ? (
             <p className={styles.invitation}>{contact.invitation}</p>
@@ -92,6 +91,6 @@ export function Contact() {
           </ul>
         </div>
       </div>
-    </Section>
+    </Page>
   )
 }
