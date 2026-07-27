@@ -135,4 +135,21 @@ postal address and no CV** are ever displayed — this is enforced by the `SiteL
 
 ## Deployment
 
-The site will be published on GitHub Pages at **https://JuriSOK.github.io** — not configured yet.
+The site is live at **https://jurisok.github.io**.
+
+Every push to `main` triggers [`.github/workflows/deploy.yml`](.github/workflows/deploy.yml), which
+installs with `npm ci`, runs `npm run lint`, builds, and publishes `dist/` to GitHub Pages. Lint and
+build gate the deployment, so a broken commit never reaches the live site. Node comes from `.nvmrc`,
+so CI cannot drift from local development.
+
+Two settings this depends on, both already in place:
+
+- **Pages source is _GitHub Actions_**, not a branch. Set to a branch, Pages serves the repository
+  root — the source `index.html`, whose `/src/main.tsx` entry the browser refuses. The result is a
+  blank page.
+- **No `base` in `vite.config.ts`.** The repository is named `JuriSOK.github.io`, so the site is
+  served from the domain root and Vite's default `base: '/'` is correct. A project repository would
+  need `base: '/<repo>/'`.
+
+`npm run sync:projects` is deliberately not run in CI: it calls the GitHub API and rewrites a
+committed file. Refresh the selection locally, then push.

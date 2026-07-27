@@ -155,6 +155,19 @@ Règles permanentes du projet. À lire avant toute modification.
 - Utiliser des messages de commit explicites (convention `type: description`, par exemple
   `feat: add project section`).
 
+## Déploiement
+
+- Le site est en ligne sur **https://jurisok.github.io**, publié par
+  `.github/workflows/deploy.yml` à chaque push sur `main`.
+- La source de GitHub Pages doit rester **« GitHub Actions »**. Repassée sur une branche, Pages sert
+  la racine du dépôt : le navigateur reçoit l'`index.html` source, refuse son entrée
+  `/src/main.tsx`, et la page est blanche.
+- **Ne pas ajouter de `base` dans `vite.config.ts`.** Le dépôt s'appelle `JuriSOK.github.io`, le site
+  est donc servi à la racine du domaine et le `base: '/'` par défaut est correct.
+- Le workflow lance `lint` puis `build` avant de publier : un commit cassé ne part jamais en ligne.
+- `npm run sync:projects` ne doit **pas** tourner en CI — il appelle l'API GitHub et réécrit un
+  fichier versionné. Rafraîchir la sélection en local, puis pousser.
+
 ## Documentation
 
 - Mettre à jour le `README.md` lorsque l'architecture change.
