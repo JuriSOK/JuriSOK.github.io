@@ -1,0 +1,64 @@
+name: Deploy to GitHub Pages
+
+# The repository is `JuriSOK.github.io`, so the site is served from the domain
+# root and Vite's default `base: '/'` is correct — no base override needed.
+#
+# `npm run sync:projects` is deliberately NOT run here: it calls the GitHub API
+# and rewrites a committed file. The generated JSON is committed, so every
+# build is reproducible and offline. Refresh it locally, then push.
+
+on:
+  push:
+    branches: [main]
+  # Lets a deployment be re-run from the Actions tab without a new commit.
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Never let two deployments race; let a newer commit supersede a queued one,
+# but never cancel a deployment already in flight.
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          # Reads .nvmrc, so CI can never drift from local development.
+          node-version-file: .nvmrc
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      # Lint and build gate the deployment: a broken commit never reaches the
+      # live site.
+      - name: Lint
+        run: npm run lint
+
+      - name: Build
+        run: npm run build
+
+      - uses: actions/configure-pages@v5
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: dist
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4
