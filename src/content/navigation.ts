@@ -25,6 +25,21 @@ export const sectionRegistry: readonly SectionDefinition[] = [
     surface: 'paper',
   },
   {
+    id: 'parcours',
+    number: '02',
+    label: 'Parcours',
+    kicker: 'Expériences et formation.',
+    inNav: true,
+    surface: 'ink',
+  },
+  {
+    id: 'competences',
+    number: '03',
+    label: 'Compétences',
+    inNav: true,
+    surface: 'paper',
+  },
+  {
     id: 'projets',
     number: '04',
     label: 'Projets',

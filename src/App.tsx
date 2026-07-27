@@ -5,8 +5,10 @@ import { SiteHeader } from './components/layout/SiteHeader'
 import { SkipLink } from './components/layout/SkipLink'
 import { Projects } from './components/projects/Projects'
 import { About } from './components/sections/About'
+import { Career } from './components/sections/Career'
 import { Hero } from './components/sections/Hero'
 import { Interests } from './components/sections/Interests'
+import { Skills } from './components/sections/Skills'
 import { useReducedMotion } from './hooks/useReducedMotion'
 
 export default function App() {
@@ -42,6 +44,8 @@ export default function App() {
       <main id="contenu">
         <Hero />
         <About />
+        <Career />
+        <Skills />
         <Projects />
         <Interests />
       </main>

@@ -1,0 +1,35 @@
+.menu {
+  position: relative;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr;
+
+  /* Le filet de fermeture est porté par la grille, pas par la dernière
+     rubrique : il reste ainsi juste quel que soit le nombre de rubriques,
+     pair ou impair, sur une colonne comme sur deux. */
+  border-bottom: 1px solid var(--hairline);
+}
+
+@media (width >= 900px) {
+  .grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    column-gap: var(--space-16);
+  }
+
+  /**
+   * Filet vertical central, comme la pliure d'une carte.
+   * Une bordure portée par les rubriques serait fausse dès que leur nombre est
+   * impair ; un trait unique posé sur le conteneur est toujours juste.
+   */
+  .menu::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 50%;
+    width: 1px;
+    background-color: var(--hairline);
+  }
+}

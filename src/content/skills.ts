@@ -20,6 +20,21 @@ import type { SkillDomain } from '../types/content'
  *
  * Ni pourcentage, ni jauge, ni niveau, ni étoile : ce type ne les permet pas.
  */
+/**
+ * `true` si un domaine a autre chose que son titre à montrer.
+ *
+ * Unique définition du « domaine renseigné » : `sections.ts` s'en sert pour
+ * décider si la section existe, et `Skills.tsx` pour choisir les rubriques à
+ * rendre. Les deux ne peuvent donc pas diverger.
+ */
+export function hasDomainContent(domain: SkillDomain): boolean {
+  return (
+    domain.usage !== undefined ||
+    (domain.tools?.length ?? 0) > 0 ||
+    (domain.contexts?.length ?? 0) > 0
+  )
+}
+
 export const skills: readonly SkillDomain[] = [
   { id: 'ia-donnees', title: 'Intelligence artificielle et données' },
   { id: 'agents-automatisation', title: 'Agents IA et automatisation' },

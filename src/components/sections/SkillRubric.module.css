@@ -1,0 +1,42 @@
+.rubric {
+  padding-block: var(--space-6);
+  border-top: 1px solid var(--hairline);
+}
+
+.number {
+  color: var(--accent);
+}
+
+.title {
+  margin-top: var(--space-1);
+  font-size: clamp(1.25rem, 2.2vw, 1.5rem);
+}
+
+.usage {
+  max-width: 46ch;
+  margin-top: var(--space-2);
+  color: var(--text-2);
+  font-size: var(--size-ui);
+  line-height: 1.6;
+}
+
+.block {
+  margin-top: var(--space-4);
+}
+
+.blockTitle {
+  color: var(--text-3);
+}
+
+.tools {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  margin-top: var(--space-2);
+}
+
+.contexts {
+  margin-top: var(--space-1);
+  color: var(--text-2);
+  font-size: var(--size-ui);
+}

@@ -1,0 +1,15 @@
+.movement + .movement {
+  margin-top: var(--space-16);
+}
+
+.movementTitle {
+  color: var(--text-3);
+}
+
+.entries {
+  margin-top: var(--space-2);
+}
+
+.entries > li:last-child {
+  border-bottom: 1px solid var(--hairline);
+}

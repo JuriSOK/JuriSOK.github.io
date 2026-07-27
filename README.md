@@ -2,8 +2,9 @@
 
 Portfolio professionnel de Sok Vibol Arnaud, chef de projet IA et étudiant en Master MIAGE.
 
-> 🚧 **Portfolio en cours de construction.** Sections en ligne : Accueil, À propos, Projets et
-> Centres d'intérêt. Restent à construire : Parcours, Compétences et Contact.
+> 🚧 **Portfolio en cours de construction.** Sections en ligne : Accueil, À propos, Parcours,
+> Projets et Centres d'intérêt. La section Compétences est développée mais reste masquée tant que
+> `src/content/skills.ts` n'est pas rempli. Reste à construire : Contact.
 
 ## Contenu et sections
 

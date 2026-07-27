@@ -24,7 +24,10 @@
 }
 
 /* `[data-project-card]` est un attribut, donc non transformé par les CSS Modules :
-   c'est ce qui permet à la carte parente de piloter l'état de ses pastilles. */
+   c'est ce qui permet à la carte parente de piloter l'état de ses pastilles.
+   La pastille réagit aussi à son propre survol, pour les contextes sans carte
+   parente comme la section Compétences. */
+.badge:hover .logo,
 [data-project-card]:hover .logo,
 [data-project-card]:has(a:focus-visible) .logo,
 [data-project-card]:active .logo {

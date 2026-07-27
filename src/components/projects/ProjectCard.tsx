@@ -3,7 +3,7 @@ import type { ProjectCardData } from '../../types/project'
 import { useReveal } from '../../hooks/useReveal'
 import { ButtonLink } from '../ui/ButtonLink'
 import { ProjectSleeve } from './ProjectSleeve'
-import { TechBadge } from './TechBadge'
+import { TechBadge } from '../ui/TechBadge'
 import styles from './ProjectCard.module.css'
 
 /** Au-delà, la cascade de révélation deviendrait une attente. */

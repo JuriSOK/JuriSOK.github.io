@@ -1,6 +1,9 @@
 import { about, facts } from './about'
+import { education } from './education'
+import { experiences } from './experiences'
 import { interests } from './interests'
 import { projects } from './projects'
+import { hasDomainContent, skills } from './skills'
 import { sectionRegistry } from './navigation'
 import type { SectionDefinition } from '../types/content'
 
@@ -21,6 +24,11 @@ const hasContent: Record<string, boolean> = {
 
   /* La fiche de faits suffit à faire exister la section, même sans prose. */
   'a-propos': about.paragraphs.length > 0 || facts.length > 0,
+
+  parcours: experiences.length > 0 || education.length > 0,
+
+  /* Six titres sans corps ne seraient pas une section de compétences. */
+  competences: skills.some(hasDomainContent),
 
   projets: projects.length > 0,
 
