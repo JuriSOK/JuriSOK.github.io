@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState, type ComponentType } from 'react'
-import { JazzCafeBackground } from './components/background/JazzCafeBackground'
+import { AppBackground } from './components/background/AppBackground'
 import { GrainOverlay } from './components/layout/GrainOverlay'
 import { Sidebar } from './components/layout/Sidebar'
 import { SkipLink } from './components/layout/SkipLink'
@@ -79,7 +79,7 @@ export default function App() {
   return (
     <>
       <SkipLink />
-      <JazzCafeBackground />
+      <AppBackground />
       <GrainOverlay />
 
       <div className={`shell ${styles.layout}`}>

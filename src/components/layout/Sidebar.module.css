@@ -15,9 +15,13 @@
 }
 
 /**
- * Editorial panel rather than a round profile picture: square frame, warm
+ * Editorial panel rather than a round profile picture: rectangular frame, warm
  * inner glow, hairline border. The avatar keeps its transparency and its
  * proportions — `object-fit: contain` never crops or stretches it.
+ *
+ * The frame follows the source ratio (150 × 178) so the illustration fills it
+ * without letterboxing and stays close to its native size, which keeps a small
+ * PNG crisp.
  */
 .avatar {
   position: relative;
@@ -25,11 +29,11 @@
   flex-shrink: 0;
   align-items: center;
   justify-content: center;
-  width: 5rem;
-  aspect-ratio: 1;
+  width: 5.25rem;
+  aspect-ratio: 150 / 178;
   padding: 0.35rem;
   background:
-    radial-gradient(circle at 50% 42%, rgb(198 138 90 / 22%), transparent 68%),
+    radial-gradient(circle at 50% 40%, rgb(198 138 90 / 24%), transparent 70%),
     var(--ink-700);
   border: 1px solid var(--hairline-strong);
 }
@@ -201,8 +205,10 @@
     gap: var(--space-5);
   }
 
+  /* Close to the source's 150 px width: large enough to read clearly, without
+     upscaling a small PNG into softness. */
   .avatar {
-    width: 9.5rem;
+    width: 10rem;
     padding: 0.6rem;
   }
 

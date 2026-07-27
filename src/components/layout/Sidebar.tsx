@@ -2,10 +2,8 @@ import { useState } from 'react'
 import { links } from '../../content/links'
 import { profile } from '../../content/profile'
 import { Icon } from '../ui/Icon'
+import avatarUrl from '../../arnaud-avatar.png'
 import styles from './Sidebar.module.css'
-
-/** Avatar file. Falls back to the monogram when it cannot be loaded. */
-const AVATAR = '/images/arnaud-avatar.png'
 
 interface Channel {
   readonly label: string
@@ -36,19 +34,22 @@ export function Sidebar() {
   return (
     <aside className={styles.sidebar} data-open={open}>
       <div className={styles.identity}>
+        {/* The image is imported rather than referenced by URL: Vite resolves
+            and fingerprints it at build time, so a missing file breaks the
+            build instead of silently 404-ing in production. The monogram then
+            only covers a genuine load failure, never a bad path. */}
         <div className={styles.avatar}>
           {avatarFailed ? (
-            /* Typographic fallback, so the card is never broken. */
             <span className={styles.monogram} aria-hidden="true">
               VAS
             </span>
           ) : (
             <img
               className={styles.avatarImage}
-              src={AVATAR}
-              alt={`${profile.fullName}, ${profile.role}`}
-              width={512}
-              height={512}
+              src={avatarUrl}
+              alt={`Illustrated avatar of ${profile.fullName}, wearing glasses and looking over a laptop`}
+              width={150}
+              height={178}
               decoding="async"
               onError={() => setAvatarFailed(true)}
             />

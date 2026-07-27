@@ -1,0 +1,41 @@
+/**
+ * Fixed background layer.
+ *
+ * `z-index: -2` puts it behind the grain overlay and the vCard. `position:
+ * fixed` keeps it out of the flow, so it can never create horizontal overflow
+ * nor scroll with the content.
+ */
+.background {
+  position: fixed;
+  inset: 0;
+  z-index: -2;
+  pointer-events: none;
+
+  background-color: var(--ink-950);
+  background-image: url('/jazz-cafe-background.gif');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+/**
+ * The source is 1280 × 560 — very wide. On a tall, narrow viewport `cover`
+ * scales it until the height fits, which leaves only a thin vertical slice
+ * visible. Anchoring slightly above centre keeps the lit part of the scene in
+ * frame rather than a stretch of floor.
+ */
+@media (width < 900px) {
+  .background {
+    background-position: center 42%;
+  }
+}
+
+/**
+ * Reduced motion: a still frame of the same scene, since an animated GIF
+ * cannot be paused from CSS.
+ */
+@media (prefers-reduced-motion: reduce) {
+  .background {
+    background-image: url('/jazz-cafe-background-still.png');
+  }
+}

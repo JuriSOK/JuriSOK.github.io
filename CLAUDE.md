@@ -19,15 +19,22 @@ Règles permanentes du projet. À lire avant toute modification.
 - **Accent selon la surface** : cuivre sur fond espresso (6,0:1), bordeaux sur insert papier (7,3:1).
   Jamais l'inverse — le cuivre tombe à 3,6:1 sur le crème. Le composant `Section` applique
   automatiquement le bon jeu de jetons via `data-surface`, ne pas le contourner.
-- **Fond pixel-art** : SVG original dessiné dans le projet, jamais d'illustration tierce, de GIF, de
-  vidéo ni de canvas. Animations CSS en `transform`/`opacity` uniquement, toutes coupées sous
-  `prefers-reduced-motion`, et un voile espresso garantit la lisibilité du panneau.
+- **Fond pixel-art** : `public/jazz-cafe-background.gif`, posé en `background-image` sur un calque
+  fixe (`AppBackground`), `cover`, centré, `pointer-events: none`, `z-index: -2`. Aucun voile : les
+  panneaux de la vCard sont opaques, la lisibilité ne dépend donc pas du fond.
+- Un GIF ne peut pas être mis en pause en CSS. Sous `prefers-reduced-motion`, le calque bascule sur
+  `jazz-cafe-background-still.png`, une image fixe de la même scène. Si le GIF est remplacé,
+  **régénérer aussi cette image** : `sips -s format png <gif> --out <png>`.
 - **`--caramel` n'est jamais une couleur de texte** (4,0:1, sous le seuil AA) : filets, cadres et
   aplats uniquement.
 - **Les polices embarquent le seul sous-ensemble `latin`.** Il couvre tout le français, mais pas les
   symboles comme `↗` ou `◇` : ceux-ci se dessinent en SVG (`Icon.tsx`), jamais en caractères.
 - **Logos de technologies** : monochrome au repos, teinte de marque seulement au survol et toujours
-  mélangée au latte. Le nom est toujours affiché à côté du logo, qui reste `aria-hidden`.
+  mélangée vers `--brand-mix`. Le nom est toujours affiché à côté du logo, qui reste `aria-hidden`.
+- **Avatar** : `src/arnaud-avatar.png`, importé par Vite plutôt que référencé par URL — un fichier
+  manquant casse alors le build au lieu de produire un 404 silencieux. `object-fit: contain`, cadre
+  au ratio de la source, jamais de recadrage circulaire. Le monogramme « VAS » ne couvre qu'un vrai
+  échec de chargement.
 
 ## Contenu
 
