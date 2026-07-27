@@ -40,7 +40,7 @@ export const skills: readonly SkillDomain[] = [
       'Docker',
       'Bash',
     ],
-    contexts: ['University projects', 'GitHub projects', 'Full-stack development'],
+    contexts: ['Academic projects', 'GitHub projects', 'Full-stack development'],
   },
   {
     id: 'databases',
