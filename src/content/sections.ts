@@ -1,5 +1,5 @@
 import { about } from './about'
-import { hackathonConcepts } from './hackathons'
+import { hackathons } from './hackathons'
 import { education } from './education'
 import { experiences } from './experiences'
 import { interests } from './interests'
@@ -21,11 +21,9 @@ const hasContent: Record<string, boolean> = {
   /* Skills live on this page, so they count towards it. */
   resume: experiences.length > 0 || education.length > 0 || skills.some(hasDomainContent),
 
-  projects: projects.length > 0,
-
-  /* Concepts only — the page says so itself. It disappears the day the file
-     is emptied while waiting for real entries. */
-  hackathons: hackathonConcepts.length > 0,
+  /* Hackathons no longer have a tab of their own: they render as a second
+     group on this same page, so either one alone keeps the tab alive. */
+  projects: projects.length > 0 || hackathons.length > 0,
 
   contact: true,
 }

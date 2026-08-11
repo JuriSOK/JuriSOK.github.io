@@ -1,44 +1,35 @@
-import type { HackathonConcept } from '../types/content'
+import type { Hackathon } from '../types/content'
 
 /**
- * Hackathon concepts.
+ * Hackathon projects, shown inside the Projects page.
  *
- * No hackathon has been attended yet, and this page never pretends otherwise:
- * every card carries the literal status « Concept », and the type has no field
- * for a date, an organiser, a location, a team, a ranking or a result.
- *
- * TODO — these three concepts are provisional and will be replaced with real
- * entries after the first actual hackathon. The word « TODO » must never reach
- * the rendered page: this note is a code comment only.
+ * Real entries only, built from the two repositories' own README files —
+ * DraftLens (github.com/JuriSOK/DraftLens) and KinCall
+ * (github.com/JuriSOK/kincall). No date, organiser, team or ranking: neither
+ * repository publishes one, so none is invented here.
  */
-export const hackathonIntro = 'Concepts I would like to explore during future hackathons.'
+export const hackathonsIntro =
+  'Projects built under time constraints, around a challenge, an idea and a team.'
 
-export const hackathonConcepts: readonly HackathonConcept[] = [
+export const hackathons: readonly Hackathon[] = [
   {
-    id: 'smart-incident-copilot',
-    title: 'Smart Incident Copilot',
+    id: 'draftlens',
+    title: 'DraftLens',
+    event: 'AQX Sports Analytics Data Bowl 3.0',
     summary:
-      'An AI assistant concept designed to help teams analyse incident information, identify useful context and support faster ITSM decision-making.',
-    technologies: ['Python', 'AI Agents', 'ServiceNow', 'RAG'],
-    status: 'Concept',
-    pixelArt: 'incident-copilot',
+      'An explainable NBA Draft analytics platform that ranks NCAA prospects, evaluates team fit and finds statistical NBA comparables to support smarter pre-draft decisions.',
+    technologies: ['Python', 'scikit-learn', 'React', 'TypeScript', 'pandas'],
+    link: { label: 'View on GitHub', url: 'https://github.com/JuriSOK/DraftLens' },
+    pixelArt: 'draftlens',
   },
   {
-    id: 'ai-workflow-studio',
-    title: 'AI Workflow Studio',
+    id: 'kincall',
+    title: 'KinCall',
+    event: 'CALL-E: Your Code Is Calling',
     summary:
-      'A concept for building and coordinating AI-powered workflows through reusable agents, tools and clearly structured automation steps.',
-    technologies: ['TypeScript', 'Python', 'AI Agents', 'Docker'],
-    status: 'Concept',
-    pixelArt: 'workflow-studio',
-  },
-  {
-    id: 'accessible-digital-toolkit',
-    title: 'Accessible Digital Toolkit',
-    summary:
-      'A concept for a digital toolbox that helps users identify accessibility issues and improve the usability of online experiences.',
-    technologies: ['React', 'TypeScript', 'AI', 'Figma'],
-    status: 'Concept',
-    pixelArt: 'accessible-toolkit',
+      'An AI-powered phone check-in and family coordination system where specialised voice agents understand conversations and a controlled orchestration engine coordinates trusted support.',
+    technologies: ['Next.js', 'React', 'TypeScript', 'CALL-E', 'Supabase / PostgreSQL'],
+    link: { label: 'View on GitHub', url: 'https://github.com/JuriSOK/kincall' },
+    pixelArt: 'kincall',
   },
 ]

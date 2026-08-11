@@ -22,5 +22,5 @@ export type PixelIconName =
 /** Full sleeve scenes for the two current projects. */
 export type ProjectArtName = 'personal-finance-tracker' | 'minisgbdr'
 
-/** Scenes of the hackathon concept cards. */
-export type HackathonArtName = 'incident-copilot' | 'workflow-studio' | 'accessible-toolkit'
+/** Scenes of the hackathon cards. */
+export type HackathonArtName = 'draftlens' | 'kincall'

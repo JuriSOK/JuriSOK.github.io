@@ -8,7 +8,6 @@ import { Projects } from './components/projects/Projects'
 import { About } from './components/sections/About'
 import { Career } from './components/sections/Career'
 import { Contact } from './components/sections/Contact'
-import { Hackathons } from './components/sections/Hackathons'
 import { profile } from './content/profile'
 import { visibleSections } from './content/sections'
 import { useReducedMotion } from './hooks/useReducedMotion'
@@ -20,12 +19,24 @@ const pages: Record<string, ComponentType<PageProps>> = {
   about: About,
   resume: Career,
   projects: Projects,
-  hackathons: Hackathons,
   contact: Contact,
+}
+
+/**
+ * The Hackathons tab was folded into Projects. A bookmark or an old shared
+ * link pointing at `#hackathons` is rewritten to `#projects` in place —
+ * `replaceState`, not `pushState`, so it does not add a spurious back-button
+ * stop.
+ */
+function normalizeLegacyHash(): void {
+  if (window.location.hash === '#hackathons') {
+    history.replaceState(null, '', '#projects')
+  }
 }
 
 /** Tab named by the URL, or the first tab in the registry. */
 function tabFromHash(): string {
+  normalizeLegacyHash()
   const id = window.location.hash.slice(1)
   const known = visibleSections.some((section) => section.id === id)
   return known ? id : (visibleSections[0]?.id ?? '')

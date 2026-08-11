@@ -6,6 +6,7 @@
  */
 
 import type { HackathonArtName, PixelIconName } from './pixel-art'
+import type { ProjectLink } from './project'
 
 export interface Profile {
   readonly fullName: string
@@ -154,17 +155,16 @@ export interface ContactContent {
 /* ---------- Hackathons ---------- */
 
 /**
- * A hackathon **concept** — not a participation.
- *
- * No hackathon has been attended yet, and this type is built so nothing can
- * pretend otherwise: the status is the literal `'Concept'`, and there is no
- * field for a date, an organiser, a team, a ranking or a result.
+ * A real hackathon project, shown inside the Projects page rather than on a
+ * page of its own. No date, team or ranking: only what was asked for.
  */
-export interface HackathonConcept {
+export interface Hackathon {
   readonly id: string
   readonly title: string
+  /** Name of the event the project was built for. */
+  readonly event: string
   readonly summary: string
   readonly technologies: readonly string[]
-  readonly status: 'Concept'
+  readonly link: ProjectLink
   readonly pixelArt: HackathonArtName
 }

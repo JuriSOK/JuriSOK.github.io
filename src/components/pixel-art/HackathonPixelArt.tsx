@@ -2,70 +2,54 @@ import type { HackathonArtName } from '../../types/pixel-art'
 import { PixelGrid } from './PixelGrid'
 
 /**
- * Scenes of the hackathon concept cards — 20 × 14 cells, warm café palette,
- * original work. Decorative: each card names its concept in text.
+ * Scenes of the hackathon cards — 20 × 14 cells, warm café palette, original
+ * work. Decorative: each card names its project in text. Coordinates were
+ * placed with a small generator script and validated for a uniform 20 × 14
+ * grid before being copied here.
  */
 
-/* A support desk: monitoring screen with an alert on the curve, and a small
-   helpful assistant standing by. */
-const incidentCopilot: readonly string[] = [
+/* A draft board: a monitor showing ranked stat bars, on its stand, beside a
+   basketball silhouette with seams. No team mark, no player likeness. */
+const draftlens: readonly string[] = [
   'bbbbbbbbbbbbbbbbbbbb',
   'bbbbbbbbbbbbbbbbbbbb',
-  'bbbkkkkkkkkbbbbbbbbb',
-  'bbbkKKKKKKkbbbbGbbbb',
-  'bbbkKKKBKKkbbMMMMMbb',
-  'bbbkKKLLKKkbbMgMgMbb',
-  'bbbkLLKKKKkbbMMMMMbb',
-  'bbbkKKKKKGkbbbCCCbbb',
-  'bbbkkkkkkkkbbbCCCbbb',
-  'bbbbbbkkbbbbbbCCCbbb',
-  'bAAAAAAAAAAAAAAAAAAb',
-  'bbkbbbbbbbbbbbbbbkbb',
-  'bbkbbbbbbbbbbbbbbkbb',
-  'bbbbbbbbbbbbbbbbbbbb',
-]
-
-/* Three workflow blocks linked left to right, feeding a small control panel. */
-const workflowStudio: readonly string[] = [
-  'bbbbbbbbbbbbbbbbbbbb',
-  'bbbbbbbbbbbbbbbbbbbb',
-  'bbLLLLbbCCCCbbGGGGbb',
-  'bbLKKLHHCKKCHHGKKGbb',
-  'bbLLLLbbCCCCbbGGGGbb',
-  'bbbbbbbbbbbbbbbbbbbb',
-  'bbbbbbbbbHHbbbbbbbbb',
-  'bbbbbbbbbbbbbbbbbbbb',
-  'bbbbkkkkkkkkkkkkbbbb',
-  'bbbbkkMkGkCkLkkkbbbb',
-  'bbbbkKKKKKKKKKKkbbbb',
-  'bbbbkkkkkkkkkkkkbbbb',
+  'bkkkkkkkkkkkbbbbbbbb',
+  'bkMMMMMMMMMkbbAkAbbb',
+  'bkMCCCCCMMMkbAAkAAbb',
+  'bkMAAAAMMMMkkkkkkkkb',
+  'bkMGGGGGGMMkAAAkAAAb',
+  'bkMCCCMMMMMkbAAkAAbb',
+  'bkMAAMMMMMMkbbAkAbbb',
+  'bkkkkkkkkkkkbbbbbbbb',
+  'bbbbbAAAbbbbbbbbbbbb',
+  'bbbbAAAAAbbbbbbbbbbb',
   'bbbbbbbbbbbbbbbbbbbb',
   'bbbbbbbbbbbbbbbbbbbb',
 ]
 
-/* A light interface panel: contrast swatch, text lines, a toggle, and a
-   button wearing a visible copper focus ring. */
-const accessibleToolkit: readonly string[] = [
+/* A vintage phone handset, a voice waveform, and three connected contact
+   nodes: the trusted-circle cascade, one node marked for attention in a
+   restrained bordeaux rather than an emergency red. */
+const kincall: readonly string[] = [
   'bbbbbbbbbbbbbbbbbbbb',
-  'bbkkkkkkkkkkkkkkkkbb',
-  'bbkMMMMMMMMMMMMMMkbb',
-  'bbkMKKMMMMAAAAAMMkbb',
-  'bbkMKKMMMMAAAMMMMkbb',
-  'bbkMMMMMMMMMMMMMMkbb',
-  'bbkMkkkkkkkkkMMMMkbb',
-  'bbkMkkkkkkMMMMMMMkbb',
-  'bbkMMMMMMMMMMMMMMkbb',
-  'bbkMggMMMMCCCCCMMkbb',
-  'bbkMMMMMMMCkkkCMMkbb',
-  'bbkMMMMMMMCCCCCMMkbb',
-  'bbkkkkkkkkkkkkkkkkbb',
+  'bbbbbbbbbbbbbbbbbbbb',
+  'bbkkkbbbbbbbbbbGGbbb',
+  'bkkkkkbbbbbbbbbGGbbb',
+  'bbkkkbbbbGbbbbbHHbbb',
+  'bbCCCbbbbGbbbbbHHbbb',
+  'bbCCCbbbCGCbbbHbbHbb',
+  'bbCCCbbbCGCbbbHbbHbb',
+  'bbkkkbbGCGCGbbHbbHbb',
+  'bkkkkkbGCGCGbGGbbbBB',
+  'bbkkkbbbbbbbbGGbbbBB',
+  'bbbbbbbbbbbbbbbbbbbb',
+  'bbbbbbbbbbbbbbbbbbbb',
   'bbbbbbbbbbbbbbbbbbbb',
 ]
 
 const scenes: Record<HackathonArtName, readonly string[]> = {
-  'incident-copilot': incidentCopilot,
-  'workflow-studio': workflowStudio,
-  'accessible-toolkit': accessibleToolkit,
+  draftlens,
+  kincall,
 }
 
 interface HackathonSceneProps {

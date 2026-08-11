@@ -1,23 +1,26 @@
-.grid {
-  display: grid;
-
-  /* Sized on the panel, not the viewport: two or three columns as space allows. */
-  grid-template-columns: repeat(auto-fill, minmax(min(15rem, 100%), 1fr));
-  gap: var(--grid-gap);
-}
-
 /**
- * A café event flyer rather than a project card: the artwork sits in a framed
- * strip, and a perforated (dashed) rule separates it from the text, like the
- * stub line of an arcade ticket.
+ * A café event flyer rather than a plain project card: the artwork sits in a
+ * framed strip, and a perforated (dashed) rule separates it from the text,
+ * like the stub line of an arcade ticket.
  */
 .ticket {
+  position: relative;
   display: flex;
   flex-direction: column;
   background-color: var(--surface);
   border: 1px solid var(--hairline-strong);
   outline: 1px solid var(--hairline);
   outline-offset: 3px;
+  transition:
+    border-color var(--dur) var(--ease),
+    transform var(--dur) var(--ease);
+}
+
+/* Same lift as a regular project card: keyboard focus triggers the identical state. */
+.ticket:hover,
+.ticket:has(a:focus-visible) {
+  border-color: var(--accent);
+  transform: translateY(-6px);
 }
 
 .art {
@@ -36,14 +39,13 @@
   display: flex;
   flex: 1;
   flex-direction: column;
-  gap: var(--space-3);
+  gap: var(--space-2);
   margin-top: var(--space-3);
   padding: var(--space-4);
   border-top: 1px dashed var(--hairline-strong);
 }
 
-/* The one honest status: these are ideas, not participations. */
-.status {
+.badge {
   align-self: flex-start;
   padding: 0.2rem 0.5rem;
   border: 1px solid var(--line);
@@ -56,7 +58,14 @@
   font-size: 1.375rem;
 }
 
+.event {
+  color: var(--text-3);
+  font-size: var(--size-meta);
+  font-style: italic;
+}
+
 .summary {
+  margin-top: var(--space-1);
   color: var(--text-2);
   font-size: var(--size-ui);
   line-height: 1.55;
@@ -68,4 +77,10 @@
   gap: var(--space-2);
   margin-top: auto;
   padding-top: var(--space-2);
+}
+
+/* Full width, like a project card's single-link button. */
+.link {
+  width: 100%;
+  margin-top: var(--space-3);
 }
