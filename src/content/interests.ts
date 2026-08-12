@@ -14,7 +14,7 @@ export const interests: readonly Interest[] = [
     icon: 'camera',
     detail: [
       'I enjoy taking my camera wherever I go. Whether I’m traveling, spending time with family and friends, or discovering a new place, I love capturing moments that I’ll be able to look back on years later. For me, photography is less about taking the perfect picture and more about preserving memories and the emotions that come with them !!',
-      'My camera : Fujifilm X-A1 😋',
+      'My camera : Fujifilm X20, if you want some recipes, contact me 😋',
     ],
   },
   {
