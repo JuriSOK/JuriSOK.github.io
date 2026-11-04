@@ -1,35 +1,54 @@
 import { hasDomainContent, skills } from '../../content/skills'
-import { SkillRubric } from './SkillRubric'
+import { useReveal } from '../../hooks/useReveal'
+import type { PageProps, SkillDomain } from '../../types/content'
+import { PixelArtIcon } from '../pixel-art/PixelArtIcon'
+import { Section } from '../ui/Section'
+import { TechBadge } from '../ui/TechBadge'
 import styles from './Skills.module.css'
 
 /**
- * Skills, laid out like a fine café menu.
+ * Skills — « the kit ».
  *
- * Embedded in the Resume page, where the reference layout put progress bars.
- * Two columns of rubrics parted by continuous rules, no floating cards — and
- * no gauge, percentage or level anywhere.
+ * One row per domain: name, what it is used for, tools. No percentage, gauge,
+ * level or years — the type does not allow them.
  */
-export function SkillsBlock() {
-  /* A rubric reduced to its title would teach nothing: it is not rendered. */
-  const rubrics = skills.filter(hasDomainContent)
-
-  if (rubrics.length === 0) {
-    return null
-  }
+export function Skills({ section }: PageProps) {
+  /* A domain reduced to its title would teach nothing: it is not rendered. */
+  const domains = skills.filter(hasDomainContent)
 
   return (
-    <section className={styles.movement} aria-labelledby="resume-skills">
-      <h3 id="resume-skills" className={`label ${styles.movementTitle}`}>
-        Skills
-      </h3>
+    <Section section={section}>
+      <ul className={styles.list}>
+        {domains.map((domain) => (
+          <SkillRow key={domain.id} domain={domain} />
+        ))}
+      </ul>
+    </Section>
+  )
+}
 
-      <div className={styles.menu}>
-        <ul className={styles.grid}>
-          {rubrics.map((domain) => (
-            <SkillRubric key={domain.id} domain={domain} />
-          ))}
-        </ul>
+function SkillRow({ domain }: { readonly domain: SkillDomain }) {
+  const ref = useReveal<HTMLLIElement>()
+  const tools = domain.tools ?? []
+
+  return (
+    <li ref={ref} className={`${styles.row} reveal`}>
+      <div className={styles.head}>
+        {/* Decorative: the heading names the domain. */}
+        <PixelArtIcon name={domain.icon} className={styles.icon} />
+        <h3 className={styles.title}>{domain.title}</h3>
       </div>
-    </section>
+
+      <div className={styles.body}>
+        {domain.usage !== undefined ? <p className={styles.usage}>{domain.usage}</p> : null}
+        {tools.length > 0 ? (
+          <ul className={styles.tools}>
+            {tools.map((tool) => (
+              <TechBadge key={tool} name={tool} />
+            ))}
+          </ul>
+        ) : null}
+      </div>
+    </li>
   )
 }

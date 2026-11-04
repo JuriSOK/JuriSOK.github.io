@@ -3,25 +3,28 @@ import { Rule } from './Rule'
 import styles from './SectionHeading.module.css'
 
 interface SectionHeadingProps {
+  /** Moment of the evening, e.g. « 9:00 pm · liner notes ». */
+  readonly cue: string
   readonly title: string
-  /** Editorial line, in italics, under the title. */
-  readonly kicker?: string
-  /** Id of the heading, referenced by the page's `aria-labelledby`. */
+  /** Editorial line under the title. */
+  readonly kicker?: string | undefined
+  /** Id of the heading, referenced by the section's `aria-labelledby`. */
   readonly headingId: string
 }
 
 /**
- * Heading shared by every page: title, editorial line, rule.
+ * Heading shared by every section: cue, title, editorial line, rule.
  *
- * No catalogue number: the identity now rests on typography, warm colour,
- * spacing and fine rules alone.
+ * The cue is a set-list time, not a number: no section, track or catalogue
+ * numbering anywhere.
  */
-export function SectionHeading({ title, kicker, headingId }: SectionHeadingProps) {
+export function SectionHeading({ cue, title, kicker, headingId }: SectionHeadingProps) {
   const ref = useReveal<HTMLDivElement>()
 
   return (
     <header className={styles.heading}>
       <div ref={ref} className={`${styles.text} reveal`}>
+        <p className={`label ${styles.cue}`}>{cue}</p>
         <h2 id={headingId} className={styles.title}>
           {title}
         </h2>

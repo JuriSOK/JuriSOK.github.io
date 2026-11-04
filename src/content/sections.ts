@@ -1,47 +1,36 @@
 import { about } from './about'
-import { hackathons } from './hackathons'
 import { education } from './education'
 import { experiences } from './experiences'
+import { hackathons } from './hackathons'
 import { interests } from './interests'
+import { sectionRegistry } from './navigation'
 import { projects } from './projects'
 import { hasDomainContent, skills } from './skills'
-import { sectionRegistry } from './navigation'
 import type { SectionDefinition } from '../types/content'
 
 /**
- * Tabs actually shown.
+ * Sections actually rendered.
  *
- * A tab exists only if its page has content. Three intended consequences: the
- * panel never shows a title followed by nothing, navigation never offers an
- * empty tab, and the site fills itself in as content modules get written.
+ * A section exists only if it has content. The page and the navigation both
+ * read `visibleSections`, so a link can never point at an empty section and the
+ * site fills itself in as content modules get written.
  */
 const hasContent: Record<string, boolean> = {
-  about: about.paragraphs.length > 0 || interests.length > 0,
-
-  /* Skills live on this page, so they count towards it. */
-  resume: experiences.length > 0 || education.length > 0 || skills.some(hasDomainContent),
-
-  /* Hackathons no longer have a tab of their own: they render as a second
-     group on this same page, so either one alone keeps the tab alive. */
-  projects: projects.length > 0 || hackathons.length > 0,
-
+  about: about.paragraphs.length > 0,
+  journey: experiences.length > 0 || education.length > 0,
+  projects: projects.length > 0,
+  hackathons: hackathons.length > 0,
+  skills: skills.some(hasDomainContent),
+  life: interests.length > 0,
   contact: true,
 }
 
-/** Tabs to display, in registry order. */
+/** Sections to display, in registry order. */
 export const visibleSections: readonly SectionDefinition[] = sectionRegistry.filter(
   (section) => hasContent[section.id] === true,
 )
 
-/** `true` when the page has content and must therefore exist. */
+/** `true` when the section has content and must therefore exist. */
 export function isSectionVisible(id: string): boolean {
   return hasContent[id] === true
-}
-
-/**
- * A page definition, so its component reads its title and editorial line from
- * here rather than hard-coding them.
- */
-export function getSection(id: string): SectionDefinition | undefined {
-  return sectionRegistry.find((section) => section.id === id)
 }

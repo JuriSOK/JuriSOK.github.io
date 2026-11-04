@@ -16,6 +16,12 @@
 html {
   -webkit-text-size-adjust: 100%;
   scroll-behavior: smooth;
+  scroll-padding-top: var(--header-h);
+}
+
+/* The programmatic focus target of the skip link draws no ring. */
+main:focus {
+  outline: none;
 }
 
 body {
@@ -135,7 +141,7 @@ p {
   border: 0;
 }
 
-/* Libellé condensé façon affiche : numéros de catalogue, périodes, catégories. */
+/* Libellé condensé façon affiche : repères horaires, périodes, catégories. */
 .label {
   font-family: var(--font-ui);
   font-size: var(--size-label);

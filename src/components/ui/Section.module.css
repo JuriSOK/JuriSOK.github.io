@@ -1,0 +1,29 @@
+.section {
+  position: relative;
+  padding-block: var(--section-gap);
+  background-color: var(--bg);
+  color: var(--text);
+  scroll-margin-top: var(--header-h);
+}
+
+.section[data-tone='deep'] {
+  background-color: var(--bg-deep);
+}
+
+/**
+ * Extra grain on cream inserts. The global grain layer is `position: fixed`
+ * and cannot take a section's opacity, so the paper carries its own.
+ */
+.section[data-tone='paper']::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-image: var(--grain);
+  opacity: var(--grain-paper);
+}
+
+.inner {
+  position: relative;
+  z-index: 1;
+}

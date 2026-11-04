@@ -1,51 +1,59 @@
-import { about } from '../../content/about'
-import { profile } from '../../content/profile'
+import { about, focusAreas, focusNote, values } from '../../content/about'
 import { useReveal } from '../../hooks/useReveal'
 import type { PageProps } from '../../types/content'
-import { Page } from '../ui/Page'
-import { SectionHeading } from '../ui/SectionHeading'
-import { Interests } from './Interests'
+import { Section } from '../ui/Section'
 import styles from './About.module.css'
 
 /**
- * About page: personal introduction, then interests.
+ * About — « liner notes ».
  *
- * No facts list: role, employer, education and location all live in the
- * identity sidebar, and repeating them here filled the page with echoes.
+ * Printed on the cream insert, like the notes inside a sleeve: the bio, three
+ * values, then the fields he wants to work in. Each block renders only when it
+ * has content.
  */
 export function About({ section }: PageProps) {
   const proseRef = useReveal<HTMLDivElement>()
+  const valuesRef = useReveal<HTMLDivElement>()
+  const focusRef = useReveal<HTMLDivElement>()
 
   return (
-    <Page id={section.id} labelledBy="about-title">
-      <SectionHeading
-        title={section.label}
-        {...(section.kicker !== undefined ? { kicker: section.kicker } : {})}
-        headingId="about-title"
-      />
+    <Section section={section} surface="paper">
+      <div className={styles.grid}>
+        <div ref={proseRef} className={`${styles.prose} reveal`}>
+          {about.paragraphs.map((paragraph) => (
+            <p key={paragraph.slice(0, 40)}>{paragraph}</p>
+          ))}
+        </div>
 
-      <div ref={proseRef} className={`${styles.prose} reveal`}>
-        {about.paragraphs.map((paragraph) => (
-          <p key={paragraph.slice(0, 40)}>{paragraph}</p>
-        ))}
+        {values.length > 0 ? (
+          <div ref={valuesRef} className={`${styles.values} reveal`}>
+            <h3 className={`label ${styles.blockTitle}`}>What I care about</h3>
+            <dl className={styles.valueList}>
+              {values.map((value) => (
+                <div key={value.id} className={styles.value}>
+                  <dt className={styles.valueName}>{value.name}</dt>
+                  <dd className={styles.valueLine}>{value.line}</dd>
+                </div>
+              ))}
+            </dl>
+          </div>
+        ) : null}
       </div>
 
-      {about.portrait !== null ? (
-        <div className={styles.portrait}>
-          <img
-            className={styles.portraitImage}
-            src={about.portrait}
-            alt={`Portrait of ${profile.fullName}`}
-            width={800}
-            height={1000}
-            loading="lazy"
-            decoding="async"
-          />
-          <span className={styles.portraitTint} aria-hidden="true" />
+      {focusAreas.length > 0 ? (
+        <div ref={focusRef} className={`${styles.focus} reveal`}>
+          <h3 className={`label ${styles.blockTitle}`}>Where I’m heading</h3>
+          <ul className={styles.focusList}>
+            {focusAreas.map((area) => (
+              <li key={area.id} className={styles.focusRow}>
+                <span className={styles.focusName}>{area.name}</span>
+                <span className={styles.focusLine}>{area.line}</span>
+              </li>
+            ))}
+          </ul>
+          <p className={styles.note}>{focusNote}</p>
         </div>
       ) : null}
-
-      <Interests />
-    </Page>
+    </Section>
   )
 }

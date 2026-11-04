@@ -1,39 +1,105 @@
+.grid {
+  display: grid;
+  gap: var(--space-12);
+}
+
+@media (width >= 960px) {
+  .grid {
+    grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+    gap: var(--space-16);
+  }
+}
+
 .prose {
   display: flex;
   flex-direction: column;
-  gap: var(--space-4);
+  gap: var(--space-5);
   max-width: var(--measure);
+  color: var(--text-2);
 }
 
-/**
- * No drop cap. `::first-letter` swallows the apostrophe that follows, so a text
- * opening on « I’m » would enlarge « I’ » and orphan the « m ». The page opens
- * on plain prose instead.
- */
-
-/* ---- Optional portrait ---- */
-
-.portrait {
-  position: relative;
-  max-width: 18rem;
-  margin-top: var(--space-8);
-  overflow: hidden;
-  aspect-ratio: 4 / 5;
-  background-color: var(--surface);
-  border: 1px solid var(--hairline);
+/* The first paragraph opens the notes: larger, in the display face. */
+.prose p:first-child {
+  color: var(--text);
+  font-family: var(--font-display);
+  font-variation-settings: var(--fraunces-text);
+  font-size: var(--size-lead);
+  line-height: 1.45;
 }
 
-.portraitImage {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
+.blockTitle {
+  margin-bottom: var(--space-4);
+  color: var(--text-2);
 }
 
-/* Duotone chaud léger, pour raccorder la photo à la palette. */
-.portraitTint {
-  position: absolute;
-  inset: 0;
-  background-color: var(--bordeaux);
-  mix-blend-mode: color;
-  opacity: 0.22;
+.valueList {
+  display: flex;
+  flex-direction: column;
+}
+
+.value {
+  padding-block: var(--space-4);
+  border-top: 1px solid var(--hairline);
+}
+
+.valueName {
+  font-family: var(--font-display);
+  font-variation-settings: var(--fraunces-title);
+  font-size: 1.375rem;
+  font-weight: 550;
+  line-height: 1.2;
+}
+
+.valueLine {
+  margin-top: var(--space-1);
+  color: var(--text-2);
+  font-size: var(--size-ui);
+  line-height: 1.55;
+}
+
+.focus {
+  margin-top: var(--space-16);
+}
+
+.focusRow {
+  display: grid;
+  gap: var(--space-1);
+  padding-block: var(--space-4);
+  border-top: 1px solid var(--hairline);
+}
+
+.focusRow:last-child {
+  border-bottom: 1px solid var(--hairline);
+}
+
+@media (width >= 720px) {
+  .focusRow {
+    grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+    align-items: baseline;
+    gap: var(--space-8);
+  }
+}
+
+.focusName {
+  font-family: var(--font-display);
+  font-variation-settings: var(--fraunces-title);
+  font-size: 1.25rem;
+  font-weight: 500;
+  line-height: 1.25;
+}
+
+.focusLine {
+  color: var(--text-2);
+  font-size: var(--size-ui);
+}
+
+.note {
+  max-width: var(--measure);
+  margin-top: var(--space-6);
+  color: var(--text-2);
+  font-family: var(--font-display);
+  font-variation-settings: var(--fraunces-text);
+  font-style: italic;
+  font-size: var(--size-lead);
+  line-height: 1.4;
 }

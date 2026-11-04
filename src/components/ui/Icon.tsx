@@ -10,7 +10,8 @@
  * libellé visible ou un texte pour lecteur d'écran.
  */
 
-export type IconName = 'github' | 'linkedin' | 'arrowUpRight' | 'arrowDown' | 'menu' | 'close'
+export type IconName =
+  'github' | 'linkedin' | 'mail' | 'arrowUpRight' | 'arrowDown' | 'arrowUp' | 'menu' | 'close'
 
 const paths: Record<IconName, string> = {
   /* Simple Icons (CC0). */
@@ -21,12 +22,14 @@ const paths: Record<IconName, string> = {
     'M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 1 1 0-4.125 2.062 2.062 0 0 1 0 4.125zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.225 0z',
   arrowUpRight: 'M7 17 17 7M9 7h8v8',
   arrowDown: 'M12 5v14M6 13l6 6 6-6',
+  arrowUp: 'M12 19V5M6 11l6-6 6 6',
+  mail: 'M3.5 5.5h17v13h-17zM3.5 6.5l8.5 6.5 8.5-6.5',
   menu: 'M3 6h18M3 12h18M3 18h18',
   close: 'M5 5l14 14M19 5L5 19',
 }
 
 /** Icônes tracées au trait plutôt qu'en aplat. */
-const stroked = new Set<IconName>(['arrowUpRight', 'arrowDown', 'menu', 'close'])
+const stroked = new Set<IconName>(['arrowUpRight', 'arrowDown', 'arrowUp', 'mail', 'menu', 'close'])
 
 interface IconProps {
   readonly name: IconName

@@ -6,7 +6,7 @@ import { LetterboxdMark } from '../ui/LetterboxdMark'
 import styles from './Interests.module.css'
 
 /**
- * Interests as an accessible accordion, embedded at the end of the About page.
+ * Interests as an accessible accordion, inside the « after hours » section.
  *
  * Each closed row shows only a pixel-art icon, the interest name and an expand
  * chevron; activating the row reveals a detail paragraph. Several rows may
@@ -37,71 +37,65 @@ export function Interests() {
   }
 
   return (
-    <section className={styles.interests} aria-labelledby="interests-title">
-      <h3 id="interests-title" className={`label ${styles.title}`}>
-        Interests
-      </h3>
+    <ul className={styles.list}>
+      {interests.map((interest) => {
+        const open = openIds.has(interest.id)
+        const buttonId = `interest-${interest.id}`
+        const panelId = `interest-${interest.id}-panel`
 
-      <ul className={styles.list}>
-        {interests.map((interest) => {
-          const open = openIds.has(interest.id)
-          const buttonId = `interest-${interest.id}`
-          const panelId = `interest-${interest.id}-panel`
-
-          return (
-            <li key={interest.id} className={styles.item}>
-              <h4 className={styles.rowHeading}>
-                <button
-                  type="button"
-                  id={buttonId}
-                  className={styles.row}
-                  aria-expanded={open}
-                  aria-controls={panelId}
-                  onClick={() => toggle(interest.id)}
-                >
-                  <PixelArtIcon name={interest.icon} className={styles.icon} />
-                  <span className={styles.name}>{interest.label}</span>
-                  <Icon name="arrowDown" size={16} className={styles.chevron} />
-                </button>
-              </h4>
-
-              <div
-                id={panelId}
-                role="region"
-                aria-labelledby={buttonId}
-                className={styles.panel}
-                data-open={open}
+        return (
+          <li key={interest.id} className={styles.item}>
+            <h3 className={styles.rowHeading}>
+              <button
+                type="button"
+                id={buttonId}
+                className={styles.row}
+                aria-expanded={open}
+                aria-controls={panelId}
+                onClick={() => toggle(interest.id)}
               >
-                <div className={styles.panelInner}>
-                  {interest.detail.map((paragraph) => (
-                    <p key={paragraph.slice(0, 40)} className={styles.detail}>
-                      {paragraph}
-                    </p>
-                  ))}
+                <PixelArtIcon name={interest.icon} className={styles.icon} />
+                <span className={styles.name}>{interest.label}</span>
+                <Icon name="arrowDown" size={16} className={styles.chevron} />
+              </button>
+            </h3>
 
-                  {/* Lives in the panel, never in the button: no interactive
+            <div
+              id={panelId}
+              role="region"
+              aria-labelledby={buttonId}
+              className={styles.panel}
+              data-open={open}
+            >
+              <div className={styles.panelInner}>
+                {interest.detail.map((paragraph) => (
+                  <p key={paragraph.slice(0, 40)} className={styles.detail}>
+                    {paragraph}
+                  </p>
+                ))}
+
+                {/* Lives in the panel, never in the button: no interactive
                       element is nested inside another, and `visibility: hidden`
                       on the collapsed panel keeps this out of the tab order
                       until the row is expanded. */}
-                  {interest.link !== undefined ? (
-                    <a
-                      className={styles.link}
-                      href={interest.link.href}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      <LetterboxdMark className={styles.mark} />
-                      {interest.link.label}
-                      <span className="sr-only"> (opens in a new tab)</span>
-                      <Icon name="arrowUpRight" size={15} className={styles.linkArrow} />
-                    </a>
-                  ) : null}
-                </div>
+                {interest.link !== undefined ? (
+                  <a
+                    className={styles.link}
+                    href={interest.link.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <LetterboxdMark className={styles.mark} />
+                    {interest.link.label}
+                    <span className="sr-only"> (opens in a new tab)</span>
+                    <Icon name="arrowUpRight" size={15} className={styles.linkArrow} />
+                  </a>
+                ) : null}
               </div>
-            </li>
-          )
-        })}
-      </ul>
-    </section>
+            </div>
+          </li>
+        )
+      })}
+    </ul>
   )
 }

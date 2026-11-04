@@ -3,13 +3,18 @@
 Professional portfolio of Vibol Arnaud Sok, Data Analyst apprentice and Master's student in
 MIAGE.
 
-The site follows a **vCard layout**: a fixed identity sidebar and a main panel whose content switches
-by tabs — About, Resume, Projects, Hackathons and Contact — rendered in a *Warm Vintage Jazz
-Editorial* theme over an animated pixel-art jazz café background, with original pixel-art
-illustrations throughout (interests, skill categories, project sleeves, hackathon concepts).
+The site is a **single-page narrative** read as one evening at a jazz club, from « doors open » to
+« closing time »: an opening screen over an animated pixel-art café, then About, Journey,
+Projects, Hackathons, Skills, Life and Contact. Each section carries a set-list cue
+(« 9:00 pm · liner notes »), and a set clock in the sticky header follows the section being read —
+the metaphor carries the navigation instead of decorating it. Headings themselves stay plain.
 
-The Hackathons page deliberately contains **concepts only** — every card is labelled « Concept »,
-because no hackathon has been attended yet. Nothing on that page is invented.
+The theme is *Warm Vintage Jazz Editorial*: espresso and cream surfaces, copper and bordeaux
+accents, Fraunces and Archivo, hairline rules, and original pixel-art illustrations (interests,
+skill categories, project sleeves, hackathons). The jazz reference stays typographic — no vinyl,
+no instrument, no musical note.
+
+Hackathon entries are real participations; a result is shown only when one is confirmed.
 
 > 🚧 **Work in progress.** Some wording is provisional and flagged with a `TODO` comment in the
 > content files. The word `TODO` never reaches the rendered page.
@@ -29,10 +34,13 @@ component, and reveals use a native `IntersectionObserver`.
 
 All copy lives in `src/content/`: changing a sentence never requires opening a component.
 
-**A tab with no real content does not exist** — no title followed by emptiness, no hollow tab. The
-site is therefore publishable at any time and fills itself in as content files are written.
+**A section with no real content does not exist** — no title followed by emptiness, and no
+navigation link pointing at nothing. The site is therefore publishable at any time and fills itself
+in as content files are written.
 
-Interests are part of the About page and skills are part of Resume; neither has its own tab.
+`src/content/navigation.ts` registers the sections (id, nav label, heading, cue);
+`src/content/sections.ts` crosses it with the actual content. The page and the header read the same
+verdict, so they cannot diverge.
 
 ## Project selection
 
@@ -105,14 +113,14 @@ The dev server starts on `http://localhost:5173`.
 │   ├── components/
 │   │   ├── background/      # Fixed animated café background
 │   │   ├── pixel-art/       # PixelGrid renderer and original pixel drawings
-│   │   ├── layout/          # Identity sidebar, tabs, grain, skip link
-│   │   ├── ui/              # Page, SectionHeading, Rule, ButtonLink, TechBadge, Icon
-│   │   ├── sections/        # About, Resume, Hackathons and Contact pages
-│   │   └── projects/        # Grid, card, generated artwork
-│   ├── content/             # Copy, data, page registry and logo registry
+│   │   ├── layout/          # Sticky header and set clock, footer, grain, skip link
+│   │   ├── ui/              # Section, SectionHeading, Rule, ButtonLink, TechBadge, Icon
+│   │   ├── sections/        # Hero, About, Journey, Skills, Life and Contact
+│   │   └── projects/        # Projects and Hackathons, cards, generated artwork
+│   ├── content/             # Copy, data, section registry and logo registry
 │   ├── data/                # Generated, committed files (do not edit)
 │   ├── types/               # content.ts, project.ts, pixel-art.ts
-│   ├── hooks/               # Reveal, reduced motion, media queries
+│   ├── hooks/               # Reveal, active section, reduced motion, media queries
 │   ├── styles/              # Tokens, fonts, global styles
 │   ├── App.tsx
 │   └── main.tsx
@@ -123,8 +131,9 @@ The dev server starts on `http://localhost:5173`.
 ## Accessibility
 
 Verified with a real browser at every step: skip link first, visible focus ring throughout, targets of
-at least 44 px. Tab changes are announced to screen readers (`aria-current`, focus moved to the panel)
-and stay in sync with the URL — `#projects` is a deep link and the browser back button works. Under
+at least 44 px. Sections are labelled landmarks with native anchors — `#projects` is a deep link —
+and the header link of the section being read carries `aria-current`. The mobile menu closes on
+Escape and gives focus back to its button. Under
 `prefers-reduced-motion`, no animation remains, the café background becomes fully static and all
 content stays visible.
 

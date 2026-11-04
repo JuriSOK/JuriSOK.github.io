@@ -1,30 +1,28 @@
-/**
- * A café event flyer rather than a plain project card: the artwork sits in a
- * framed strip, and a perforated (dashed) rule separates it from the text,
- * like the stub line of an arcade ticket.
- */
-.ticket {
+.card {
   position: relative;
-  display: flex;
-  flex-direction: column;
+  display: grid;
   background-color: var(--surface);
-  border: 1px solid var(--hairline-strong);
-  outline: 1px solid var(--hairline);
-  outline-offset: 3px;
+  border: 1px solid var(--hairline);
   transition:
     border-color var(--dur) var(--ease),
     transform var(--dur) var(--ease);
 }
 
-/* Same lift as a regular project card: keyboard focus triggers the identical state. */
-.ticket:hover,
-.ticket:has(a:focus-visible) {
+/* Same lift as a project card; keyboard focus triggers the identical state. */
+.card:hover,
+.card:has(a:focus-visible) {
   border-color: var(--accent);
-  transform: translateY(-6px);
+  transform: translateY(-4px);
+}
+
+@media (width >= 900px) {
+  .card {
+    grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+  }
 }
 
 .art {
-  padding: var(--space-3) var(--space-3) 0;
+  padding: var(--space-4);
 }
 
 .scene {
@@ -37,50 +35,70 @@
 
 .body {
   display: flex;
-  flex: 1;
   flex-direction: column;
-  gap: var(--space-2);
-  margin-top: var(--space-3);
-  padding: var(--space-4);
-  border-top: 1px dashed var(--hairline-strong);
+  gap: var(--space-3);
+  padding: var(--space-2) var(--space-5) var(--space-6);
 }
 
-.badge {
-  align-self: flex-start;
-  padding: 0.2rem 0.5rem;
-  border: 1px solid var(--line);
-  border-radius: var(--radius-chip);
+@media (width >= 900px) {
+  .body {
+    padding: var(--space-6) var(--space-8) var(--space-6) var(--space-4);
+  }
+}
+
+.meta {
   color: var(--accent);
 }
 
 .title {
   margin: 0;
-  font-size: 1.375rem;
-}
-
-.event {
-  color: var(--text-3);
-  font-size: var(--size-meta);
-  font-style: italic;
+  font-size: clamp(1.5rem, 3vw, 2rem);
 }
 
 .summary {
-  margin-top: var(--space-1);
+  max-width: var(--measure);
   color: var(--text-2);
   font-size: var(--size-ui);
-  line-height: 1.55;
+  line-height: 1.6;
+}
+
+.facts {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  margin-top: var(--space-1);
+  font-size: var(--size-ui);
+  line-height: 1.5;
+}
+
+.fact {
+  display: grid;
+  gap: var(--space-1);
+}
+
+@media (width >= 560px) {
+  .fact {
+    grid-template-columns: 6.5rem minmax(0, 1fr);
+    align-items: baseline;
+    gap: var(--space-4);
+  }
+}
+
+.term {
+  color: var(--text-3);
 }
 
 .tech {
   display: flex;
   flex-wrap: wrap;
   gap: var(--space-2);
-  margin-top: auto;
-  padding-top: var(--space-2);
+  margin-top: var(--space-2);
 }
 
-/* Full width, like a project card's single-link button. */
-.link {
-  width: 100%;
-  margin-top: var(--space-3);
+.links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  margin-top: auto;
+  padding-top: var(--space-3);
 }

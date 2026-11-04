@@ -112,6 +112,9 @@
 
   --tap-min: 44px;
 
+  /* Height of the sticky header: anchors land below it, never under it. */
+  --header-h: 4rem;
+
   --dur-fast: 150ms;
   --dur: 180ms;
   --dur-slow: 420ms;

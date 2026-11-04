@@ -1,6 +1,9 @@
+/* Landscape rather than square: in a two-column grid a square sleeve made the
+   artwork taller than everything else on the card. The pixel scenes keep their
+   own ratio inside (SVG `meet`), centred on the espresso ground. */
 .sleeve {
   position: relative;
-  aspect-ratio: 1;
+  aspect-ratio: 16 / 10;
   overflow: hidden;
   background-color: var(--ink-800);
   border-bottom: 1px solid var(--hairline);

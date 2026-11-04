@@ -33,7 +33,7 @@ export function ProjectCard({ project, index }: ProjectCardProps) {
       />
 
       <div className={styles.body}>
-        <h4 className={styles.title}>{project.title}</h4>
+        <h3 className={styles.title}>{project.title}</h3>
 
         {project.summary !== null ? <p className={styles.summary}>{project.summary}</p> : null}
 

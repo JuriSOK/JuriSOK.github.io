@@ -8,11 +8,21 @@ Règles permanentes du projet. À lire avant toute modification.
   Master MIAGE). L'interface est intégralement en anglais.
 - La direction artistique est **`Warm Vintage Jazz Editorial`**, désormais implémentée. Les règles
   ci-dessous sont opposables à toute évolution.
+- Le niveau visé est celui d'un portfolio éditorial mûr (référence de maturité, **jamais de copie** :
+  kepard.dev) : un récit qui se lit d'un seul défilement, une métaphore unique qui porte la
+  navigation, une voix personnelle mais toujours adossée à des faits, et de la retenue visuelle.
 
 ## Direction artistique — règles opposables
 
-- **Budget d'ornement : trois éléments graphiques non textuels au maximum par page** (filet, cadre,
-  pastille…). Un ornement qui ne porte aucune information saute.
+- **Budget d'ornement : trois types d'éléments graphiques non textuels sur tout le site** — filets,
+  cadres de cartes, pastilles (technologies, point « en cours »). Un ornement qui ne porte aucune
+  information saute.
+- **La métaphore : une soirée au club, de l'ouverture à la fermeture.** Chaque section porte un
+  `cue` horaire (« 9:00 pm · liner notes »… « 2:00 am · closing time »). L'horloge de l'en-tête
+  affiche le `cue` de la section lue : c'est le fil de la page. Les **titres restent clairs** — un
+  recruteur ne doit jamais décoder un jeu de mots pour trouver l'expérience. Les horaires sont une
+  set-list, pas l'heure réelle : l'heure réelle de Paris n'apparaît que dans Contact, libellée
+  comme telle.
 - **La référence jazz reste typographique, jamais illustrative.** Aucun disque ou vinyle, aucun
   saxophone, aucune note de musique, aucune tasse de café. L'univers passe par la matière (teintes,
   grain, lumière, fond pixel-art) et le vocabulaire d'édition (crédits, filets, mises en page).
@@ -20,8 +30,9 @@ Règles permanentes du projet. À lire avant toute modification.
   Jamais l'inverse — le cuivre tombe à 3,6:1 sur le crème. Le composant `Section` applique
   automatiquement le bon jeu de jetons via `data-surface`, ne pas le contourner.
 - **Fond pixel-art** : `public/jazz-cafe-background.gif`, posé en `background-image` sur un calque
-  fixe (`AppBackground`), `cover`, centré, `pointer-events: none`, `z-index: -2`. Aucun voile : les
-  panneaux de la vCard sont opaques, la lisibilité ne dépend donc pas du fond.
+  fixe (`AppBackground`), `cover`, centré, `pointer-events: none`, `z-index: -2`. Aucun voile : seul l'écran
+  d'ouverture est transparent, et son texte repose sur une plaque opaque ; toutes les sections et
+  l'en-tête sont opaques. La lisibilité ne dépend donc jamais du fond.
 - Un GIF ne peut pas être mis en pause en CSS. Sous `prefers-reduced-motion`, le calque bascule sur
   `jazz-cafe-background-still.png`, une image fixe de la même scène. Si le GIF est remplacé,
   **régénérer aussi cette image** : `sips -s format png <gif> --out <png>`.
@@ -33,7 +44,7 @@ Règles permanentes du projet. À lire avant toute modification.
   (ils portent tous de l'encre sombre) avec `mix-blend-mode: multiply` pour fondre un éventuel fond
   blanc opaque. `alt=""` quand le nom est affiché juste à côté — un nom accessible dupliqué serait
   lu deux fois. Proportions toujours préservées, jamais de recadrage.
-- **Heure locale de la sidebar** : `Intl.DateTimeFormat` sur `profile.timezone`, jamais un décalage
+- **Heure locale (section Contact)** : `Intl.DateTimeFormat` sur `profile.timezone`, jamais un décalage
   UTC codé en dur ; mise à jour à la minute, minuteries nettoyées au démontage.
 - **`--caramel` n'est jamais une couleur de texte** (4,0:1, sous le seuil AA) : filets, cadres et
   aplats uniquement.
@@ -46,7 +57,7 @@ Règles permanentes du projet. À lire avant toute modification.
   c'est pourquoi Rust, Java et Splunk, officiellement noirs, s'affichent en bronze chaud. Ne jamais
   remettre un hex officiel sans revérifier son contraste. Le nom reste toujours affiché à côté du
   logo, qui reste `aria-hidden`.
-- **Avatar** : `src/arnaud-avatar.png`, importé par Vite plutôt que référencé par URL — un fichier
+- **Avatar** (écran d'ouverture) : `src/arnaud-avatar.png`, importé par Vite plutôt que référencé par URL — un fichier
   manquant casse alors le build au lieu de produire un 404 silencieux. `object-fit: contain`, cadre
   au ratio de la source, jamais de recadrage circulaire. Le monogramme « VAS » ne couvre qu'un vrai
   échec de chargement.
@@ -94,28 +105,26 @@ Règles permanentes du projet. À lire avant toute modification.
   accessibles, textes réservés aux lecteurs d'écran. Ne pas réintroduire de français à l'écran.
   Exception : les noms propres (Crédit Agricole Assurances, Université Paris Dauphine-PSL,
   Université Paris Cité, MiniSGBDR, Personal Finance Tracker).
-- Le site suit un **format vCard** (référence : codewithsadee/vcard-personal-portfolio) : une
-  **sidebar d'identité** — avatar, nom, rôle, coordonnées repliables — et un **panneau principal
-  dont le contenu bascule par onglets**. Pas de hero, pas de défilement de sections.
-- Quatre pages : About (avec les centres d'intérêt), Resume (avec le bloc compétences), Projects,
-  Contact. **Centres d'intérêt et compétences n'ont pas d'onglet propre.**
+- Le site est une **page unique en récit continu** : écran d'ouverture (plaque d'identité sur le
+  fond pixel-art), puis About, Journey, Projects, Hackathons, Skills, Life, Contact, et un pied de
+  page « closing time ». En-tête collant : nom, horloge de set, liens d'ancre.
 - **Aucune numérotation éditoriale.** Ni numéros de section, ni numéros de piste, ni numéros de
-  catalogue, ni mention d'édition. L'identité repose sur la typographie, les teintes chaudes, les
-  filets fins, l'espacement, la texture et le fond pixel-art.
-- Chaque page reçoit sa `SectionDefinition` **en prop** depuis `App`. Ne jamais la rechercher par
+  catalogue, ni mention d'édition. Les `cue` horaires ne sont pas des numéros.
+- Chaque section reçoit sa `SectionDefinition` **en prop** depuis `App`. Ne jamais la rechercher par
   identifiant dans le composant : une recherche par chaîne peut échouer silencieusement quand un id
-  change, laissant un onglet qui ouvre un panneau vide — c'est arrivé.
-- **Un onglet sans contenu réel n'existe pas.** Jamais un titre suivi de vide, jamais un onglet
-  creux. C'est la règle qui permet de publier le site avant que tous les textes soient écrits.
-- `src/content/navigation.ts` est le **registre des pages construites** ; `src/content/sections.ts`
-  le croise avec le contenu réel et expose `visibleSections`, `isSectionVisible()` et `getSection()`.
-  **Le panneau et les onglets lisent ce même verdict** : ils ne peuvent pas diverger.
-- La bascule d'onglet met à jour le hash (`#projects` reste un lien profond partageable), gère le
-  bouton retour via `popstate`, et déplace le focus sur le panneau.
-- Sous **1250 px**, la sidebar passe au-dessus du panneau (coordonnées repliées derrière le bouton
-  « Contacts ») et les onglets deviennent une **barre fixe en bas**, sous le pouce.
-- Interdits hérités du modèle mais refusés ici : jauges et pourcentages de compétences, formulaire
-  de contact, carte géographique, filtres de projets.
+  change, laissant un lien de navigation qui ne pointe sur rien.
+- **Une section sans contenu réel n'existe pas.** Jamais un titre suivi de vide. C'est la règle qui
+  permet de publier le site avant que tous les textes soient écrits.
+- `src/content/navigation.ts` est le **registre des sections construites** (id, libellé de nav,
+  titre, `cue`) ; `src/content/sections.ts` le croise avec le contenu réel et expose
+  `visibleSections` et `isSectionVisible()`. **La page et l'en-tête lisent ce même verdict** : ils
+  ne peuvent pas diverger.
+- Les ids servent d'ancres (`#projects` reste un lien profond partageable). Les anciens hashes de
+  la version à onglets (`#resume`) sont réécrits par `replaceState` dans `App`.
+- Sous **960 px**, les liens de l'en-tête se replient derrière un bouton « Menu » (Échap ferme et
+  rend le focus au bouton ; hors de l'ordre de tabulation tant que fermé).
+- Interdits : jauges et pourcentages de compétences, formulaire de contact, carte géographique,
+  filtres de projets, bouton CV (même si la référence en a un).
 - Privilégier des composants **accessibles et réutilisables**.
 - Maintenir une **excellente expérience mobile** (approche mobile-first).
 - Respecter la **navigation clavier** (focus visible, ordre de tabulation cohérent, pas de piège au
@@ -135,10 +144,9 @@ Règles permanentes du projet. À lire avant toute modification.
 - Ne jamais ajouter d'information confidentielle d'entreprise, ni de résultat chiffré.
 - **Aucune expérience SNCF** ne doit figurer sur le site.
 - Ne jamais inventer d'expérience, de hackathon, de certification, ni de niveau de compétence.
-- **La page Hackathons ne contient que des concepts.** Statut littéral `'Concept'` sur chaque carte,
-  et le type `HackathonConcept` n'a volontairement aucun champ pour une date, un organisateur, un
-  lieu, une équipe, un classement ou un résultat. À remplacer par de vraies entrées après une
-  première participation réelle — jamais avant.
+- **Hackathons : participations réelles uniquement.** Période telle que fournie (mois ou saison),
+  rôle, liens. Le champ `outcome` n'existe que pour un résultat confirmé et public ; une simple
+  soumission n'en reçoit pas. Ne jamais écrire de prix, classement ou chiffre non confirmé.
 
 ## Dépendances
 

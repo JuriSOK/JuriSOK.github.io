@@ -1,0 +1,132 @@
+.entry {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  padding-block: var(--space-6);
+  border-top: 1px solid var(--hairline);
+}
+
+.meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-2) var(--space-4);
+}
+
+.period {
+  color: var(--accent);
+}
+
+.stamp {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  color: var(--text-2);
+}
+
+/* « Current » marker: a still dot, no pulse. */
+.dot {
+  width: 0.45rem;
+  height: 0.45rem;
+  border-radius: 50%;
+  background-color: var(--accent);
+}
+
+/* Logo above the title: institutional logos are wide, and beside the title
+   they would squeeze it in the narrow column. */
+.heading {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--space-4);
+}
+
+/**
+ * Cream tile: every logo carries dark ink. `multiply` melts an opaque white
+ * background into the tile. Proportions are kept, never cropped.
+ */
+.logoTile {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 2.75rem;
+  max-width: 9rem;
+  padding: 0.4rem 0.6rem;
+  background-color: var(--paper);
+}
+
+.logo {
+  width: auto;
+  height: 100%;
+  max-width: 100%;
+  object-fit: contain;
+  mix-blend-mode: multiply;
+}
+
+.titles {
+  min-width: 0;
+}
+
+.title {
+  margin: 0;
+  font-size: clamp(1.25rem, 2.4vw, 1.625rem);
+  line-height: 1.15;
+}
+
+.subtitle {
+  margin-top: var(--space-1);
+  color: var(--text-2);
+  font-family: var(--font-display);
+  font-variation-settings: var(--fraunces-text);
+  font-style: italic;
+  font-size: var(--size-ui);
+}
+
+.place {
+  margin-top: var(--space-1);
+  color: var(--text-2);
+  font-size: var(--size-ui);
+}
+
+.summary {
+  max-width: var(--measure);
+  color: var(--text);
+  font-size: var(--size-ui);
+}
+
+.missions {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  max-width: var(--measure);
+  color: var(--text-2);
+  font-size: var(--size-ui);
+  line-height: 1.55;
+}
+
+/* A short hairline dash instead of a bullet glyph. */
+.missions li {
+  position: relative;
+  padding-left: var(--space-5);
+}
+
+.missions li::before {
+  content: '';
+  position: absolute;
+  top: 0.78em;
+  left: 0;
+  width: 0.65rem;
+  height: 1px;
+  background-color: var(--line);
+}
+
+.tools {
+  color: var(--text-2);
+  font-size: var(--size-meta);
+}
+
+.tools .label {
+  margin-right: var(--space-2);
+  color: var(--text-3);
+}
