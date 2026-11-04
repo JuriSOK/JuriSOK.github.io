@@ -41,24 +41,37 @@ export interface SiteLinks {
 /* ---------- Page registry ---------- */
 
 /**
- * A page of the main panel. The registry only describes **pages that are
- * actually built**: an entry here guarantees the component exists. Whether it
- * becomes a tab depends on `hasContent`, computed in `sections.ts`.
+ * A section of the single-page narrative. The registry only describes
+ * **sections that are actually built**: an entry here guarantees the component
+ * exists. Whether it is rendered — and listed in the navigation — depends on
+ * `hasContent`, computed in `sections.ts`.
  */
 export interface SectionDefinition {
+  /** Anchor id, doubling as the URL hash — `#projects` is a shareable link. */
   readonly id: string
+  /** Short name used in the navigation. */
   readonly label: string
-  /** Editorial line shown under the page title. */
+  /** Section heading. Plain and readable: the metaphor lives in the cue. */
+  readonly title: string
+  /**
+   * Moment of the evening, e.g. « 9:00 pm · liner notes ». It is the thread
+   * of the page — a set clock that advances as the visitor scrolls.
+   */
+  readonly cue: string
+  /** Editorial line shown under the heading. */
   readonly kicker?: string
 }
 
+/** Theme preference. `system` follows `prefers-color-scheme`. */
+export type ThemePreference = 'light' | 'dark' | 'system'
+
 /**
- * Props every page component receives.
+ * Props every section component receives.
  *
  * The definition is handed down by `App` rather than looked up by id inside the
  * component. That is deliberate: a lookup by string can silently fail when an
- * id changes, leaving a tab that opens an empty panel. Passing the object makes
- * the tab and its page the same value, so they cannot disagree.
+ * id changes, leaving a navigation link that points at nothing. Passing the
+ * object makes the link and its section the same value.
  */
 export interface PageProps {
   readonly section: SectionDefinition
@@ -68,8 +81,27 @@ export interface PageProps {
 
 export interface AboutContent {
   readonly paragraphs: readonly string[]
-  /** Path to a portrait, or `null`. The page works perfectly without one. */
-  readonly portrait: string | null
+}
+
+/** A personal value: one word, one sentence. */
+export interface Value {
+  readonly id: string
+  readonly name: string
+  readonly line: string
+}
+
+/** A field Vibol Arnaud Sok wants to work in. */
+export interface FocusArea {
+  readonly id: string
+  readonly name: string
+  readonly line: string
+}
+
+/* ---------- Hero ---------- */
+
+export interface HeroContent {
+  /** One-line introduction under the name. */
+  readonly lead: string
 }
 
 /* ---------- Resume ---------- */
@@ -155,16 +187,24 @@ export interface ContactContent {
 /* ---------- Hackathons ---------- */
 
 /**
- * A real hackathon project, shown inside the Projects page rather than on a
- * page of its own. No date, team or ranking: only what was asked for.
+ * A real hackathon participation.
+ *
+ * `outcome` exists only for a confirmed, public result. No prize, ranking or
+ * figure is ever written without one — a submission alone gets no outcome.
  */
 export interface Hackathon {
   readonly id: string
   readonly title: string
   /** Name of the event the project was built for. */
   readonly event: string
+  /** Month or season, as provided — never a guessed exact date. */
+  readonly period: string
+  /** What Vibol Arnaud Sok did on the project. */
+  readonly role: string
   readonly summary: string
+  readonly outcome?: string
   readonly technologies: readonly string[]
-  readonly link: ProjectLink
+  /** Source first, then any write-up page. */
+  readonly links: readonly ProjectLink[]
   readonly pixelArt: HackathonArtName
 }

@@ -1,4 +1,4 @@
-import type { SkillDomain } from '../types/content'
+import type { SkillDomain } from '@/types/content'
 
 /**
  * Skills, grouped by domain.

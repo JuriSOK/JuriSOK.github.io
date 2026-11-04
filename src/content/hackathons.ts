@@ -1,35 +1,43 @@
-import type { Hackathon } from '../types/content'
+import type { Hackathon } from '@/types/content'
 
 /**
- * Hackathon projects, shown inside the Projects page.
+ * Hackathon participations.
  *
- * Real entries only, built from the two repositories' own README files —
- * DraftLens (github.com/JuriSOK/DraftLens) and KinCall
- * (github.com/JuriSOK/kincall). No date, organiser, team or ranking: neither
- * repository publishes one, so none is invented here.
+ * Real entries only, from the two repositories' README files and the details
+ * Vibol Arnaud Sok provided. Neither project won a prize, so neither carries
+ * one; KinCall's `outcome` is its confirmed inclusion in the CALL-E community
+ * directory, nothing more.
  */
 export const hackathonsIntro =
-  'Projects built under time constraints, around a challenge, an idea and a team.'
+  'Time-boxed builds around a challenge, an idea and a deadline. The closest thing to a jam session I know.'
 
 export const hackathons: readonly Hackathon[] = [
-  {
-    id: 'draftlens',
-    title: 'DraftLens',
-    event: 'AQX Sports Analytics Data Bowl 3.0',
-    summary:
-      'An explainable NBA Draft analytics platform that ranks NCAA prospects, evaluates team fit and finds statistical NBA comparables to support smarter pre-draft decisions.',
-    technologies: ['Python', 'scikit-learn', 'React', 'TypeScript', 'pandas'],
-    link: { label: 'View on GitHub', url: 'https://github.com/JuriSOK/DraftLens' },
-    pixelArt: 'draftlens',
-  },
   {
     id: 'kincall',
     title: 'KinCall',
     event: 'CALL-E: Your Code Is Calling',
+    period: 'Summer 2026',
+    role: 'Product design, architecture and development of the AI voice-agent system.',
     summary:
-      'An AI-powered phone check-in and family coordination system where specialised voice agents understand conversations and a controlled orchestration engine coordinates trusted support.',
+      'AI voice agents regularly call isolated people to check in on them, and coordinate their relatives when help is needed.',
+    outcome: 'Open-source contribution added to the official CALL-E community directory.',
     technologies: ['Next.js', 'React', 'TypeScript', 'CALL-E', 'Supabase / PostgreSQL'],
-    link: { label: 'View on GitHub', url: 'https://github.com/JuriSOK/kincall' },
+    links: [{ label: 'Source', url: 'https://github.com/JuriSOK/kincall' }],
     pixelArt: 'kincall',
+  },
+  {
+    id: 'draftlens',
+    title: 'DraftLens',
+    event: 'AQX Sports Analytics Data Bowl 3.0',
+    period: 'August 2026',
+    role: 'End-to-end design and development, from the data science to the interface.',
+    summary:
+      'An explainable NBA Draft analytics platform that ranks NCAA prospects, evaluates team fit and finds statistical NBA comparables.',
+    technologies: ['Python', 'scikit-learn', 'React', 'TypeScript', 'pandas'],
+    links: [
+      { label: 'Source', url: 'https://github.com/JuriSOK/DraftLens' },
+      { label: 'Devpost', url: 'https://devpost.com/software/draftlens' },
+    ],
+    pixelArt: 'draftlens',
   },
 ]

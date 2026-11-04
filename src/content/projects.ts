@@ -1,6 +1,11 @@
-import generated from '../data/projects.generated.json'
+import generated from '@/data/projects.generated.json'
 import { groups, overrides } from './projects.overrides'
-import type { GeneratedProjects, GeneratedRepo, ProjectCardData, ProjectLink } from '../types/project'
+import type {
+  GeneratedProjects,
+  GeneratedRepo,
+  ProjectCardData,
+  ProjectLink,
+} from '@/types/project'
 
 const data = generated as GeneratedProjects
 
@@ -43,8 +48,9 @@ export function buildProjects(): readonly ProjectCardData[] {
   for (const group of groups) {
     const members = group.repos
       .map((member) => ({ member, repo: byName.get(member.name) }))
-      .filter((entry): entry is { member: (typeof group.repos)[number]; repo: GeneratedRepo } =>
-        entry.repo !== undefined,
+      .filter(
+        (entry): entry is { member: (typeof group.repos)[number]; repo: GeneratedRepo } =>
+          entry.repo !== undefined,
       )
 
     if (members.length === 0) {

@@ -1,4 +1,4 @@
-import type { PixelIconName } from '../../types/pixel-art'
+import type { PixelIconName } from '@/types/pixel-art'
 import { PixelGrid } from './PixelGrid'
 
 /**

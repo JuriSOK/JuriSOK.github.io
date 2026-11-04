@@ -1,4 +1,4 @@
-import type { Experience } from '../types/content'
+import type { Experience } from '@/types/content'
 
 /**
  * Professional experience.
@@ -14,13 +14,16 @@ export const experiences: readonly Experience[] = [
     logo: '/images/brands/credit-agricole.png',
     role: 'Data Analyst',
     contract: 'Apprenticeship',
-    period: 'September 2025 — Present',
+    period: 'Sep 2025 — Present',
     current: true,
+    summary:
+      'Part of the property & casualty Quality of Service team, which monitors and improves the quality of IT services.',
     missions: [
-      'Creating data visualizations and dashboards to monitor IT performance and service quality (QoS).',
-      'Supporting data-driven decision-making by analyzing incident trends and operational KPIs.',
-      'Cleaning, transforming and consolidating data through ETL processes to make it usable for analysis and reporting.',
+      'Building Power BI dashboards to monitor IT performance and service quality.',
+      'Analysing operational data and incident trends to support decision-making.',
+      'Automating processes, and cleaning and consolidating data through ETL pipelines.',
+      'Exploring generative AI use cases, notably with Microsoft Copilot, to make everyday work more efficient.',
     ],
-    domains: ['Data Analysis', 'Data Visualization', 'ETL', 'ITSM'],
+    tools: ['Power BI', 'Microsoft Copilot', 'ETL', 'ITSM'],
   },
 ]

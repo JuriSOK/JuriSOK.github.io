@@ -1,4 +1,4 @@
-import type { Education } from '../types/content'
+import type { Education } from '@/types/content'
 
 /**
  * Education.

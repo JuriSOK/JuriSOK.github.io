@@ -1,4 +1,4 @@
-import type { SiteLinks } from '../types/content'
+import type { SiteLinks } from '@/types/content'
 
 /**
  * Public contact details.

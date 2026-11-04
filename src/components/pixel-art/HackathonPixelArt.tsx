@@ -1,4 +1,4 @@
-import type { HackathonArtName } from '../../types/pixel-art'
+import type { HackathonArtName } from '@/types/pixel-art'
 import { PixelGrid } from './PixelGrid'
 
 /**

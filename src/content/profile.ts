@@ -1,4 +1,4 @@
-import type { Profile } from '../types/content'
+import type { Profile } from '@/types/content'
 
 /**
  * Profile facts.
@@ -13,11 +13,5 @@ export const profile: Profile = {
   company: 'Crédit Agricole Assurances',
   location: 'Paris, France',
   timezone: 'Europe/Paris',
-  domains: [
-    'Data Analysis',
-    'Data Visualization',
-    'ETL',
-    'ITSM',
-    'Information Systems',
-  ],
+  domains: ['Data Analysis', 'Data Visualization', 'ETL', 'ITSM', 'Information Systems'],
 }

@@ -1,155 +1,116 @@
-# Portfolio — Vibol Arnaud Sok
+# 2 a.m. — Arnaud's desk
 
-Professional portfolio of Vibol Arnaud Sok, Data Analyst apprentice and Master's student in
-MIAGE.
+The portfolio of Vibol Arnaud Sok, as one scene: his desk at night, seen from above, under a lamp.
+Every object on it *is* a piece of content, and every one can be picked up:
 
-The site follows a **vCard layout**: a fixed identity sidebar and a main panel whose content switches
-by tabs — About, Resume, Projects, Hackathons and Contact — rendered in a *Warm Vintage Jazz
-Editorial* theme over an animated pixel-art jazz café background, with original pixel-art
-illustrations throughout (interests, skill categories, project sleeves, hackathon concepts).
+| Object | Content | What it does |
+|---|---|---|
+| Leather notebook | About | Opens on two spreads of ruled paper |
+| Work badge | The apprenticeship | Flips over to show the missions |
+| Student cards | Education | Spread out on the table |
+| Receipt | Personal Finance Tracker | Prints out line by line |
+| Index cards | MiniSGBDR | Shuffle one at a time |
+| "While you were out" message slip | KinCall | |
+| Trading card | DraftLens | |
+| Keyboard | Skills | Its keys type on a little screen |
+| Polaroids | Interests | |
+| Postcard | Contact | |
 
-The Hackathons page deliberately contains **concepts only** — every card is labelled « Concept »,
-because no hackathon has been attended yet. Nothing on that page is invented.
+Other parts of the scene:
 
-> 🚧 **Work in progress.** Some wording is provisional and flagged with a `TODO` comment in the
-> content files. The word `TODO` never reaches the rendered page.
+- Laptop stickers are the links.
+- The radio plays a jazz trio composed live in the browser.
+- A flip clock shows the real time in Paris.
+- A sticky-note pad is the guestbook.
+- Lived-in details lie around: a mug of coffee (its steam rises once the lamp is on), a coffee ring, a pencil, paper clips, an eraser, a crumpled draft, and a knot and worn varnish in the wood.
 
-## Stack
+- [`DIRECTION.md`](DIRECTION.md): the three directions considered, why this one was chosen, the
+  object-to-content mapping, and the motion.
+- [`SOUND.md`](SOUND.md): the music and sounds, their provenance and licence (all original and
+  synthesised).
+- [`REVERSE_ENGINEERING.md`](REVERSE_ENGINEERING.md): what was learnt from kepard.dev. No code,
+  copy or asset was reused.
 
-- [React](https://react.dev/) 19
-- [TypeScript](https://www.typescriptlang.org/) (strict mode)
-- [Vite](https://vite.dev/)
-- [ESLint](https://eslint.org/)
-
-No production dependency beyond React: fonts are self-hosted, technology logos are inlined SVG
-paths, pixel-art illustrations are original local drawings rendered by a small `PixelGrid`
-component, and reveals use a native `IntersectionObserver`.
-
-## Content
-
-All copy lives in `src/content/`: changing a sentence never requires opening a component.
-
-**A tab with no real content does not exist** — no title followed by emptiness, no hollow tab. The
-site is therefore publishable at any time and fills itself in as content files are written.
-
-Interests are part of the About page and skills are part of Resume; neither has its own tab.
-
-## Project selection
-
-Displayed projects are the GitHub repositories carrying the **`portfolio`** topic.
+## Run
 
 ```bash
-npm run sync:projects
-```
-
-The script queries the public GitHub API and writes `src/data/projects.generated.json`, which is
-committed: the site makes no network call for visitors and builds offline. No token is needed or
-embedded.
-
-To add a project:
-
-```bash
-gh repo edit JuriSOK/REPO-NAME --add-topic portfolio
-npm run sync:projects
-```
-
-Descriptions, titles, technologies and ordering are refined in `src/content/projects.overrides.ts`.
-The `groups` table in the same file gathers several repositories under a single card — as with
-`personal-finance-tracker`, split between frontend and backend.
-
-## Requirements
-
-- **Node.js 24 LTS** (declared in `.nvmrc`, `.node-version` and the `engines` field)
-- npm 11 or later
-
-Using a version manager such as [`nvm`](https://github.com/nvm-sh/nvm),
-[`fnm`](https://github.com/Schniz/fnm) or [`mise`](https://mise.jdx.dev/) is recommended:
-
-```bash
-nvm use          # first time: nvm install 24
-```
-
-## Install and run
-
-```bash
-git clone https://github.com/JuriSOK/JuriSOK.github.io.git
-cd JuriSOK.github.io
-nvm use
 npm install
-npm run dev
+npm run dev            # http://localhost:3000
+npm run build && npm run preview   # static site on :3100, as GitHub Pages serves it
+npm run verify         # 51 functional checks against :3100 (needs Chrome installed)
+npm run lint
 ```
-
-The dev server starts on `http://localhost:5173`.
-
-## Commands
-
-| Command                 | Description                                     |
-| ----------------------- | ----------------------------------------------- |
-| `npm run dev`           | Development server                              |
-| `npm run build`         | Production build into `dist/`                   |
-| `npm run lint`          | ESLint                                          |
-| `npm run preview`       | Serves the production build locally             |
-| `npm run sync:projects` | Refreshes the selection from the GitHub topic   |
 
 ## Structure
 
 ```
-.
-├── index.html
-├── public/
-│   ├── fonts/               # Self-hosted Fraunces and Archivo (+ OFL licences)
-│   └── images/              # Avatar, institution logos
-├── scripts/
-│   └── sync-projects.mjs    # Fetches repositories carrying the `portfolio` topic
-├── src/
-│   ├── components/
-│   │   ├── background/      # Fixed animated café background
-│   │   ├── pixel-art/       # PixelGrid renderer and original pixel drawings
-│   │   ├── layout/          # Identity sidebar, tabs, grain, skip link
-│   │   ├── ui/              # Page, SectionHeading, Rule, ButtonLink, TechBadge, Icon
-│   │   ├── sections/        # About, Resume, Hackathons and Contact pages
-│   │   └── projects/        # Grid, card, generated artwork
-│   ├── content/             # Copy, data, page registry and logo registry
-│   ├── data/                # Generated, committed files (do not edit)
-│   ├── types/               # content.ts, project.ts, pixel-art.ts
-│   ├── hooks/               # Reveal, reduced motion, media queries
-│   ├── styles/              # Tokens, fonts, global styles
-│   ├── App.tsx
-│   └── main.tsx
-├── CLAUDE.md                # Permanent project rules
-└── vite.config.ts
+src/
+├── app/                 # layout (fonts, js/motion bootstrap), page, globals.css (materials, stage, light)
+├── content/             # every word — edit here, not in components
+│   ├── desk.ts          # what lies on the desk and where (wide and tall layouts)
+│   ├── site.ts          # arrival, intro note, screen-reader guide, visitor notes
+│   └── about.ts, experiences.ts, education.ts, hackathons.ts, skills.ts, interests.ts, …
+├── components/
+│   ├── desk/
+│   │   ├── Desk.tsx         # the scene: placement, light, drag, arrival, index, notes
+│   │   ├── faces.tsx        # objects seen from above
+│   │   ├── LiveFaces.tsx    # laptop stickers (links) and the radio (music)
+│   │   ├── Inspector.tsx    # picking an object up: the flight from the desk, the dialog
+│   │   ├── views/           # what each object shows once in hand
+│   │   ├── LampFace.tsx     # the lamp seen from above; its shade is the light source
+│   │   └── DecorFaces.tsx   # set dressing (inert, aria-hidden)
+│   ├── sound/           # SoundProvider
+│   ├── pixel-art/       # original pixel drawings
+│   └── ui/Icon.tsx
+├── lib/
+│   ├── audio/ClubAudio.ts   # the trio and the desk sounds (Web Audio)
+│   └── desk.ts              # light and shadow of each object, from its distance to the lamp
+└── data/                # generated GitHub project list (committed)
 ```
 
-## Accessibility
+## Customising
 
-Verified with a real browser at every step: skip link first, visible focus ring throughout, targets of
-at least 44 px. Tab changes are announced to screen readers (`aria-current`, focus moved to the panel)
-and stay in sync with the URL — `#projects` is a deep link and the browser back button works. Under
-`prefers-reduced-motion`, no animation remains, the café background becomes fully static and all
-content stays visible.
+- **Move an object.** Change its `x`, `y`, `r` (and `s` for scale) in `content/desk.ts`. There is
+  one entry for the landscape desk and one for the portrait desk (phones). Light and shadow follow
+  automatically.
+- **Move the light.** `light` in each layout of `content/desk.ts`.
+- **Colours and materials.** The tokens and the wood, paper and light live in `src/app/globals.css`.
+- **The music.** The constants at the top of `lib/audio/ClubAudio.ts`.
 
-## Privacy
+## Simulated features
 
-The site publishes only three contact channels: email, LinkedIn and GitHub. **No phone number, no
-postal address and no CV** are ever displayed — this is enforced by the `SiteLinks` type itself.
+- **Notes on the desk.** The sticky-note guestbook is stored in `localStorage` (`desk:notes`), so
+  only the person who wrote a note can see it. The 6 most recent notes stay on the desk.
+- **The lamp** is remembered for the visit (`sessionStorage`): a reload does not plunge the room
+  back into darkness.
 
-## Deployment
+## Accessibility, motion and sound
 
-The site is live at **https://jurisok.github.io**.
+- Every object is a real button with a plain label, and every view is a labelled dialog with its
+  full text. A visually hidden guide tells screen-reader users how the desk works, and **"what's
+  on the desk?"** lists every object. There is no second, text-only version of the portfolio.
+- The detail views are dialogs: Escape closes them, Tab stays inside, and focus returns to the
+  object.
+- **No sound before a gesture.** "switch on the lamp" comes in silently, while "lamp + radio" and
+  the radio itself start the music. The audio fades when the tab is hidden.
+- **Without JavaScript**, the desk is lit and a small note gives the name, the email, LinkedIn and GitHub.
+- **Under reduced motion**, nothing flies, flips are instant, and the steam does not rise.
 
-Every push to `main` triggers [`.github/workflows/deploy.yml`](.github/workflows/deploy.yml), which
-installs with `npm ci`, runs `npm run lint`, builds, and publishes `dist/` to GitHub Pages. Lint and
-build gate the deployment, so a broken commit never reaches the live site. Node comes from `.nvmrc`,
-so CI cannot drift from local development.
+## Performance
 
-Two settings this depends on, both already in place:
+Every object is its own compositor layer. Its lighting filter (brightness and a drop shadow cast
+away from the lamp) is fixed, so it is rasterised once. Hovering, straightening and dragging only
+move finished bitmaps, through `translate`, `rotate` and `transform`. The darkness when the lamp
+is off is a single overlay that fades out. Before this, switching the lamp on animated the filter
+of every object, which repainted the whole desk on every frame.
 
-- **Pages source is _GitHub Actions_**, not a branch. Set to a branch, Pages serves the repository
-  root — the source `index.html`, whose `/src/main.tsx` entry the browser refuses. The result is a
-  blank page.
-- **No `base` in `vite.config.ts`.** The repository is named `JuriSOK.github.io`, so the site is
-  served from the domain root and Vite's default `base: '/'` is correct. A project repository would
-  need `base: '/<repo>/'`.
+Measured with a Chrome trace at retina density (DPR 2), GPU time per interaction:
 
-`npm run sync:projects` is deliberately not run in CI: it calls the GitHub API and rewrites a
-committed file. Refresh the selection locally, then push.
+| Interaction | Before | After |
+|---|---|---|
+| Lamp on | 281 ms | 6 ms |
+| Hover sweep | 62 ms | 0 ms |
+| Drag | 39 ms | 2 ms |
+| Open / close an object | 16 ms | 3 ms |
+
+With the CPU throttled ×4, no frame exceeds 16.8 ms.
